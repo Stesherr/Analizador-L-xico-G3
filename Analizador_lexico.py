@@ -18,7 +18,7 @@ tokens= (
     'ID'
 )+tuple(reserved.values())
 
-#Expresiones regulares para tokens simples
+# Expresiones regulares para tokens simples
 def t_ID(t):
     r'[a-zA-Z_$]\w*'
     t.type = reserved.get(t.value, 'ID')
@@ -29,6 +29,10 @@ def t_INT(t):
     t.value = int(t.value)
     return t
 
+# A string containing ignored characters (spaces and tabs)
+t_ignore  = ' \t'
+
+# Regla de manejo de errores
 def t_error(t):
     print("Illegal character '%s" % t.value[0])
     t.lexer.skip(1)
@@ -36,7 +40,7 @@ def t_error(t):
 # Constructor lexer
 lexer = lex.lex()
 
-data = "__halt_compiler() abstract"
+data = "$hola abstract"
 
 lexer.input(data)
 
