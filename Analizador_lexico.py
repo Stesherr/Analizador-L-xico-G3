@@ -50,6 +50,8 @@ tokens= (
     'ERRORCONTROL',
     'CONCAT',
     'CONCATASSIGN',
+    'OPEN_TAG',
+    'DOC_COMMENT',
 )+tuple(reserved.values())
 
 # Lista Operadores - Kevin Valle
@@ -99,6 +101,16 @@ t_CONCATASSIGN = r'\.='
     # Tipo
 #t_INSOF = r'instanceof'
 # Lista Operadores - Kevin Valle
+
+def t_OPEN_TAG(t):
+    r'<(\?(php)?|%)'
+    t.type = reserved.get(t.value, 'OPEN_TAG')
+    return t
+#Comentario
+def t_DOC_COMMENT(t):
+    r'\/\*(.|\n)*?\*\/'
+    t.type = reserved.get(t.value, 'DOC_COMMENT')
+    return t
 
 # Expresiones regulares para tokens simples
 def t_ID(t):
