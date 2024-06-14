@@ -15,8 +15,90 @@ reserved = {"__halt_compiler()" : "HALT", "abstract" : "ABSTRACT", "and" : "AND"
 # Lista de tokens
 tokens= (
     'INT',
-    'ID'
+    'ID',
+    'LPAREN',
+    'RPAREN',
+    'PLUS',
+    'MINUS',
+    'TIMES',
+    'DIVIDE',
+    'MOD',
+    'EXP',
+    'EQUAL',
+    'PLUSASSIGN',
+    'MINUSASSIGN',
+    'TIMESASSIGN',
+    'DIVIDEASSIGN',
+    'MODASSIGN',
+    'EXPASSIGN',
+    'INCREMENT',
+    'DECREMENT',
+    'BITAND',
+    'BITOR',
+    'BITNOT',
+    'EQUAL',
+    'IDENTICAL',
+    'NOTEQUAL',
+    'LESSTHAN',
+    'GREATERTHAN',
+    'LESSEQUALTHAN',
+    'GREATEREQUALTHAN',
+    'LOGICALAND',
+    'LOGICALOR',
+    'LOGICALNOT',
+    'EXECUTION',
+    'ERRORCONTROL',
+    'CONCAT',
+    'CONCATASSIGN',
 )+tuple(reserved.values())
+
+# Lista Operadores - Kevin Valle
+t_LPAREN  = r'\('
+t_RPAREN  = r'\)'
+    # Aritmeticos
+t_PLUS = r'\+'
+t_MINUS = r'-'
+t_TIMES = r'\*'
+t_DIVIDE = r'\/'
+t_MOD = r'%'
+t_EXP = r'\*\*'
+    # Asignacion (Aritmetica)
+t_EQUAL = r'='
+t_PLUSASSIGN = r'\+='
+t_MINUSASSIGN = r'-='
+t_TIMESASSIGN = r'\*='
+t_DIVIDEASSIGN = r'\/='
+t_MODASSIGN = r'%='
+t_EXPASSIGN = r'\*\*='
+    # Incremento/Decremento
+t_INCREMENT = r'\+\+'
+t_DECREMENT = r'--'
+    # Bit a Bit
+t_BITAND = r'\$'
+t_BITOR = r'\|'
+t_BITNOT = r'~'
+    # Comparacion
+t_EQUAL = r'=='
+t_IDENTICAL = r'==='
+t_NOTEQUAL = r'!='
+t_LESSTHAN = r'<'
+t_GREATERTHAN = r'>'
+t_LESSEQUALTHAN = r'<='
+t_GREATEREQUALTHAN = r'>='
+    # Logico
+t_LOGICALAND = r'and'
+t_LOGICALOR = r'or'
+t_LOGICALNOT = r'!'
+    # Ejecucion
+t_EXECUTION = r'^(`)([^`]*)(`)$'
+    # Control Errores
+t_ERRORCONTROL = r'@'
+    # Cadenas
+t_CONCAT = r'\.'
+t_CONCATASSIGN = r'\.='
+    # Tipo
+#t_INSOF = r'instanceof'
+# Lista Operadores - Kevin Valle
 
 # Expresiones regulares para tokens simples
 def t_ID(t):
@@ -42,7 +124,21 @@ lexer = lex.lex()
 
 data = "$hola abstract"
 
-lexer.input(data)
+# ALGORITMO PARA PRUEBA DE OPERADORES - GENERADO POR IA - Kevin Valle
+dataOperadores = '''
+    <?php
+    $var = 5;
+    $var++;
+    $arr[0] = $var;
+    echo $arr[0];
+    if ($var == $arr[0]) {
+        echo "Equal";
+    }
+    $command = `ls`;
+    ?>
+    '''
+
+lexer.input(dataOperadores)
 
 # Tokenize
 while True:
