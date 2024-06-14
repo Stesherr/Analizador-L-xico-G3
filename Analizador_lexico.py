@@ -36,7 +36,7 @@ tokens= (
     'BITAND',
     'BITOR',
     'BITNOT',
-    'EQUAL',
+    'IS_EQUAL',
     'IDENTICAL',
     'NOTEQUAL',
     'LESSTHAN',
@@ -51,6 +51,7 @@ tokens= (
     'CONCAT',
     'CONCATASSIGN',
     'OPEN_TAG',
+    'CLOSE_TAG',
     'DOC_COMMENT',
 )+tuple(reserved.values())
 
@@ -80,7 +81,7 @@ t_BITAND = r'\$'
 t_BITOR = r'\|'
 t_BITNOT = r'~'
     # Comparacion
-t_EQUAL = r'=='
+t_IS_EQUAL = r'=='
 t_IDENTICAL = r'==='
 t_NOTEQUAL = r'!='
 t_LESSTHAN = r'<'
@@ -105,6 +106,10 @@ t_CONCATASSIGN = r'\.='
 def t_OPEN_TAG(t):
     r'<(\?(php)?|%)'
     t.type = reserved.get(t.value, 'OPEN_TAG')
+    return t
+def t_CLOSE_TAG(t):
+    r'(\?|%)>'
+    t.type = reserved.get(t.value, 'CLOSE_TAG')
     return t
 #Comentario
 def t_DOC_COMMENT(t):
