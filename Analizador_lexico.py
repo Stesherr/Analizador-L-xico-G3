@@ -11,7 +11,7 @@ reserved = {"__halt_compiler()" : "__HALT_COMPILER", "abstract" : "ABSTRACT", "a
 "list()" : "LIST", "match" : "MATCH", "namespace" : "NAMESPACE", "new" : "NEW", "or" : "OR", "print" : "PRINT", "private" : "PRIVATE", "protected" : "PROTECTED",
 "public" : "PUBLIC", "require" : "REQUIRE", "require_once" : "REQUIRE_ONCE", "return" : "RETURN", "static" : "STATIC", "switch" : "SWITCH",
 "throw" : "THROW", "trait" : "TRAIT", "try" : "TRY", "unset()" : "UNSET", "use" : "USE", "var" : "VAR", "while" : "WHILE", "xor" : "XOR",
-"yield" : "YIELD", "yield_from" : "YIELD_FROM"}
+"yield" : "YIELD", "yield_from" : "YIELD_FROM", "SplQueue()" : "QUEUE", "SplStack()" : "STACK"}
 
 # Lista de tokens
 tokens= (
@@ -113,6 +113,7 @@ t_CONCATASSIGN = r'\.='
 t_OBJOP = r'->'
 # Lista Operadores - Kevin Valle
 
+#OPEN/CLOSE TAG Luis Quezada
 def t_OPEN_TAG(t):
     r'<(\?(php)?|%)'
     t.type = reserved.get(t.value, 'OPEN_TAG')
@@ -121,9 +122,9 @@ def t_CLOSE_TAG(t):
     r'(\?|%)>'
     t.type = reserved.get(t.value, 'CLOSE_TAG')
     return t
-#Comentario
+#Comentario Luis Quezada
 def t_DOC_COMMENT(t):
-    r'\/\*(.|\n)*?\*\/'
+    r'(\/\*(.|\n)*?\*\/)|(\/\/.*)'
     t.type = reserved.get(t.value, 'DOC_COMMENT')
     return t
 
@@ -137,6 +138,16 @@ def t_ARRAY(t):
      r'array\(\)'
      t.type = reserved.get(t.value, 'ARRAY')
      return t
+
+def t_QUEUE(t):
+    r'SplQueue\(\)'
+    t.type = reserved.get(t.value, 'QUEUE')
+    return t
+
+def t_STACK(t):
+    r'SplStack\(\)'
+    t.type = reserved.get(t.value, 'STACK')
+    return t
 
 def t_DIE(t):
      r'die\(\)'
