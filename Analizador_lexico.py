@@ -1,4 +1,5 @@
 import ply.lex as lex
+import Generador_log
 
 # Todas las palabras reservadas Stefano Suarez
 reserved = {"__halt_compiler()" : "HALT", "abstract" : "ABSTRACT", "and" : "AND", "array()" : "ARRAY", "as" : "AS", "break" : "BREAK",
@@ -14,10 +15,19 @@ reserved = {"__halt_compiler()" : "HALT", "abstract" : "ABSTRACT", "and" : "AND"
 
 # Lista de tokens
 tokens= (
-    'INT',
+    'SEMICOLON',
+    'INTEGER',
+    'FLOAT',
+    'STRING',
+    'BOOL',
+    'NULL',
     'ID',
     'LPAREN',
     'RPAREN',
+    'LSQUARE',
+    'RSQUARE',
+    'LCURLY',
+    'RCURLY',
     'PLUS',
     'MINUS',
     'TIMES',
@@ -50,14 +60,20 @@ tokens= (
     'ERRORCONTROL',
     'CONCAT',
     'CONCATASSIGN',
+    'OBJOP',
     'OPEN_TAG',
     'CLOSE_TAG',
     'DOC_COMMENT',
 )+tuple(reserved.values())
 
 # Lista Operadores - Kevin Valle
+t_SEMICOLON = r';'
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
+t_LSQUARE = r'\['
+t_RSQUARE = r'\]'
+t_LCURLY = r'\{'
+t_RCURLY = r'\}'
     # Aritmeticos
 t_PLUS = r'\+'
 t_MINUS = r'-'
@@ -92,8 +108,6 @@ t_GREATEREQUALTHAN = r'>='
 t_LOGICALAND = r'and'
 t_LOGICALOR = r'or'
 t_LOGICALNOT = r'!'
-    # Ejecucion
-t_EXECUTION = r'^(`)([^`]*)(`)$'
     # Control Errores
 t_ERRORCONTROL = r'@'
     # Cadenas
@@ -101,6 +115,8 @@ t_CONCAT = r'\.'
 t_CONCATASSIGN = r'\.='
     # Tipo
 #t_INSOF = r'instanceof'
+    # Objeto
+t_OBJOP = r'->'
 # Lista Operadores - Kevin Valle
 
 def t_OPEN_TAG(t):
@@ -123,10 +139,27 @@ def t_ID(t):
     t.type = reserved.get(t.value, 'ID')
     return t
 
-def t_INT(t):
+def t_EXECUTION(t):
+     r'`([^`]*)`'
+     t.type = reserved.get(t.value, 'EXECUTION')
+     return t
+
+# Tipos de Datos - Kevin Valle
+def t_INTEGER(t):
     r'\d+'
     t.value = int(t.value)
     return t
+
+def t_FLOAT(t):
+     r'([-]?)(\d+\.\d*|\.\d+)'
+     t.value = float(t.value)
+     return t
+
+def t_STRING(t):
+     r'^(")([^"]+)(")$'
+     t.value = str(t.value)
+     return t
+# Tipos de Datos - Kevin Valle
 
 # A string containing ignored characters (spaces and tabs)
 t_ignore  = ' \t'
@@ -139,27 +172,23 @@ def t_error(t):
 # Constructor lexer
 lexer = lex.lex()
 
-data = "$hola abstract"
+# ALGORITMO PARA PRUEBA DE OPERADORES
+Generador_log.obtener_alg()
+# RESULTADOS
+algoritmos = Generador_log.algoritmos_3
+resultados = {}
 
-# ALGORITMO PARA PRUEBA DE OPERADORES - GENERADO POR IA - Kevin Valle
-dataOperadores = '''
-    <?php
-    $var = 5;
-    $var++;
-    $arr[0] = $var;
-    echo $arr[0];
-    if ($var == $arr[0]) {
-        echo "Equal";
-    }
-    $command = `ls`;
-    ?>
-    '''
+for key, value in algoritmos.items():
+    lexer.input(value)
+    # Tokenize
+    while True:
+        tok = lexer.token()
+        if not tok:
+                break
+        print(tok)
+        if key in resultados:
+             resultados[key].append(str(tok))
+        else:
+             resultados[key]  = [str(tok)]
 
-lexer.input(dataOperadores)
-
-# Tokenize
-while True:
-    tok = lexer.token()
-    if not tok:
-            break   # No more input
-    print(tok)
+#Generador_log.generar_log(resultados)

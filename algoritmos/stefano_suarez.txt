@@ -1,0 +1,10 @@
+<?php
+$var=5;
+$var++;
+$arr[0]=$var;
+echo $arr[0];
+if ($var == $arr[0]) {
+    echo "Equal";
+}
+$command=`ls`;
+?>
