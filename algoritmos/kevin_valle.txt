@@ -1,10 +1,20 @@
 <?php
-$var=5;
-$var++;
-$arr[0]=$var;
-echo $arr[0];
-if ($var == $arr[0]) {
-    echo "Equal";
+// Ejemplo de estructuras de control y operadores
+__halt_compiler();
+$x = 10;
+$y = 5;
+if ($x > $y) {
+    echo "x es mayor que y";
+} elseif ($x == $y) {
+    echo "x es igual a y";
+} else {
+    echo "x es menor que y";
 }
-$command=`ls`;
+
+for ($i = 0; $i < 5; $i++) {
+    echo "El valor de i es: $i<br>";
+}
+
+$suma = $x + $y;
+echo "La suma de x + y es: $suma";
 ?>

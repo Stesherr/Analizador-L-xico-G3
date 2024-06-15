@@ -53,8 +53,6 @@ tokens= (
     'GREATERTHAN',
     'LESSEQUALTHAN',
     'GREATEREQUALTHAN',
-    'LOGICALAND',
-    'LOGICALOR',
     'LOGICALNOT',
     'EXECUTION',
     'ERRORCONTROL',
@@ -105,16 +103,12 @@ t_GREATERTHAN = r'>'
 t_LESSEQUALTHAN = r'<='
 t_GREATEREQUALTHAN = r'>='
     # Logico
-t_LOGICALAND = r'and'
-t_LOGICALOR = r'or'
 t_LOGICALNOT = r'!'
     # Control Errores
 t_ERRORCONTROL = r'@'
     # Cadenas
 t_CONCAT = r'\.'
 t_CONCATASSIGN = r'\.='
-    # Tipo
-#t_INSOF = r'instanceof'
     # Objeto
 t_OBJOP = r'->'
 # Lista Operadores - Kevin Valle
@@ -135,7 +129,7 @@ def t_DOC_COMMENT(t):
 
 # Expresiones regulares para tokens simples
 def t_ID(t):
-    r'[a-zA-Z_$]\w*'
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
     t.type = reserved.get(t.value, 'ID')
     return t
 
@@ -156,7 +150,7 @@ def t_FLOAT(t):
      return t
 
 def t_STRING(t):
-     r'^(")([^"]+)(")$'
+     r'(")([^"]+)(")'
      t.value = str(t.value)
      return t
 # Tipos de Datos - Kevin Valle
@@ -191,4 +185,4 @@ for key, value in algoritmos.items():
         else:
              resultados[key]  = [str(tok)]
 
-#Generador_log.generar_log(resultados)
+Generador_log.generar_log(resultados)
