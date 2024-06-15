@@ -1,6 +1,14 @@
 <?php
 // Ejemplo de estructuras de control y operadores
 __halt_compiler();
+array();
+die();
+empty();
+eval();
+exit();
+isset();
+list();
+unset();
 $x = 10;
 $y = 5;
 if ($x > $y) {

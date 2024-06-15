@@ -2,8 +2,8 @@ import ply.lex as lex
 import Generador_log
 
 # Todas las palabras reservadas Stefano Suarez
-reserved = {"__halt_compiler()" : "HALT", "abstract" : "ABSTRACT", "and" : "AND", "array()" : "ARRAY", "as" : "AS", "break" : "BREAK",
-"callable" : "CALLABLE", "case" : "CASE", "catch" : "CATCH", "class" : "CLASS", "clone" : "CLONE", "const" : "CONST", "continue" : "CONTINUE",
+reserved = {"__halt_compiler()" : "__HALT_COMPILER", "abstract" : "ABSTRACT", "and" : "AND", "array()" : "ARRAY", "as" : "AS", 
+"break" : "BREAK", "callable" : "CALLABLE", "case" : "CASE", "catch" : "CATCH", "class" : "CLASS", "clone" : "CLONE", "const" : "CONST", "continue" : "CONTINUE",
 "declare" : "DECLARE", "default" : "DEFAULT", "die()" : "DIE", "do" : "DO", "echo" : "ECHO", "else" : "ELSE", "elseif" : "ELSEIF",
 "empty()" : "EMPTY", "endwhile" : "ENDWHILE", "eval()" : "EVAL", "exit()" : "EXIT", "extends" : "EXTENDS", "final" : "FINAL", "finally" : "FINALLY",
 "fn" : "FN", "for" : "FOR", "foreach" : "FOREACH", "function" : "FUNCTION", "global" : "GLOBAL", "goto" : "GOTO", "if" : "IF", "implements" : "IMPLEMENTS",
@@ -61,7 +61,7 @@ tokens= (
     'OBJOP',
     'OPEN_TAG',
     'CLOSE_TAG',
-    'DOC_COMMENT',
+    'DOC_COMMENT'
 )+tuple(reserved.values())
 
 # Lista Operadores - Kevin Valle
@@ -127,9 +127,55 @@ def t_DOC_COMMENT(t):
     t.type = reserved.get(t.value, 'DOC_COMMENT')
     return t
 
-# Expresiones regulares para tokens simples
+# Palabras reservadas compuestas - Stefano Suarez
+def t_HALT_COMPILER(t):
+     r'__halt_compiler\(\)'
+     t.type = reserved.get(t.value, '__HALT_COMPILER')
+     return t
+
+def t_ARRAY(t):
+     r'array\(\)'
+     t.type = reserved.get(t.value, 'ARRAY')
+     return t
+
+def t_DIE(t):
+     r'die\(\)'
+     t.type = reserved.get(t.value, 'DIE')
+     return t
+
+def t_EMPTY(t):
+     r'empty\(\)'
+     t.type = reserved.get(t.value, 'EMPTY')
+     return t
+
+def t_EVAL(t):
+     r'eval\(\)'
+     t.type = reserved.get(t.value, 'EVAL')
+     return t
+
+def t_EXIT(t):
+     r'exit\(\)'
+     t.type = reserved.get(t.value, 'EXIT')
+     return t
+
+def t_ISSET(t):
+     r'isset\(\)'
+     t.type = reserved.get(t.value, 'ISSET')
+     return t
+
+def t_LIST(t):
+     r'list\(\)'
+     t.type = reserved.get(t.value, 'LIST')
+     return t
+
+def t_UNSET(t):
+     r'unset\(\)'
+     t.type = reserved.get(t.value, 'UNSET')
+     return t
+
+# Variables - Stefano Suarez
 def t_ID(t):
-    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    r'[a-zA-Z_$][a-zA-Z0-9_]*'
     t.type = reserved.get(t.value, 'ID')
     return t
 
@@ -158,7 +204,12 @@ def t_STRING(t):
 # A string containing ignored characters (spaces and tabs)
 t_ignore  = ' \t'
 
-# Regla de manejo de errores
+# Regla para manejar nuevas líneas - Stefano Suarez
+def t_newline(t):
+     r'\n+'
+     t.lexer.lineno += len(t.value)
+
+# Regla de manejo de errores - Stefano Suarez
 def t_error(t):
     print("Illegal character '%s" % t.value[0])
     t.lexer.skip(1)
