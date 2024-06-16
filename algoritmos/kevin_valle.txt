@@ -4,11 +4,7 @@ __halt_compiler();
 array();
 die();
 empty();
-eval();
-exit();
-isset();
-list();
-unset();
+
 $x = 10;
 $y = 5;
 if ($x > $y) {
@@ -23,6 +19,7 @@ for ($i = 0; $i < 5; $i++) {
     echo "El valor de i es: $i<br>";
 }
 
+$array = [1,2,3,4];
 $suma = $x + $y;
 echo "La suma de x + y es: $suma";
 ?>

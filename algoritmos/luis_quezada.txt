@@ -1,10 +1,19 @@
 <?php
-$var=5;
-$var++;
-$arr[0]=$var;
-echo $arr[0];
-if ($var == $arr[0]) {
-    echo "Equal";
+// Algoritmo 2: Uso de funciones y manejo de strings
+function saludar($nombre) {
+    echo "Hola, $nombre.<br>";
 }
-$command=`ls`;
+isset();
+list();
+unset();
+
+saludar("Juan");
+
+$frase = "La práctica hace al maestro.";
+echo "Longitud de la frase: " . strlen($frase) . "<br>";
+
+$cadena1 = "Hola ";
+$cadena2 = "Mundo!";
+$stack = new SplStack();
+echo $cadena1 . $cadena2 . "<br>";
 ?>
