@@ -11,9 +11,10 @@ fecha_log = datetime.today().strftime('%d%m%Y')
 hora_log = datetime.today().strftime('%Hh%M')
 ext_log = '.txt'
 
-logs_folder = 'logs'
+logs_lexico = 'logs_lexico'
+logs_sintactico = 'logs_sintactico'
 algoritmos_folder = 'algoritmos'
-os.makedirs(logs_folder, exist_ok=True)
+os.makedirs(logs_lexico, exist_ok=True)
 
 algoritmos_3 = {}
 
@@ -25,27 +26,17 @@ def obtener_alg():
         with open(ruta, "r") as file:
             algoritmos_3[integrante[0]] = file.read()
 
-def generar_log(resultados):
+def generar_log_lexico(resultados):
     for integrante, usuario_log in grupo_3.items():
-        nombre_log = os.path.join(
-            logs_folder, f"lexico-{usuario_log}-{fecha_log}-{hora_log}{ext_log}")
-        with open(nombre_log, 'w') as file:
+        nombre_log_lexico = os.path.join(
+            logs_lexico, f"lexico-{usuario_log}-{fecha_log}-{hora_log}{ext_log}")
+        with open(nombre_log_lexico, 'w') as file:
             file.write('\n'.join((resultados[integrante])))
-        print(f"Se creó el archivo de {integrante} con el nombre: '{nombre_log}'")
+        print(f"Se creó el archivo de {integrante} con el nombre: '{nombre_log_lexico}'")
 
-"""
-ENTERO 
-^(\d+)$
-
-FLOAT
-^([-]?)(\d+\.\d*|\.\d+)$
-
-CADENA
-^(")([^"]+)(")$
-
-BOOLEANO
-^(true|false)$
-
-NULL
-^(null|NULL)$
-"""
+def generar_log_sintactico(resultados):
+    for integrante, usuario_log in grupo_3.items():
+        nombre_log_sintactico = os.path.join(logs_sintactico, f"sintactico-{usuario_log}-{fecha_log}-{hora_log}{ext_log}")
+        with open(nombre_log_sintactico, 'w') as file:
+            file.write('\n'.join((resultados[integrante])))
+        print(f"Se creó el archivo de {integrante} con el nombre: '{nombre_log_sintactico}'")

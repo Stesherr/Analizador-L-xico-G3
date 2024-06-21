@@ -6,12 +6,12 @@ reserved = {"__halt_compiler()" : "__HALT_COMPILER", "abstract" : "ABSTRACT", "a
 "break" : "BREAK", "callable" : "CALLABLE", "case" : "CASE", "catch" : "CATCH", "class" : "CLASS", "clone" : "CLONE", "const" : "CONST", "continue" : "CONTINUE",
 "declare" : "DECLARE", "default" : "DEFAULT", "die()" : "DIE", "do" : "DO", "echo" : "ECHO", "else" : "ELSE", "elseif" : "ELSEIF",
 "empty()" : "EMPTY", "endwhile" : "ENDWHILE", "eval()" : "EVAL", "exit()" : "EXIT", "extends" : "EXTENDS", "final" : "FINAL", "finally" : "FINALLY",
-"fn" : "FN", "for" : "FOR", "foreach" : "FOREACH", "function" : "FUNCTION", "global" : "GLOBAL", "goto" : "GOTO", "if" : "IF", "implements" : "IMPLEMENTS",
+"fn" : "FN", "for" : "FOR", "foreach" : "FOREACH", "fgets" : "FGETS", "function" : "FUNCTION", "global" : "GLOBAL", "goto" : "GOTO", "if" : "IF", "implements" : "IMPLEMENTS",
 "include" : "INCLUDE", "include_once" : "INCLUDE_ONCE", "instanceof" : "INSTANCEOF", "insteadof" : "INSTEADOF", "interface" : "INTERFACE", "isset()" : "ISSET",
-"list()" : "LIST", "match" : "MATCH", "namespace" : "NAMESPACE", "new" : "NEW", "or" : "OR", "print" : "PRINT", "private" : "PRIVATE", "protected" : "PROTECTED",
+"list()" : "LIST", "match" : "MATCH", "namespace" : "NAMESPACE", "new" : "NEW", "or" : "OR", "print" : "PRINT", "private" : "PRIVATE", "protected" : "PROTECTED", "push" : "PUSH", "pop()" : "POP",
 "public" : "PUBLIC", "require" : "REQUIRE", "require_once" : "REQUIRE_ONCE", "return" : "RETURN", "static" : "STATIC", "switch" : "SWITCH",
 "throw" : "THROW", "trait" : "TRAIT", "try" : "TRY", "unset()" : "UNSET", "use" : "USE", "var" : "VAR", "while" : "WHILE", "xor" : "XOR",
-"yield" : "YIELD", "yield_from" : "YIELD_FROM", "SplQueue()" : "QUEUE", "SplStack()" : "STACK"}
+"yield" : "YIELD", "yield_from" : "YIELD_FROM", "SplQueue()" : "QUEUE", "SplStack()" : "STACK", "STDIN" : "STDIN"}
 
 # Lista de tokens
 tokens= (
@@ -61,7 +61,11 @@ tokens= (
     'OBJOP',
     'OPEN_TAG',
     'CLOSE_TAG',
-    'DOC_COMMENT'
+    'DOC_COMMENT',
+    'COLON',
+    'FNARROW',
+    'QUOTE',
+    'COMMA'
 )+tuple(reserved.values())
 
 # Lista Operadores - Kevin Valle
@@ -72,6 +76,9 @@ t_LSQUARE = r'\['
 t_RSQUARE = r'\]'
 t_LCURLY = r'\{'
 t_RCURLY = r'\}'
+t_COLON = r':'
+t_QUOTE = r'\''
+t_COMMA = r','
     # Aritmeticos
 t_PLUS = r'\+'
 t_MINUS = r'-'
@@ -111,6 +118,8 @@ t_CONCAT = r'\.'
 t_CONCATASSIGN = r'\.='
     # Objeto
 t_OBJOP = r'->'
+    # Funciones
+t_FNARROW = r'=>'
 # Lista Operadores - Kevin Valle
 
 #OPEN/CLOSE TAG Luis Quezada
@@ -142,6 +151,11 @@ def t_ARRAY(t):
 def t_QUEUE(t):
     r'SplQueue\(\)'
     t.type = reserved.get(t.value, 'QUEUE')
+    return t
+
+def t_POP(t):
+    r'pop\(\)'
+    t.type = reserved.get(t.value, 'POP')
     return t
 
 def t_STACK(t):
@@ -222,7 +236,7 @@ def t_newline(t):
 
 # Regla de manejo de errores - Stefano Suarez
 def t_error(t):
-    print("Illegal character '%s" % t.value[0])
+    #print("Illegal character '%s" % t.value[0])
     t.lexer.skip(1)
 
 # Constructor lexer
@@ -241,10 +255,10 @@ for key, value in algoritmos.items():
         tok = lexer.token()
         if not tok:
                 break
-        print(tok)
+        #print(tok)
         if key in resultados:
              resultados[key].append(str(tok))
         else:
              resultados[key]  = [str(tok)]
 
-Generador_log.generar_log(resultados)
+#Generador_log.generar_log(resultados)
