@@ -1,19 +1,53 @@
 <?php
-// Algoritmo 2: Uso de funciones y manejo de strings
-function saludar($nombre) {
-    echo "Hola, $nombre.<br>";
+class Persona {
+    public $nombre;
+    public $edad;
+    function __construct($nombre, $edad) {
+        $this->nombre = $nombre;
+        $this->edad = $edad;
+    }
+    function presentarse() {
+        printf("Hola, mi nombre es %s y tengo %d años.\n", $this->nombre, $this->edad);
+    }
 }
-isset();
-list();
-unset();
+function ejemplo1() {
+    $personas = [
+        new Persona("Juan", 30),
+        new Persona("María", 25),
+        new Persona("Pedro", 40)
+    ];
+    for ($i = 0; $i < 10; $i++) {
+        if ($i % 2 == 0) {
+            continue; // CONTINUE DENTRO DE IF DENTRO DE FOR
+        } else {
+            switch ($i) {
+                case 1:
+                    printf("Opción 1 seleccionada\n");
+                    $numero1 = 10;
+                    $numero2 = 5;
+                    $resultado = $numero1 + $numero2; //SOLO NUMEROS EN OPERACIONES ARITMETICAS
+                    printf("Resultado de la suma: %d\n", $resultado); //CONCATENACION DE STRING CON OTRO TIPO DE DATO
+                    break;
+                case 3:
+                    printf("Opción 2 seleccionada\n");
+                    $numero = 6;
+                    printf("Cuadrado de %d: %d\n", $numero, $numero*$numero);
+                    break;
+                default: //DEFAULT DENTRO DE SWITCH
+                    printf("Opción por defecto\n");
+                    $numeroComoString = "10";
+                    $resultadoConversion = $numeroComoString + 5; //CADENA A NUMERO
+                    printf("Resultado de la operación con conversión implícita: %d\n", $resultadoConversion);
+            }
+        }
+        printf("%d %f\n", $i, sin(5)); //FUNCION QUE SOLO RECIBE NUMERO
+    }
 
-saludar("Juan");
-
-$frase = "La práctica hace al maestro.";
-echo "Longitud de la frase: " . strlen($frase) . "<br>";
-
-$cadena1 = "Hola ";
-$cadena2 = "Mundo!";
-$stack = new SplStack();
-echo $cadena1 . $cadena2 . "<br>";
+    // Impresión de la información de personas
+    foreach ($personas as $persona) {
+        $persona->presentarse();
+    }
+}
+// Llamada a la función que encapsula todos los ejemplos
+ejemplo1();
 ?>
