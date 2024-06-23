@@ -10,6 +10,9 @@ def p_cuerpo(p):
               | arrowFunction
               | echo
               | fgets
+              | stackDeclaration
+              | stackPush
+              | stackPop
     '''
 # ESTRUCTURA SWITCH - KEVIN VALLE
 def p_switchStatement(p):
@@ -26,6 +29,16 @@ def p_switchCases(p):
                    | switchCases switchCase
     '''
 # ESTRUCTURA SWITCH - KEVIN VALLE
+
+# ESTRUCTURA COLA - STEFANO SUAREZ
+def p_stackDeclaration(p):
+    'stackDeclaration : ID EQUAL NEW STACK SEMICOLON'
+
+def p_stackPush(p):
+    'stackPush : ID OBJOP PUSH LPAREN value RPAREN SEMICOLON'
+
+def p_stackPop(p):
+    'stackPop : ID OBJOP POP SEMICOLON'
 
 # ESTRUCTURA COLA - KEVIN VALLE
 def p_queueDeclaration(p):
