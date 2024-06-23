@@ -3,6 +3,7 @@ from Analizador_lexico import tokens
 
 def p_cuerpo(p):
     '''cuerpo : arithmeticExpression
+              | forStatement
               | switchStatement
               | queueDeclaration
               | queueEnqueue
@@ -29,6 +30,20 @@ def p_switchCases(p):
                    | switchCases switchCase
     '''
 # ESTRUCTURA SWITCH - KEVIN VALLE
+
+# ESTRUCTURA FOR - LUIS QUEZADA
+def p_forStatement(p):
+    'forStatement : FOR LPAREN forStatementCondition RPAREN LCURLY forStatementBody RCURLY'
+
+def p_forStatementCondition(p):
+    '''forStatementCondition :  SEMICOLON SEMICOLON 
+                            |  variableAsignation SEMICOLON SEMICOLON variableAsignation
+                            |  variableAsignation SEMICOLON comparingValue SEMICOLON variableAsignation'''
+
+def p_forStatementBody(p):
+    '''forStatementBody : cuerpo 
+                        | forStatementBody cuerpo'''
+# ESTRUCTURA FOR - LUIS QUEZADA
 
 # ESTRUCTURA COLA - STEFANO SUAREZ
 def p_stackDeclaration(p):
