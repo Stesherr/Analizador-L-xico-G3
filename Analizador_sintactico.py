@@ -14,6 +14,7 @@ def p_cuerpo(p):
               | stackDeclaration
               | stackPush
               | stackPop
+              | line
     '''
 # ESTRUCTURA SWITCH - KEVIN VALLE
 def p_switchStatement(p):
@@ -111,6 +112,31 @@ def p_arithmeticOperator(p):
                           | MOD
                           | EXP
     '''
+
+# LINE - LUIS QUEZADA
+def p_line(p):
+    '''line : variableAsignation SEMICOLON'''
+    
+# VARIABLE ASIGNATION - LUIS QUEZADA
+def p_variableAsignation(p):
+    '''variableAsignation : ID EQUAL value
+                            | ID EQUAL arithmeticExpression
+    '''
+
+# COMPARING SIGN - LUIS QUEZADA
+def p_comparingSign(p):
+    '''comparingSign : IS_EQUAL
+                        | IDENTICAL
+                        | NOTEQUAL
+                        | LESSTHAN
+                        | GREATERTHAN
+                        | LESSEQUALTHAN
+                        | GREATEREQUALTHAN
+    '''
+
+# COMPARING VALUES - LUIS QUEZADA
+def p_comparingValue(p):
+    'comparingValue : value comparingSign value'
 
 # Error rule for syntax errors
 def p_error(p):
