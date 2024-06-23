@@ -8,6 +8,7 @@ def p_cuerpo(p):
               | queueDeclaration
               | queueEnqueue
               | queueDequeue
+              | defineFunction
               | arrowFunction
               | echo
               | fgets
@@ -66,6 +67,16 @@ def p_queueEnqueue(p):
 def p_queueDequeue(p):
     'queueDequeue : ID OBJOP POP SEMICOLON'
 # ESTRUCTURA COLA - KEVIN VALLE
+
+# DEFINE FUNCTION - LUIS QUEZADA
+def p_defineFunction(p):
+    '''defineFunction : FUNCTION ID LPAREN arguments RPAREN LCURLY cuerpo RCURLY
+                    | FUNCTION ID LPAREN RPAREN LCURLY cuerpo RCURLY'''
+
+# ARGUMENTS - LUIS QUEZADA
+def p_arguments(p):
+    '''arguments : ID
+                | ID COMMA arguments'''
 
 #  FUNCION FLECHA - KEVIN VALLE
 def p_arrowFunction(p):
