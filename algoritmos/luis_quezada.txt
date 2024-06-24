@@ -12,35 +12,35 @@ class Persona {
 }
 function ejemplo1() {
     $personas = [
-        new Persona("Juan", 30),
-        new Persona("María", 25),
-        new Persona("Pedro", 40)
+        "Juan",
+        "Maria,
+        "Pedro"
     ];
-    for ($i = 0; $i < 10; $i++) {
+    $teclado = fgets(STDIN);
+    for ($i = 0; $i < 10; $i=$i+1) {
         if ($i % 2 == 0) {
             continue; // CONTINUE DENTRO DE IF DENTRO DE FOR
         } else {
             switch ($i) {
                 case 1:
-                    printf("Opción 1 seleccionada\n");
+                    print("Opción 1 seleccionada");
                     $numero1 = 10;
                     $numero2 = 5;
-                    $resultado = $numero1 + $numero2; //SOLO NUMEROS EN OPERACIONES ARITMETICAS
-                    printf("Resultado de la suma: %d\n", $resultado); //CONCATENACION DE STRING CON OTRO TIPO DE DATO
+                    $resultado = $numero1 + $numero2 + (12+8/(21*9)); //SOLO NUMEROS EN OPERACIONES ARITMETICAS
+                    print("Resultado de la suma: $resultado"); //CONCATENACION DE STRING CON OTRO TIPO DE DATO
                     break;
                 case 3:
-                    printf("Opción 2 seleccionada\n");
+                    echo "Opción 2 seleccionada";
                     $numero = 6;
-                    printf("Cuadrado de %d: %d\n", $numero, $numero*$numero);
                     break;
                 default: //DEFAULT DENTRO DE SWITCH
-                    printf("Opción por defecto\n");
+                    print "Opción por defecto";
                     $numeroComoString = "10";
                     $resultadoConversion = $numeroComoString + 5; //CADENA A NUMERO
-                    printf("Resultado de la operación con conversión implícita: %d\n", $resultadoConversion);
+                    print("Resultado de la operación con conversión implícita: $resultadoConversion");
             }
         }
-        printf("%d %f\n", $i, sin(5)); //FUNCION QUE SOLO RECIBE NUMERO
+        print "sin de 5 es sin(5)"; //FUNCION QUE SOLO RECIBE NUMERO
     }
 
     // Impresión de la información de personas

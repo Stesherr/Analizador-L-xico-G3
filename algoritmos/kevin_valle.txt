@@ -8,43 +8,38 @@ class Objeto {
         $this->nombre = $nombre;
         $this->cantidad = $cantidad;
     }
-
-    function presentarse() {
-        printf("El objeto %s tiene una cantidad de %d.\n", $this->nombre, $this->cantidad);
-    }
 }
 
 function ejemplo3() {
+    $ingreso = fgets(STDIN);
     $objetos = new SplQueue();
-    $objetos->enqueue(new Objeto("Libro", 3));
-    $objetos->enqueue(new Objeto("Lápiz", 5));
-    $objetos->enqueue(new Objeto("Cuaderno", 2));
-
-    for ($i = 0; $i < 10; $i++) {
+    $objetos->push("Libro");
+    $objetos->push("Pluma");
+    $objetos->push("Borrador");
+    $objetos->pop();
+    for ($i = 0; $i < 10; $i=$i+2) {
         if ($i % 2 == 0) {
             continue; // CONTINUE DENTRO DE IF DENTRO DE FOR
         } else {
             switch ($i) {
                 case 1:
                     print("Acción 1 realizada");
-                    $num1 = 8;
+                    $num1 = (1+2)*5/2-(121-(21+21));
                     $num2 = 4;
                     $result = $num1 * $num2; // SOLO NUMEROS EN OPERACIONES ARITMETICAS
-                    printf("Resultado de la multiplicación: %d\n", $result); // CONCATENACION DE STRING CON OTRO TIPO DE DATO
+                    print("Resultado de la multiplicación: $result"); // CONCATENACION DE STRING CON OTRO TIPO DE DATO
                     break;
                 case 3:
-                    printf("Acción 2 realizada\n");
+                    echo "Acción 2 realizada";
                     $num = 6;
-                    printf("Cuadrado de %d: %d\n", $num, $num * $num);
                     break;
                 default: // DEFAULT DENTRO DE SWITCH
-                    printf("Acción por defecto\n");
+                    print("Acción por defecto");
                     $strNumber = "12";
                     $resultConversion = $strNumber + 6; // CADENA A NUMERO
-                    printf("Resultado de la operación con conversión implícita: %d\n", $resultConversion);
             }
         }
-        printf("%d %f\n", $i, tan(5)); // FUNCION QUE SOLO RECIBE NUMERO
+        print "tan de 5 es tan(5)"; // FUNCION QUE SOLO RECIBE NUMERO
     }
 
     // Impresión de la información de objetos

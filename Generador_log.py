@@ -15,6 +15,7 @@ logs_lexico = 'logs_lexico'
 logs_sintactico = 'logs_sintactico'
 algoritmos_folder = 'algoritmos'
 os.makedirs(logs_lexico, exist_ok=True)
+os.makedirs(logs_sintactico, exist_ok=True)
 
 algoritmos_3 = {}
 

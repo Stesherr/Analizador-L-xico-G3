@@ -10,10 +10,12 @@
     }
 
     function ejemplo2() {
-        $animales = new SplQueue();
-        $animales->enqueue(new Animal("Perro", 3));
-        $animales->enqueue(new Animal("Gato", 5));
-        $animales->enqueue(new Animal("Pájaro", 2));
+        $datos = fgets(STDIN);
+        $animales = new SplStack();
+        $animales->push("Perro");
+        $animales->push("Gato");
+        $animales->push("Pollo");
+        $animales->pop();
 
         for ($i = 0; $i < 10; $i=$i+1) {
             if ($i == 0) {
@@ -24,7 +26,7 @@
                         echo "Acción 1 realizada";
                         $num1 = 15;
                         $num2 = 7;
-                        $result = $num1 * $num2;
+                        $result = $num1 * $num2 + 10 * (21/2);
                         break;
                     case 3:
                         print("Acción 2 realizada");

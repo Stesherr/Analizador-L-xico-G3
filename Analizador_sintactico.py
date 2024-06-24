@@ -31,10 +31,10 @@ def p_switchStatement(p):
     'switchStatement : SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY'
 
 def p_switchDefault(p):
-    'switchDefault : DEFAULT COLON cuerpo'
+    'switchDefault : DEFAULT COLON programa'
 
 def p_switchCase(p):
-    'switchCase : CASE value COLON cuerpo BREAK SEMICOLON'
+    'switchCase : CASE value COLON programa BREAK SEMICOLON'
 
 def p_switchCases(p):
     '''switchCases : switchCase
@@ -129,7 +129,10 @@ def p_fgets(p):
     'fgets : ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON'
 
 def p_arithmeticExpression(p):
-    'arithmeticExpression : value arithmeticOperator value'
+    '''arithmeticExpression : value
+                            | arithmeticExpression arithmeticOperator arithmeticExpression
+                            | LPAREN arithmeticExpression RPAREN
+    '''
 
 def p_value(p):
     '''value : ID 
