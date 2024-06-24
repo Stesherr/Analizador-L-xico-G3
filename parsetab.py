@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ABSTRACT AND ARRAY AS BITAND BITNOT BITOR BOOL BREAK CALLABLE CASE CATCH CLASS CLONE CLOSE_TAG COLON COMMA CONCAT CONCATASSIGN CONST CONTINUE DECLARE DECREMENT DEFAULT DIE DIVIDE DIVIDEASSIGN DO DOC_COMMENT ECHO ELSE ELSEIF EMPTY ENDWHILE EQUAL ERRORCONTROL EVAL EXECUTION EXIT EXP EXPASSIGN EXTENDS FGETS FINAL FINALLY FLOAT FN FNARROW FOR FOREACH FUNCTION GLOBAL GOTO GREATEREQUALTHAN GREATERTHAN ID IDENTICAL IF IMPLEMENTS INCLUDE INCLUDE_ONCE INCREMENT INSTANCEOF INSTEADOF INTEGER INTERFACE ISSET IS_EQUAL LCURLY LESSEQUALTHAN LESSTHAN LIST LOGICALNOT LPAREN LSQUARE MATCH MINUS MINUSASSIGN MOD MODASSIGN NAMESPACE NEW NOTEQUAL NULL OBJOP OPEN_TAG OR PLUS PLUSASSIGN POP PRINT PRIVATE PROTECTED PUBLIC PUSH QUEUE QUOTE RCURLY REQUIRE REQUIRE_ONCE RETURN RPAREN RSQUARE SEMICOLON STACK STATIC STDIN STRING SWITCH THROW TIMES TIMESASSIGN TRAIT TRY UNSET USE VAR WHILE XOR YIELD YIELD_FROM __HALT_COMPILERcuerpo : arithmeticExpression\n              | switchStatement\n              | queueDeclaration\n              | queueEnqueue\n              | queueDequeue\n              | arrowFunction\n              | echo\n              | fgets\n    switchStatement : SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLYswitchDefault : DEFAULT COLON arithmeticExpressionswitchCase : CASE value COLON arithmeticExpression BREAK SEMICOLONswitchCases : switchCase\n                   | switchCases switchCase\n    queueDeclaration : ID EQUAL NEW QUEUE SEMICOLONqueueEnqueue : ID OBJOP PUSH LPAREN value RPAREN SEMICOLONqueueDequeue : ID OBJOP POP SEMICOLONarrowFunction : FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLONarrowBody : FN LPAREN ID RPAREN FNARROW arrowBody\n                 | cuerpo\n    echo : ECHO values SEMICOLONvalues : value\n               | values COMMA value\n    fgets : ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLONarithmeticExpression : value arithmeticOperator valuevalue : ID \n             | INTEGER\n             | FLOAT\n             | STRING\n             | BOOL\n             | NULL\n    arithmeticOperator : PLUS\n                          | MINUS \n                          | TIMES \n                          | DIVIDE\n                          | MOD\n                          | EXP\n    '
+_lr_signature = 'ABSTRACT AND ARRAY AS BITAND BITNOT BITOR BOOL BREAK CALLABLE CASE CATCH CLASS CLONE CLOSE_TAG COLON COMMA CONCAT CONCATASSIGN CONST CONTINUE DECLARE DECREMENT DEFAULT DIE DIVIDE DIVIDEASSIGN DO DOC_COMMENT ECHO ELSE ELSEIF EMPTY ENDWHILE EQUAL ERRORCONTROL EVAL EXECUTION EXIT EXP EXPASSIGN EXTENDS FGETS FINAL FINALLY FLOAT FN FNARROW FOR FOREACH FUNCTION GLOBAL GOTO GREATEREQUALTHAN GREATERTHAN ID IDENTICAL IF IMPLEMENTS INCLUDE INCLUDE_ONCE INCREMENT INSTANCEOF INSTEADOF INTEGER INTERFACE ISSET IS_EQUAL LCURLY LESSEQUALTHAN LESSTHAN LIST LOGICALNOT LPAREN LSQUARE MATCH MINUS MINUSASSIGN MOD MODASSIGN NAMESPACE NEW NOTEQUAL NULL OBJOP OPEN_TAG OR PLUS PLUSASSIGN POP PRINT PRIVATE PROTECTED PUBLIC PUSH QUEUE QUOTE RCURLY REQUIRE REQUIRE_ONCE RETURN RPAREN RSQUARE SEMICOLON STACK STATIC STDIN STRING SWITCH THROW TIMES TIMESASSIGN TRAIT TRY UNSET USE VAR WHILE XOR YIELD YIELD_FROM __HALT_COMPILERprograma : cuerpo\n                | programa cuerpo\n    cuerpo : arithmeticExpression\n              | switchStatement\n              | queueDeclaration\n              | queueEnqueue\n              | queueDequeue\n              | arrowFunction\n              | echo\n              | fgets\n    switchStatement : SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLYswitchDefault : DEFAULT COLON arithmeticExpressionswitchCase : CASE value COLON arithmeticExpression BREAK SEMICOLONswitchCases : switchCase\n                   | switchCases switchCase\n    queueDeclaration : ID EQUAL NEW QUEUE SEMICOLONqueueEnqueue : ID OBJOP PUSH LPAREN value RPAREN SEMICOLONqueueDequeue : ID OBJOP POP SEMICOLONarrowFunction : FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLONarrowBody : FN LPAREN ID RPAREN FNARROW arrowBody\n                 | cuerpo\n    echo : ECHO values SEMICOLONvalues : value\n               | values COMMA value\n    fgets : ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLONarithmeticExpression : value arithmeticOperator valuevalue : ID \n             | INTEGER\n             | FLOAT\n             | STRING\n             | BOOL\n             | NULL\n    arithmeticOperator : PLUS\n                          | MINUS \n                          | TIMES \n                          | DIVIDE\n                          | MOD\n                          | EXP\n    '
     
-_lr_action_items = {'SWITCH':([0,54,79,],[11,11,11,]),'ID':([0,14,20,21,22,23,24,25,26,27,30,42,46,54,57,69,72,73,79,],[12,33,33,-31,-32,-33,-34,-35,-36,33,40,33,33,12,33,74,33,33,12,]),'FN':([0,54,79,],[13,60,60,]),'ECHO':([0,54,79,],[14,14,14,]),'INTEGER':([0,14,20,21,22,23,24,25,26,27,42,46,54,57,72,73,79,],[15,15,15,-31,-32,-33,-34,-35,-36,15,15,15,15,15,15,15,15,]),'FLOAT':([0,14,20,21,22,23,24,25,26,27,42,46,54,57,72,73,79,],[16,16,16,-31,-32,-33,-34,-35,-36,16,16,16,16,16,16,16,16,]),'STRING':([0,14,20,21,22,23,24,25,26,27,42,46,54,57,72,73,79,],[17,17,17,-31,-32,-33,-34,-35,-36,17,17,17,17,17,17,17,17,]),'BOOL':([0,14,20,21,22,23,24,25,26,27,42,46,54,57,72,73,79,],[18,18,18,-31,-32,-33,-34,-35,-36,18,18,18,18,18,18,18,18,]),'NULL':([0,14,20,21,22,23,24,25,26,27,42,46,54,57,72,73,79,],[19,19,19,-31,-32,-33,-34,-35,-36,19,19,19,19,19,19,19,19,]),'$end':([1,2,3,4,5,6,7,8,9,15,16,17,18,19,33,34,41,47,51,67,68,70,71,],[0,-1,-2,-3,-4,-5,-6,-7,-8,-26,-27,-28,-29,-30,-25,-24,-20,-16,-14,-23,-15,-17,-9,]),'SEMICOLON':([2,3,4,5,6,7,8,9,15,16,17,18,19,31,32,33,34,39,41,44,47,49,51,58,59,61,62,67,68,70,71,78,81,],[-1,-2,-3,-4,-5,-6,-7,-8,-26,-27,-28,-29,-30,41,-21,-25,-24,47,-20,51,-16,-22,-14,67,68,70,-19,-23,-15,-17,-9,80,70,]),'PLUS':([10,12,15,16,17,18,19,33,],[21,-25,-26,-27,-28,-29,-30,-25,]),'MINUS':([10,12,15,16,17,18,19,33,],[22,-25,-26,-27,-28,-29,-30,-25,]),'TIMES':([10,12,15,16,17,18,19,33,],[23,-25,-26,-27,-28,-29,-30,-25,]),'DIVIDE':([10,12,15,16,17,18,19,33,],[24,-25,-26,-27,-28,-29,-30,-25,]),'MOD':([10,12,15,16,17,18,19,33,],[25,-25,-26,-27,-28,-29,-30,-25,]),'EXP':([10,12,15,16,17,18,19,33,],[26,-25,-26,-27,-28,-29,-30,-25,]),'LPAREN':([11,13,37,38,60,],[27,30,45,46,69,]),'EQUAL':([12,],[28,]),'OBJOP':([12,],[29,]),'COMMA':([15,16,17,18,19,31,32,33,49,],[-26,-27,-28,-29,-30,42,-21,-25,-22,]),'RCURLY':([15,16,17,18,19,33,34,63,75,],[-26,-27,-28,-29,-30,-25,-24,71,-10,]),'BREAK':([15,16,17,18,19,33,34,76,],[-26,-27,-28,-29,-30,-25,-24,78,]),'RPAREN':([15,16,17,18,19,33,35,40,52,53,74,],[-26,-27,-28,-29,-30,-25,43,48,58,59,77,]),'COLON':([15,16,17,18,19,33,65,66,],[-26,-27,-28,-29,-30,-25,72,73,]),'NEW':([28,],[36,]),'FGETS':([28,],[37,]),'PUSH':([29,],[38,]),'POP':([29,],[39,]),'QUEUE':([36,],[44,]),'LCURLY':([43,],[50,]),'STDIN':([45,],[52,]),'FNARROW':([48,77,],[54,79,]),'CASE':([50,55,56,64,80,],[57,57,-12,-13,-11,]),'DEFAULT':([55,56,64,80,],[65,-12,-13,-11,]),}
+_lr_action_items = {'SWITCH':([0,1,2,3,4,5,6,7,8,9,10,16,17,18,19,20,21,35,36,43,49,53,56,69,70,72,73,81,],[12,12,-1,-3,-4,-5,-6,-7,-8,-9,-10,-28,-29,-30,-31,-32,-2,-27,-26,-22,-18,-16,12,-25,-17,-19,-11,12,]),'ID':([0,1,2,3,4,5,6,7,8,9,10,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,32,35,36,43,44,48,49,53,56,59,69,70,71,72,73,74,75,81,],[13,13,-1,-3,-4,-5,-6,-7,-8,-9,-10,35,-28,-29,-30,-31,-32,-2,35,-33,-34,-35,-36,-37,-38,35,42,-27,-26,-22,35,35,-18,-16,13,35,-25,-17,76,-19,-11,35,35,13,]),'FN':([0,1,2,3,4,5,6,7,8,9,10,16,17,18,19,20,21,35,36,43,49,53,56,69,70,72,73,81,],[14,14,-1,-3,-4,-5,-6,-7,-8,-9,-10,-28,-29,-30,-31,-32,-2,-27,-26,-22,-18,-16,62,-25,-17,-19,-11,62,]),'ECHO':([0,1,2,3,4,5,6,7,8,9,10,16,17,18,19,20,21,35,36,43,49,53,56,69,70,72,73,81,],[15,15,-1,-3,-4,-5,-6,-7,-8,-9,-10,-28,-29,-30,-31,-32,-2,-27,-26,-22,-18,-16,15,-25,-17,-19,-11,15,]),'INTEGER':([0,1,2,3,4,5,6,7,8,9,10,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,35,36,43,44,48,49,53,56,59,69,70,72,73,74,75,81,],[16,16,-1,-3,-4,-5,-6,-7,-8,-9,-10,16,-28,-29,-30,-31,-32,-2,16,-33,-34,-35,-36,-37,-38,16,-27,-26,-22,16,16,-18,-16,16,16,-25,-17,-19,-11,16,16,16,]),'FLOAT':([0,1,2,3,4,5,6,7,8,9,10,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,35,36,43,44,48,49,53,56,59,69,70,72,73,74,75,81,],[17,17,-1,-3,-4,-5,-6,-7,-8,-9,-10,17,-28,-29,-30,-31,-32,-2,17,-33,-34,-35,-36,-37,-38,17,-27,-26,-22,17,17,-18,-16,17,17,-25,-17,-19,-11,17,17,17,]),'STRING':([0,1,2,3,4,5,6,7,8,9,10,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,35,36,43,44,48,49,53,56,59,69,70,72,73,74,75,81,],[18,18,-1,-3,-4,-5,-6,-7,-8,-9,-10,18,-28,-29,-30,-31,-32,-2,18,-33,-34,-35,-36,-37,-38,18,-27,-26,-22,18,18,-18,-16,18,18,-25,-17,-19,-11,18,18,18,]),'BOOL':([0,1,2,3,4,5,6,7,8,9,10,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,35,36,43,44,48,49,53,56,59,69,70,72,73,74,75,81,],[19,19,-1,-3,-4,-5,-6,-7,-8,-9,-10,19,-28,-29,-30,-31,-32,-2,19,-33,-34,-35,-36,-37,-38,19,-27,-26,-22,19,19,-18,-16,19,19,-25,-17,-19,-11,19,19,19,]),'NULL':([0,1,2,3,4,5,6,7,8,9,10,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,35,36,43,44,48,49,53,56,59,69,70,72,73,74,75,81,],[20,20,-1,-3,-4,-5,-6,-7,-8,-9,-10,20,-28,-29,-30,-31,-32,-2,20,-33,-34,-35,-36,-37,-38,20,-27,-26,-22,20,20,-18,-16,20,20,-25,-17,-19,-11,20,20,20,]),'$end':([1,2,3,4,5,6,7,8,9,10,16,17,18,19,20,21,35,36,43,49,53,69,70,72,73,],[0,-1,-3,-4,-5,-6,-7,-8,-9,-10,-28,-29,-30,-31,-32,-2,-27,-26,-22,-18,-16,-25,-17,-19,-11,]),'SEMICOLON':([3,4,5,6,7,8,9,10,16,17,18,19,20,33,34,35,36,41,43,46,49,51,53,60,61,63,64,69,70,72,73,80,83,],[-3,-4,-5,-6,-7,-8,-9,-10,-28,-29,-30,-31,-32,43,-23,-27,-26,49,-22,53,-18,-24,-16,69,70,72,-21,-25,-17,-19,-11,82,72,]),'PLUS':([11,13,16,17,18,19,20,35,],[23,-27,-28,-29,-30,-31,-32,-27,]),'MINUS':([11,13,16,17,18,19,20,35,],[24,-27,-28,-29,-30,-31,-32,-27,]),'TIMES':([11,13,16,17,18,19,20,35,],[25,-27,-28,-29,-30,-31,-32,-27,]),'DIVIDE':([11,13,16,17,18,19,20,35,],[26,-27,-28,-29,-30,-31,-32,-27,]),'MOD':([11,13,16,17,18,19,20,35,],[27,-27,-28,-29,-30,-31,-32,-27,]),'EXP':([11,13,16,17,18,19,20,35,],[28,-27,-28,-29,-30,-31,-32,-27,]),'LPAREN':([12,14,39,40,62,],[29,32,47,48,71,]),'EQUAL':([13,],[30,]),'OBJOP':([13,],[31,]),'COMMA':([16,17,18,19,20,33,34,35,51,],[-28,-29,-30,-31,-32,44,-23,-27,-24,]),'RCURLY':([16,17,18,19,20,35,36,65,77,],[-28,-29,-30,-31,-32,-27,-26,73,-12,]),'BREAK':([16,17,18,19,20,35,36,78,],[-28,-29,-30,-31,-32,-27,-26,80,]),'RPAREN':([16,17,18,19,20,35,37,42,54,55,76,],[-28,-29,-30,-31,-32,-27,45,50,60,61,79,]),'COLON':([16,17,18,19,20,35,67,68,],[-28,-29,-30,-31,-32,-27,74,75,]),'NEW':([30,],[38,]),'FGETS':([30,],[39,]),'PUSH':([31,],[40,]),'POP':([31,],[41,]),'QUEUE':([38,],[46,]),'LCURLY':([45,],[52,]),'STDIN':([47,],[54,]),'FNARROW':([50,79,],[56,81,]),'CASE':([52,57,58,66,82,],[59,59,-14,-15,-13,]),'DEFAULT':([57,58,66,82,],[67,-14,-15,-13,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'cuerpo':([0,54,79,],[1,62,62,]),'arithmeticExpression':([0,54,72,73,79,],[2,2,75,76,2,]),'switchStatement':([0,54,79,],[3,3,3,]),'queueDeclaration':([0,54,79,],[4,4,4,]),'queueEnqueue':([0,54,79,],[5,5,5,]),'queueDequeue':([0,54,79,],[6,6,6,]),'arrowFunction':([0,54,79,],[7,7,7,]),'echo':([0,54,79,],[8,8,8,]),'fgets':([0,54,79,],[9,9,9,]),'value':([0,14,20,27,42,46,54,57,72,73,79,],[10,32,34,35,49,53,10,66,10,10,10,]),'arithmeticOperator':([10,],[20,]),'values':([14,],[31,]),'switchCases':([50,],[55,]),'switchCase':([50,55,],[56,64,]),'arrowBody':([54,79,],[61,81,]),'switchDefault':([55,],[63,]),}
+_lr_goto_items = {'programa':([0,],[1,]),'cuerpo':([0,1,56,81,],[2,21,64,64,]),'arithmeticExpression':([0,1,56,74,75,81,],[3,3,3,77,78,3,]),'switchStatement':([0,1,56,81,],[4,4,4,4,]),'queueDeclaration':([0,1,56,81,],[5,5,5,5,]),'queueEnqueue':([0,1,56,81,],[6,6,6,6,]),'queueDequeue':([0,1,56,81,],[7,7,7,7,]),'arrowFunction':([0,1,56,81,],[8,8,8,8,]),'echo':([0,1,56,81,],[9,9,9,9,]),'fgets':([0,1,56,81,],[10,10,10,10,]),'value':([0,1,15,22,29,44,48,56,59,74,75,81,],[11,11,34,36,37,51,55,11,68,11,11,11,]),'arithmeticOperator':([11,],[22,]),'values':([15,],[33,]),'switchCases':([52,],[57,]),'switchCase':([52,57,],[58,66,]),'arrowBody':([56,81,],[63,83,]),'switchDefault':([57,],[65,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,41 +26,43 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> cuerpo","S'",1,None,None,None),
-  ('cuerpo -> arithmeticExpression','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',5),
-  ('cuerpo -> switchStatement','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',6),
-  ('cuerpo -> queueDeclaration','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',7),
-  ('cuerpo -> queueEnqueue','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',8),
-  ('cuerpo -> queueDequeue','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',9),
-  ('cuerpo -> arrowFunction','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',10),
-  ('cuerpo -> echo','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',11),
-  ('cuerpo -> fgets','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',12),
-  ('switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY','switchStatement',8,'p_switchStatement','Analizador_sintactico.py',16),
-  ('switchDefault -> DEFAULT COLON arithmeticExpression','switchDefault',3,'p_switchDefault','Analizador_sintactico.py',19),
-  ('switchCase -> CASE value COLON arithmeticExpression BREAK SEMICOLON','switchCase',6,'p_switchCase','Analizador_sintactico.py',22),
-  ('switchCases -> switchCase','switchCases',1,'p_switchCases','Analizador_sintactico.py',25),
-  ('switchCases -> switchCases switchCase','switchCases',2,'p_switchCases','Analizador_sintactico.py',26),
-  ('queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON','queueDeclaration',5,'p_queueDeclaration','Analizador_sintactico.py',32),
-  ('queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON','queueEnqueue',7,'p_queueEnqueue','Analizador_sintactico.py',35),
-  ('queueDequeue -> ID OBJOP POP SEMICOLON','queueDequeue',4,'p_queueDequeue','Analizador_sintactico.py',38),
-  ('arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON','arrowFunction',7,'p_arrowFunction','Analizador_sintactico.py',43),
-  ('arrowBody -> FN LPAREN ID RPAREN FNARROW arrowBody','arrowBody',6,'p_arrowBody','Analizador_sintactico.py',46),
-  ('arrowBody -> cuerpo','arrowBody',1,'p_arrowBody','Analizador_sintactico.py',47),
-  ('echo -> ECHO values SEMICOLON','echo',3,'p_echo','Analizador_sintactico.py',53),
-  ('values -> value','values',1,'p_values','Analizador_sintactico.py',56),
-  ('values -> values COMMA value','values',3,'p_values','Analizador_sintactico.py',57),
-  ('fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON','fgets',7,'p_fgets','Analizador_sintactico.py',63),
-  ('arithmeticExpression -> value arithmeticOperator value','arithmeticExpression',3,'p_arithmeticExpression','Analizador_sintactico.py',66),
-  ('value -> ID','value',1,'p_value','Analizador_sintactico.py',70),
-  ('value -> INTEGER','value',1,'p_value','Analizador_sintactico.py',71),
-  ('value -> FLOAT','value',1,'p_value','Analizador_sintactico.py',72),
-  ('value -> STRING','value',1,'p_value','Analizador_sintactico.py',73),
-  ('value -> BOOL','value',1,'p_value','Analizador_sintactico.py',74),
-  ('value -> NULL','value',1,'p_value','Analizador_sintactico.py',75),
-  ('arithmeticOperator -> PLUS','arithmeticOperator',1,'p_arithmeticOperator','Analizador_sintactico.py',79),
-  ('arithmeticOperator -> MINUS','arithmeticOperator',1,'p_arithmeticOperator','Analizador_sintactico.py',80),
-  ('arithmeticOperator -> TIMES','arithmeticOperator',1,'p_arithmeticOperator','Analizador_sintactico.py',81),
-  ('arithmeticOperator -> DIVIDE','arithmeticOperator',1,'p_arithmeticOperator','Analizador_sintactico.py',82),
-  ('arithmeticOperator -> MOD','arithmeticOperator',1,'p_arithmeticOperator','Analizador_sintactico.py',83),
-  ('arithmeticOperator -> EXP','arithmeticOperator',1,'p_arithmeticOperator','Analizador_sintactico.py',84),
+  ("S' -> programa","S'",1,None,None,None),
+  ('programa -> cuerpo','programa',1,'p_programa','Analizador_sintactico.py',6),
+  ('programa -> programa cuerpo','programa',2,'p_programa','Analizador_sintactico.py',7),
+  ('cuerpo -> arithmeticExpression','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',11),
+  ('cuerpo -> switchStatement','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',12),
+  ('cuerpo -> queueDeclaration','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',13),
+  ('cuerpo -> queueEnqueue','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',14),
+  ('cuerpo -> queueDequeue','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',15),
+  ('cuerpo -> arrowFunction','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',16),
+  ('cuerpo -> echo','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',17),
+  ('cuerpo -> fgets','cuerpo',1,'p_cuerpo','Analizador_sintactico.py',18),
+  ('switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY','switchStatement',8,'p_switchStatement','Analizador_sintactico.py',22),
+  ('switchDefault -> DEFAULT COLON arithmeticExpression','switchDefault',3,'p_switchDefault','Analizador_sintactico.py',25),
+  ('switchCase -> CASE value COLON arithmeticExpression BREAK SEMICOLON','switchCase',6,'p_switchCase','Analizador_sintactico.py',28),
+  ('switchCases -> switchCase','switchCases',1,'p_switchCases','Analizador_sintactico.py',31),
+  ('switchCases -> switchCases switchCase','switchCases',2,'p_switchCases','Analizador_sintactico.py',32),
+  ('queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON','queueDeclaration',5,'p_queueDeclaration','Analizador_sintactico.py',38),
+  ('queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON','queueEnqueue',7,'p_queueEnqueue','Analizador_sintactico.py',41),
+  ('queueDequeue -> ID OBJOP POP SEMICOLON','queueDequeue',4,'p_queueDequeue','Analizador_sintactico.py',44),
+  ('arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON','arrowFunction',7,'p_arrowFunction','Analizador_sintactico.py',49),
+  ('arrowBody -> FN LPAREN ID RPAREN FNARROW arrowBody','arrowBody',6,'p_arrowBody','Analizador_sintactico.py',52),
+  ('arrowBody -> cuerpo','arrowBody',1,'p_arrowBody','Analizador_sintactico.py',53),
+  ('echo -> ECHO values SEMICOLON','echo',3,'p_echo','Analizador_sintactico.py',59),
+  ('values -> value','values',1,'p_values','Analizador_sintactico.py',62),
+  ('values -> values COMMA value','values',3,'p_values','Analizador_sintactico.py',63),
+  ('fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON','fgets',7,'p_fgets','Analizador_sintactico.py',69),
+  ('arithmeticExpression -> value arithmeticOperator value','arithmeticExpression',3,'p_arithmeticExpression','Analizador_sintactico.py',72),
+  ('value -> ID','value',1,'p_value','Analizador_sintactico.py',76),
+  ('value -> INTEGER','value',1,'p_value','Analizador_sintactico.py',77),
+  ('value -> FLOAT','value',1,'p_value','Analizador_sintactico.py',78),
+  ('value -> STRING','value',1,'p_value','Analizador_sintactico.py',79),
+  ('value -> BOOL','value',1,'p_value','Analizador_sintactico.py',80),
+  ('value -> NULL','value',1,'p_value','Analizador_sintactico.py',81),
+  ('arithmeticOperator -> PLUS','arithmeticOperator',1,'p_arithmeticOperator','Analizador_sintactico.py',85),
+  ('arithmeticOperator -> MINUS','arithmeticOperator',1,'p_arithmeticOperator','Analizador_sintactico.py',86),
+  ('arithmeticOperator -> TIMES','arithmeticOperator',1,'p_arithmeticOperator','Analizador_sintactico.py',87),
+  ('arithmeticOperator -> DIVIDE','arithmeticOperator',1,'p_arithmeticOperator','Analizador_sintactico.py',88),
+  ('arithmeticOperator -> MOD','arithmeticOperator',1,'p_arithmeticOperator','Analizador_sintactico.py',89),
+  ('arithmeticOperator -> EXP','arithmeticOperator',1,'p_arithmeticOperator','Analizador_sintactico.py',90),
 ]

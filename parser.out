@@ -93,43 +93,45 @@ Unused terminals:
 
 Grammar
 
-Rule 0     S' -> cuerpo
-Rule 1     cuerpo -> arithmeticExpression
-Rule 2     cuerpo -> switchStatement
-Rule 3     cuerpo -> queueDeclaration
-Rule 4     cuerpo -> queueEnqueue
-Rule 5     cuerpo -> queueDequeue
-Rule 6     cuerpo -> arrowFunction
-Rule 7     cuerpo -> echo
-Rule 8     cuerpo -> fgets
-Rule 9     switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY
-Rule 10    switchDefault -> DEFAULT COLON arithmeticExpression
-Rule 11    switchCase -> CASE value COLON arithmeticExpression BREAK SEMICOLON
-Rule 12    switchCases -> switchCase
-Rule 13    switchCases -> switchCases switchCase
-Rule 14    queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON
-Rule 15    queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON
-Rule 16    queueDequeue -> ID OBJOP POP SEMICOLON
-Rule 17    arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON
-Rule 18    arrowBody -> FN LPAREN ID RPAREN FNARROW arrowBody
-Rule 19    arrowBody -> cuerpo
-Rule 20    echo -> ECHO values SEMICOLON
-Rule 21    values -> value
-Rule 22    values -> values COMMA value
-Rule 23    fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON
-Rule 24    arithmeticExpression -> value arithmeticOperator value
-Rule 25    value -> ID
-Rule 26    value -> INTEGER
-Rule 27    value -> FLOAT
-Rule 28    value -> STRING
-Rule 29    value -> BOOL
-Rule 30    value -> NULL
-Rule 31    arithmeticOperator -> PLUS
-Rule 32    arithmeticOperator -> MINUS
-Rule 33    arithmeticOperator -> TIMES
-Rule 34    arithmeticOperator -> DIVIDE
-Rule 35    arithmeticOperator -> MOD
-Rule 36    arithmeticOperator -> EXP
+Rule 0     S' -> programa
+Rule 1     programa -> cuerpo
+Rule 2     programa -> programa cuerpo
+Rule 3     cuerpo -> arithmeticExpression
+Rule 4     cuerpo -> switchStatement
+Rule 5     cuerpo -> queueDeclaration
+Rule 6     cuerpo -> queueEnqueue
+Rule 7     cuerpo -> queueDequeue
+Rule 8     cuerpo -> arrowFunction
+Rule 9     cuerpo -> echo
+Rule 10    cuerpo -> fgets
+Rule 11    switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY
+Rule 12    switchDefault -> DEFAULT COLON arithmeticExpression
+Rule 13    switchCase -> CASE value COLON arithmeticExpression BREAK SEMICOLON
+Rule 14    switchCases -> switchCase
+Rule 15    switchCases -> switchCases switchCase
+Rule 16    queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON
+Rule 17    queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON
+Rule 18    queueDequeue -> ID OBJOP POP SEMICOLON
+Rule 19    arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON
+Rule 20    arrowBody -> FN LPAREN ID RPAREN FNARROW arrowBody
+Rule 21    arrowBody -> cuerpo
+Rule 22    echo -> ECHO values SEMICOLON
+Rule 23    values -> value
+Rule 24    values -> values COMMA value
+Rule 25    fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON
+Rule 26    arithmeticExpression -> value arithmeticOperator value
+Rule 27    value -> ID
+Rule 28    value -> INTEGER
+Rule 29    value -> FLOAT
+Rule 30    value -> STRING
+Rule 31    value -> BOOL
+Rule 32    value -> NULL
+Rule 33    arithmeticOperator -> PLUS
+Rule 34    arithmeticOperator -> MINUS
+Rule 35    arithmeticOperator -> TIMES
+Rule 36    arithmeticOperator -> DIVIDE
+Rule 37    arithmeticOperator -> MOD
+Rule 38    arithmeticOperator -> EXP
 
 Terminals, with rules where they appear
 
@@ -140,47 +142,47 @@ AS                   :
 BITAND               : 
 BITNOT               : 
 BITOR                : 
-BOOL                 : 29
-BREAK                : 11
+BOOL                 : 31
+BREAK                : 13
 CALLABLE             : 
-CASE                 : 11
+CASE                 : 13
 CATCH                : 
 CLASS                : 
 CLONE                : 
 CLOSE_TAG            : 
-COLON                : 10 11
-COMMA                : 22
+COLON                : 12 13
+COMMA                : 24
 CONCAT               : 
 CONCATASSIGN         : 
 CONST                : 
 CONTINUE             : 
 DECLARE              : 
 DECREMENT            : 
-DEFAULT              : 10
+DEFAULT              : 12
 DIE                  : 
-DIVIDE               : 34
+DIVIDE               : 36
 DIVIDEASSIGN         : 
 DO                   : 
 DOC_COMMENT          : 
-ECHO                 : 20
+ECHO                 : 22
 ELSE                 : 
 ELSEIF               : 
 EMPTY                : 
 ENDWHILE             : 
-EQUAL                : 14 23
+EQUAL                : 16 25
 ERRORCONTROL         : 
 EVAL                 : 
 EXECUTION            : 
 EXIT                 : 
-EXP                  : 36
+EXP                  : 38
 EXPASSIGN            : 
 EXTENDS              : 
-FGETS                : 23
+FGETS                : 25
 FINAL                : 
 FINALLY              : 
-FLOAT                : 27
-FN                   : 17 18
-FNARROW              : 17 18
+FLOAT                : 29
+FN                   : 19 20
+FNARROW              : 19 20
 FOR                  : 
 FOREACH              : 
 FUNCTION             : 
@@ -188,7 +190,7 @@ GLOBAL               :
 GOTO                 : 
 GREATEREQUALTHAN     : 
 GREATERTHAN          : 
-ID                   : 14 15 16 17 18 23 25
+ID                   : 16 17 18 19 20 25 27
 IDENTICAL            : 
 IF                   : 
 IMPLEMENTS           : 
@@ -197,53 +199,53 @@ INCLUDE_ONCE         :
 INCREMENT            : 
 INSTANCEOF           : 
 INSTEADOF            : 
-INTEGER              : 26
+INTEGER              : 28
 INTERFACE            : 
 ISSET                : 
 IS_EQUAL             : 
-LCURLY               : 9
+LCURLY               : 11
 LESSEQUALTHAN        : 
 LESSTHAN             : 
 LIST                 : 
 LOGICALNOT           : 
-LPAREN               : 9 15 17 18 23
+LPAREN               : 11 17 19 20 25
 LSQUARE              : 
 MATCH                : 
-MINUS                : 32
+MINUS                : 34
 MINUSASSIGN          : 
-MOD                  : 35
+MOD                  : 37
 MODASSIGN            : 
 NAMESPACE            : 
-NEW                  : 14
+NEW                  : 16
 NOTEQUAL             : 
-NULL                 : 30
-OBJOP                : 15 16
+NULL                 : 32
+OBJOP                : 17 18
 OPEN_TAG             : 
 OR                   : 
-PLUS                 : 31
+PLUS                 : 33
 PLUSASSIGN           : 
-POP                  : 16
+POP                  : 18
 PRINT                : 
 PRIVATE              : 
 PROTECTED            : 
 PUBLIC               : 
-PUSH                 : 15
-QUEUE                : 14
+PUSH                 : 17
+QUEUE                : 16
 QUOTE                : 
-RCURLY               : 9
+RCURLY               : 11
 REQUIRE              : 
 REQUIRE_ONCE         : 
 RETURN               : 
-RPAREN               : 9 15 17 18 23
+RPAREN               : 11 17 19 20 25
 RSQUARE              : 
-SEMICOLON            : 11 14 15 16 17 20 23
+SEMICOLON            : 13 16 17 18 19 22 25
 STACK                : 
 STATIC               : 
-STDIN                : 23
-STRING               : 28
-SWITCH               : 9
+STDIN                : 25
+STRING               : 30
+SWITCH               : 11
 THROW                : 
-TIMES                : 33
+TIMES                : 35
 TIMESASSIGN          : 
 TRAIT                : 
 TRY                  : 
@@ -259,1001 +261,1277 @@ error                :
 
 Nonterminals, with rules where they appear
 
-arithmeticExpression : 1 10 11
-arithmeticOperator   : 24
-arrowBody            : 17 18
-arrowFunction        : 6
-cuerpo               : 19 0
-echo                 : 7
-fgets                : 8
-queueDeclaration     : 3
-queueDequeue         : 5
-queueEnqueue         : 4
-switchCase           : 12 13
-switchCases          : 9 13
-switchDefault        : 9
-switchStatement      : 2
-value                : 9 11 15 21 22 24 24
-values               : 20 22
+arithmeticExpression : 3 12 13
+arithmeticOperator   : 26
+arrowBody            : 19 20
+arrowFunction        : 8
+cuerpo               : 1 2 21
+echo                 : 9
+fgets                : 10
+programa             : 2 0
+queueDeclaration     : 5
+queueDequeue         : 7
+queueEnqueue         : 6
+switchCase           : 14 15
+switchCases          : 11 15
+switchDefault        : 11
+switchStatement      : 4
+value                : 11 13 17 23 24 26 26
+values               : 22 24
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . cuerpo
-    (1) cuerpo -> . arithmeticExpression
-    (2) cuerpo -> . switchStatement
-    (3) cuerpo -> . queueDeclaration
-    (4) cuerpo -> . queueEnqueue
-    (5) cuerpo -> . queueDequeue
-    (6) cuerpo -> . arrowFunction
-    (7) cuerpo -> . echo
-    (8) cuerpo -> . fgets
-    (24) arithmeticExpression -> . value arithmeticOperator value
-    (9) switchStatement -> . SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY
-    (14) queueDeclaration -> . ID EQUAL NEW QUEUE SEMICOLON
-    (15) queueEnqueue -> . ID OBJOP PUSH LPAREN value RPAREN SEMICOLON
-    (16) queueDequeue -> . ID OBJOP POP SEMICOLON
-    (17) arrowFunction -> . FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON
-    (20) echo -> . ECHO values SEMICOLON
-    (23) fgets -> . ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON
-    (25) value -> . ID
-    (26) value -> . INTEGER
-    (27) value -> . FLOAT
-    (28) value -> . STRING
-    (29) value -> . BOOL
-    (30) value -> . NULL
+    (0) S' -> . programa
+    (1) programa -> . cuerpo
+    (2) programa -> . programa cuerpo
+    (3) cuerpo -> . arithmeticExpression
+    (4) cuerpo -> . switchStatement
+    (5) cuerpo -> . queueDeclaration
+    (6) cuerpo -> . queueEnqueue
+    (7) cuerpo -> . queueDequeue
+    (8) cuerpo -> . arrowFunction
+    (9) cuerpo -> . echo
+    (10) cuerpo -> . fgets
+    (26) arithmeticExpression -> . value arithmeticOperator value
+    (11) switchStatement -> . SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY
+    (16) queueDeclaration -> . ID EQUAL NEW QUEUE SEMICOLON
+    (17) queueEnqueue -> . ID OBJOP PUSH LPAREN value RPAREN SEMICOLON
+    (18) queueDequeue -> . ID OBJOP POP SEMICOLON
+    (19) arrowFunction -> . FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON
+    (22) echo -> . ECHO values SEMICOLON
+    (25) fgets -> . ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON
+    (27) value -> . ID
+    (28) value -> . INTEGER
+    (29) value -> . FLOAT
+    (30) value -> . STRING
+    (31) value -> . BOOL
+    (32) value -> . NULL
 
-    SWITCH          shift and go to state 11
-    ID              shift and go to state 12
-    FN              shift and go to state 13
-    ECHO            shift and go to state 14
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    STRING          shift and go to state 17
-    BOOL            shift and go to state 18
-    NULL            shift and go to state 19
+    SWITCH          shift and go to state 12
+    ID              shift and go to state 13
+    FN              shift and go to state 14
+    ECHO            shift and go to state 15
+    INTEGER         shift and go to state 16
+    FLOAT           shift and go to state 17
+    STRING          shift and go to state 18
+    BOOL            shift and go to state 19
+    NULL            shift and go to state 20
 
-    cuerpo                         shift and go to state 1
-    arithmeticExpression           shift and go to state 2
-    switchStatement                shift and go to state 3
-    queueDeclaration               shift and go to state 4
-    queueEnqueue                   shift and go to state 5
-    queueDequeue                   shift and go to state 6
-    arrowFunction                  shift and go to state 7
-    echo                           shift and go to state 8
-    fgets                          shift and go to state 9
-    value                          shift and go to state 10
+    programa                       shift and go to state 1
+    cuerpo                         shift and go to state 2
+    arithmeticExpression           shift and go to state 3
+    switchStatement                shift and go to state 4
+    queueDeclaration               shift and go to state 5
+    queueEnqueue                   shift and go to state 6
+    queueDequeue                   shift and go to state 7
+    arrowFunction                  shift and go to state 8
+    echo                           shift and go to state 9
+    fgets                          shift and go to state 10
+    value                          shift and go to state 11
 
 state 1
 
-    (0) S' -> cuerpo .
+    (0) S' -> programa .
+    (2) programa -> programa . cuerpo
+    (3) cuerpo -> . arithmeticExpression
+    (4) cuerpo -> . switchStatement
+    (5) cuerpo -> . queueDeclaration
+    (6) cuerpo -> . queueEnqueue
+    (7) cuerpo -> . queueDequeue
+    (8) cuerpo -> . arrowFunction
+    (9) cuerpo -> . echo
+    (10) cuerpo -> . fgets
+    (26) arithmeticExpression -> . value arithmeticOperator value
+    (11) switchStatement -> . SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY
+    (16) queueDeclaration -> . ID EQUAL NEW QUEUE SEMICOLON
+    (17) queueEnqueue -> . ID OBJOP PUSH LPAREN value RPAREN SEMICOLON
+    (18) queueDequeue -> . ID OBJOP POP SEMICOLON
+    (19) arrowFunction -> . FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON
+    (22) echo -> . ECHO values SEMICOLON
+    (25) fgets -> . ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON
+    (27) value -> . ID
+    (28) value -> . INTEGER
+    (29) value -> . FLOAT
+    (30) value -> . STRING
+    (31) value -> . BOOL
+    (32) value -> . NULL
 
+    SWITCH          shift and go to state 12
+    ID              shift and go to state 13
+    FN              shift and go to state 14
+    ECHO            shift and go to state 15
+    INTEGER         shift and go to state 16
+    FLOAT           shift and go to state 17
+    STRING          shift and go to state 18
+    BOOL            shift and go to state 19
+    NULL            shift and go to state 20
 
+    cuerpo                         shift and go to state 21
+    arithmeticExpression           shift and go to state 3
+    switchStatement                shift and go to state 4
+    queueDeclaration               shift and go to state 5
+    queueEnqueue                   shift and go to state 6
+    queueDequeue                   shift and go to state 7
+    arrowFunction                  shift and go to state 8
+    echo                           shift and go to state 9
+    fgets                          shift and go to state 10
+    value                          shift and go to state 11
 
 state 2
 
-    (1) cuerpo -> arithmeticExpression .
+    (1) programa -> cuerpo .
 
-    $end            reduce using rule 1 (cuerpo -> arithmeticExpression .)
-    SEMICOLON       reduce using rule 1 (cuerpo -> arithmeticExpression .)
+    SWITCH          reduce using rule 1 (programa -> cuerpo .)
+    ID              reduce using rule 1 (programa -> cuerpo .)
+    FN              reduce using rule 1 (programa -> cuerpo .)
+    ECHO            reduce using rule 1 (programa -> cuerpo .)
+    INTEGER         reduce using rule 1 (programa -> cuerpo .)
+    FLOAT           reduce using rule 1 (programa -> cuerpo .)
+    STRING          reduce using rule 1 (programa -> cuerpo .)
+    BOOL            reduce using rule 1 (programa -> cuerpo .)
+    NULL            reduce using rule 1 (programa -> cuerpo .)
+    $end            reduce using rule 1 (programa -> cuerpo .)
 
 
 state 3
 
-    (2) cuerpo -> switchStatement .
+    (3) cuerpo -> arithmeticExpression .
 
-    $end            reduce using rule 2 (cuerpo -> switchStatement .)
-    SEMICOLON       reduce using rule 2 (cuerpo -> switchStatement .)
+    SWITCH          reduce using rule 3 (cuerpo -> arithmeticExpression .)
+    ID              reduce using rule 3 (cuerpo -> arithmeticExpression .)
+    FN              reduce using rule 3 (cuerpo -> arithmeticExpression .)
+    ECHO            reduce using rule 3 (cuerpo -> arithmeticExpression .)
+    INTEGER         reduce using rule 3 (cuerpo -> arithmeticExpression .)
+    FLOAT           reduce using rule 3 (cuerpo -> arithmeticExpression .)
+    STRING          reduce using rule 3 (cuerpo -> arithmeticExpression .)
+    BOOL            reduce using rule 3 (cuerpo -> arithmeticExpression .)
+    NULL            reduce using rule 3 (cuerpo -> arithmeticExpression .)
+    $end            reduce using rule 3 (cuerpo -> arithmeticExpression .)
+    SEMICOLON       reduce using rule 3 (cuerpo -> arithmeticExpression .)
 
 
 state 4
 
-    (3) cuerpo -> queueDeclaration .
+    (4) cuerpo -> switchStatement .
 
-    $end            reduce using rule 3 (cuerpo -> queueDeclaration .)
-    SEMICOLON       reduce using rule 3 (cuerpo -> queueDeclaration .)
+    SWITCH          reduce using rule 4 (cuerpo -> switchStatement .)
+    ID              reduce using rule 4 (cuerpo -> switchStatement .)
+    FN              reduce using rule 4 (cuerpo -> switchStatement .)
+    ECHO            reduce using rule 4 (cuerpo -> switchStatement .)
+    INTEGER         reduce using rule 4 (cuerpo -> switchStatement .)
+    FLOAT           reduce using rule 4 (cuerpo -> switchStatement .)
+    STRING          reduce using rule 4 (cuerpo -> switchStatement .)
+    BOOL            reduce using rule 4 (cuerpo -> switchStatement .)
+    NULL            reduce using rule 4 (cuerpo -> switchStatement .)
+    $end            reduce using rule 4 (cuerpo -> switchStatement .)
+    SEMICOLON       reduce using rule 4 (cuerpo -> switchStatement .)
 
 
 state 5
 
-    (4) cuerpo -> queueEnqueue .
+    (5) cuerpo -> queueDeclaration .
 
-    $end            reduce using rule 4 (cuerpo -> queueEnqueue .)
-    SEMICOLON       reduce using rule 4 (cuerpo -> queueEnqueue .)
+    SWITCH          reduce using rule 5 (cuerpo -> queueDeclaration .)
+    ID              reduce using rule 5 (cuerpo -> queueDeclaration .)
+    FN              reduce using rule 5 (cuerpo -> queueDeclaration .)
+    ECHO            reduce using rule 5 (cuerpo -> queueDeclaration .)
+    INTEGER         reduce using rule 5 (cuerpo -> queueDeclaration .)
+    FLOAT           reduce using rule 5 (cuerpo -> queueDeclaration .)
+    STRING          reduce using rule 5 (cuerpo -> queueDeclaration .)
+    BOOL            reduce using rule 5 (cuerpo -> queueDeclaration .)
+    NULL            reduce using rule 5 (cuerpo -> queueDeclaration .)
+    $end            reduce using rule 5 (cuerpo -> queueDeclaration .)
+    SEMICOLON       reduce using rule 5 (cuerpo -> queueDeclaration .)
 
 
 state 6
 
-    (5) cuerpo -> queueDequeue .
+    (6) cuerpo -> queueEnqueue .
 
-    $end            reduce using rule 5 (cuerpo -> queueDequeue .)
-    SEMICOLON       reduce using rule 5 (cuerpo -> queueDequeue .)
+    SWITCH          reduce using rule 6 (cuerpo -> queueEnqueue .)
+    ID              reduce using rule 6 (cuerpo -> queueEnqueue .)
+    FN              reduce using rule 6 (cuerpo -> queueEnqueue .)
+    ECHO            reduce using rule 6 (cuerpo -> queueEnqueue .)
+    INTEGER         reduce using rule 6 (cuerpo -> queueEnqueue .)
+    FLOAT           reduce using rule 6 (cuerpo -> queueEnqueue .)
+    STRING          reduce using rule 6 (cuerpo -> queueEnqueue .)
+    BOOL            reduce using rule 6 (cuerpo -> queueEnqueue .)
+    NULL            reduce using rule 6 (cuerpo -> queueEnqueue .)
+    $end            reduce using rule 6 (cuerpo -> queueEnqueue .)
+    SEMICOLON       reduce using rule 6 (cuerpo -> queueEnqueue .)
 
 
 state 7
 
-    (6) cuerpo -> arrowFunction .
+    (7) cuerpo -> queueDequeue .
 
-    $end            reduce using rule 6 (cuerpo -> arrowFunction .)
-    SEMICOLON       reduce using rule 6 (cuerpo -> arrowFunction .)
+    SWITCH          reduce using rule 7 (cuerpo -> queueDequeue .)
+    ID              reduce using rule 7 (cuerpo -> queueDequeue .)
+    FN              reduce using rule 7 (cuerpo -> queueDequeue .)
+    ECHO            reduce using rule 7 (cuerpo -> queueDequeue .)
+    INTEGER         reduce using rule 7 (cuerpo -> queueDequeue .)
+    FLOAT           reduce using rule 7 (cuerpo -> queueDequeue .)
+    STRING          reduce using rule 7 (cuerpo -> queueDequeue .)
+    BOOL            reduce using rule 7 (cuerpo -> queueDequeue .)
+    NULL            reduce using rule 7 (cuerpo -> queueDequeue .)
+    $end            reduce using rule 7 (cuerpo -> queueDequeue .)
+    SEMICOLON       reduce using rule 7 (cuerpo -> queueDequeue .)
 
 
 state 8
 
-    (7) cuerpo -> echo .
+    (8) cuerpo -> arrowFunction .
 
-    $end            reduce using rule 7 (cuerpo -> echo .)
-    SEMICOLON       reduce using rule 7 (cuerpo -> echo .)
+    SWITCH          reduce using rule 8 (cuerpo -> arrowFunction .)
+    ID              reduce using rule 8 (cuerpo -> arrowFunction .)
+    FN              reduce using rule 8 (cuerpo -> arrowFunction .)
+    ECHO            reduce using rule 8 (cuerpo -> arrowFunction .)
+    INTEGER         reduce using rule 8 (cuerpo -> arrowFunction .)
+    FLOAT           reduce using rule 8 (cuerpo -> arrowFunction .)
+    STRING          reduce using rule 8 (cuerpo -> arrowFunction .)
+    BOOL            reduce using rule 8 (cuerpo -> arrowFunction .)
+    NULL            reduce using rule 8 (cuerpo -> arrowFunction .)
+    $end            reduce using rule 8 (cuerpo -> arrowFunction .)
+    SEMICOLON       reduce using rule 8 (cuerpo -> arrowFunction .)
 
 
 state 9
 
-    (8) cuerpo -> fgets .
+    (9) cuerpo -> echo .
 
-    $end            reduce using rule 8 (cuerpo -> fgets .)
-    SEMICOLON       reduce using rule 8 (cuerpo -> fgets .)
+    SWITCH          reduce using rule 9 (cuerpo -> echo .)
+    ID              reduce using rule 9 (cuerpo -> echo .)
+    FN              reduce using rule 9 (cuerpo -> echo .)
+    ECHO            reduce using rule 9 (cuerpo -> echo .)
+    INTEGER         reduce using rule 9 (cuerpo -> echo .)
+    FLOAT           reduce using rule 9 (cuerpo -> echo .)
+    STRING          reduce using rule 9 (cuerpo -> echo .)
+    BOOL            reduce using rule 9 (cuerpo -> echo .)
+    NULL            reduce using rule 9 (cuerpo -> echo .)
+    $end            reduce using rule 9 (cuerpo -> echo .)
+    SEMICOLON       reduce using rule 9 (cuerpo -> echo .)
 
 
 state 10
 
-    (24) arithmeticExpression -> value . arithmeticOperator value
-    (31) arithmeticOperator -> . PLUS
-    (32) arithmeticOperator -> . MINUS
-    (33) arithmeticOperator -> . TIMES
-    (34) arithmeticOperator -> . DIVIDE
-    (35) arithmeticOperator -> . MOD
-    (36) arithmeticOperator -> . EXP
+    (10) cuerpo -> fgets .
 
-    PLUS            shift and go to state 21
-    MINUS           shift and go to state 22
-    TIMES           shift and go to state 23
-    DIVIDE          shift and go to state 24
-    MOD             shift and go to state 25
-    EXP             shift and go to state 26
+    SWITCH          reduce using rule 10 (cuerpo -> fgets .)
+    ID              reduce using rule 10 (cuerpo -> fgets .)
+    FN              reduce using rule 10 (cuerpo -> fgets .)
+    ECHO            reduce using rule 10 (cuerpo -> fgets .)
+    INTEGER         reduce using rule 10 (cuerpo -> fgets .)
+    FLOAT           reduce using rule 10 (cuerpo -> fgets .)
+    STRING          reduce using rule 10 (cuerpo -> fgets .)
+    BOOL            reduce using rule 10 (cuerpo -> fgets .)
+    NULL            reduce using rule 10 (cuerpo -> fgets .)
+    $end            reduce using rule 10 (cuerpo -> fgets .)
+    SEMICOLON       reduce using rule 10 (cuerpo -> fgets .)
 
-    arithmeticOperator             shift and go to state 20
 
 state 11
 
-    (9) switchStatement -> SWITCH . LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY
+    (26) arithmeticExpression -> value . arithmeticOperator value
+    (33) arithmeticOperator -> . PLUS
+    (34) arithmeticOperator -> . MINUS
+    (35) arithmeticOperator -> . TIMES
+    (36) arithmeticOperator -> . DIVIDE
+    (37) arithmeticOperator -> . MOD
+    (38) arithmeticOperator -> . EXP
 
-    LPAREN          shift and go to state 27
+    PLUS            shift and go to state 23
+    MINUS           shift and go to state 24
+    TIMES           shift and go to state 25
+    DIVIDE          shift and go to state 26
+    MOD             shift and go to state 27
+    EXP             shift and go to state 28
 
+    arithmeticOperator             shift and go to state 22
 
 state 12
 
-    (14) queueDeclaration -> ID . EQUAL NEW QUEUE SEMICOLON
-    (15) queueEnqueue -> ID . OBJOP PUSH LPAREN value RPAREN SEMICOLON
-    (16) queueDequeue -> ID . OBJOP POP SEMICOLON
-    (23) fgets -> ID . EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON
-    (25) value -> ID .
+    (11) switchStatement -> SWITCH . LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY
 
-    EQUAL           shift and go to state 28
-    OBJOP           shift and go to state 29
-    PLUS            reduce using rule 25 (value -> ID .)
-    MINUS           reduce using rule 25 (value -> ID .)
-    TIMES           reduce using rule 25 (value -> ID .)
-    DIVIDE          reduce using rule 25 (value -> ID .)
-    MOD             reduce using rule 25 (value -> ID .)
-    EXP             reduce using rule 25 (value -> ID .)
+    LPAREN          shift and go to state 29
 
 
 state 13
 
-    (17) arrowFunction -> FN . LPAREN ID RPAREN FNARROW arrowBody SEMICOLON
+    (16) queueDeclaration -> ID . EQUAL NEW QUEUE SEMICOLON
+    (17) queueEnqueue -> ID . OBJOP PUSH LPAREN value RPAREN SEMICOLON
+    (18) queueDequeue -> ID . OBJOP POP SEMICOLON
+    (25) fgets -> ID . EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON
+    (27) value -> ID .
 
-    LPAREN          shift and go to state 30
+    EQUAL           shift and go to state 30
+    OBJOP           shift and go to state 31
+    PLUS            reduce using rule 27 (value -> ID .)
+    MINUS           reduce using rule 27 (value -> ID .)
+    TIMES           reduce using rule 27 (value -> ID .)
+    DIVIDE          reduce using rule 27 (value -> ID .)
+    MOD             reduce using rule 27 (value -> ID .)
+    EXP             reduce using rule 27 (value -> ID .)
 
 
 state 14
 
-    (20) echo -> ECHO . values SEMICOLON
-    (21) values -> . value
-    (22) values -> . values COMMA value
-    (25) value -> . ID
-    (26) value -> . INTEGER
-    (27) value -> . FLOAT
-    (28) value -> . STRING
-    (29) value -> . BOOL
-    (30) value -> . NULL
+    (19) arrowFunction -> FN . LPAREN ID RPAREN FNARROW arrowBody SEMICOLON
 
-    ID              shift and go to state 33
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    STRING          shift and go to state 17
-    BOOL            shift and go to state 18
-    NULL            shift and go to state 19
+    LPAREN          shift and go to state 32
 
-    values                         shift and go to state 31
-    value                          shift and go to state 32
 
 state 15
 
-    (26) value -> INTEGER .
+    (22) echo -> ECHO . values SEMICOLON
+    (23) values -> . value
+    (24) values -> . values COMMA value
+    (27) value -> . ID
+    (28) value -> . INTEGER
+    (29) value -> . FLOAT
+    (30) value -> . STRING
+    (31) value -> . BOOL
+    (32) value -> . NULL
 
-    PLUS            reduce using rule 26 (value -> INTEGER .)
-    MINUS           reduce using rule 26 (value -> INTEGER .)
-    TIMES           reduce using rule 26 (value -> INTEGER .)
-    DIVIDE          reduce using rule 26 (value -> INTEGER .)
-    MOD             reduce using rule 26 (value -> INTEGER .)
-    EXP             reduce using rule 26 (value -> INTEGER .)
-    SEMICOLON       reduce using rule 26 (value -> INTEGER .)
-    COMMA           reduce using rule 26 (value -> INTEGER .)
-    $end            reduce using rule 26 (value -> INTEGER .)
-    RCURLY          reduce using rule 26 (value -> INTEGER .)
-    BREAK           reduce using rule 26 (value -> INTEGER .)
-    RPAREN          reduce using rule 26 (value -> INTEGER .)
-    COLON           reduce using rule 26 (value -> INTEGER .)
+    ID              shift and go to state 35
+    INTEGER         shift and go to state 16
+    FLOAT           shift and go to state 17
+    STRING          shift and go to state 18
+    BOOL            shift and go to state 19
+    NULL            shift and go to state 20
 
+    values                         shift and go to state 33
+    value                          shift and go to state 34
 
 state 16
 
-    (27) value -> FLOAT .
+    (28) value -> INTEGER .
 
-    PLUS            reduce using rule 27 (value -> FLOAT .)
-    MINUS           reduce using rule 27 (value -> FLOAT .)
-    TIMES           reduce using rule 27 (value -> FLOAT .)
-    DIVIDE          reduce using rule 27 (value -> FLOAT .)
-    MOD             reduce using rule 27 (value -> FLOAT .)
-    EXP             reduce using rule 27 (value -> FLOAT .)
-    SEMICOLON       reduce using rule 27 (value -> FLOAT .)
-    COMMA           reduce using rule 27 (value -> FLOAT .)
-    $end            reduce using rule 27 (value -> FLOAT .)
-    RCURLY          reduce using rule 27 (value -> FLOAT .)
-    BREAK           reduce using rule 27 (value -> FLOAT .)
-    RPAREN          reduce using rule 27 (value -> FLOAT .)
-    COLON           reduce using rule 27 (value -> FLOAT .)
+    PLUS            reduce using rule 28 (value -> INTEGER .)
+    MINUS           reduce using rule 28 (value -> INTEGER .)
+    TIMES           reduce using rule 28 (value -> INTEGER .)
+    DIVIDE          reduce using rule 28 (value -> INTEGER .)
+    MOD             reduce using rule 28 (value -> INTEGER .)
+    EXP             reduce using rule 28 (value -> INTEGER .)
+    SEMICOLON       reduce using rule 28 (value -> INTEGER .)
+    COMMA           reduce using rule 28 (value -> INTEGER .)
+    SWITCH          reduce using rule 28 (value -> INTEGER .)
+    ID              reduce using rule 28 (value -> INTEGER .)
+    FN              reduce using rule 28 (value -> INTEGER .)
+    ECHO            reduce using rule 28 (value -> INTEGER .)
+    INTEGER         reduce using rule 28 (value -> INTEGER .)
+    FLOAT           reduce using rule 28 (value -> INTEGER .)
+    STRING          reduce using rule 28 (value -> INTEGER .)
+    BOOL            reduce using rule 28 (value -> INTEGER .)
+    NULL            reduce using rule 28 (value -> INTEGER .)
+    $end            reduce using rule 28 (value -> INTEGER .)
+    RCURLY          reduce using rule 28 (value -> INTEGER .)
+    BREAK           reduce using rule 28 (value -> INTEGER .)
+    RPAREN          reduce using rule 28 (value -> INTEGER .)
+    COLON           reduce using rule 28 (value -> INTEGER .)
 
 
 state 17
 
-    (28) value -> STRING .
+    (29) value -> FLOAT .
 
-    PLUS            reduce using rule 28 (value -> STRING .)
-    MINUS           reduce using rule 28 (value -> STRING .)
-    TIMES           reduce using rule 28 (value -> STRING .)
-    DIVIDE          reduce using rule 28 (value -> STRING .)
-    MOD             reduce using rule 28 (value -> STRING .)
-    EXP             reduce using rule 28 (value -> STRING .)
-    SEMICOLON       reduce using rule 28 (value -> STRING .)
-    COMMA           reduce using rule 28 (value -> STRING .)
-    $end            reduce using rule 28 (value -> STRING .)
-    RCURLY          reduce using rule 28 (value -> STRING .)
-    BREAK           reduce using rule 28 (value -> STRING .)
-    RPAREN          reduce using rule 28 (value -> STRING .)
-    COLON           reduce using rule 28 (value -> STRING .)
+    PLUS            reduce using rule 29 (value -> FLOAT .)
+    MINUS           reduce using rule 29 (value -> FLOAT .)
+    TIMES           reduce using rule 29 (value -> FLOAT .)
+    DIVIDE          reduce using rule 29 (value -> FLOAT .)
+    MOD             reduce using rule 29 (value -> FLOAT .)
+    EXP             reduce using rule 29 (value -> FLOAT .)
+    SEMICOLON       reduce using rule 29 (value -> FLOAT .)
+    COMMA           reduce using rule 29 (value -> FLOAT .)
+    SWITCH          reduce using rule 29 (value -> FLOAT .)
+    ID              reduce using rule 29 (value -> FLOAT .)
+    FN              reduce using rule 29 (value -> FLOAT .)
+    ECHO            reduce using rule 29 (value -> FLOAT .)
+    INTEGER         reduce using rule 29 (value -> FLOAT .)
+    FLOAT           reduce using rule 29 (value -> FLOAT .)
+    STRING          reduce using rule 29 (value -> FLOAT .)
+    BOOL            reduce using rule 29 (value -> FLOAT .)
+    NULL            reduce using rule 29 (value -> FLOAT .)
+    $end            reduce using rule 29 (value -> FLOAT .)
+    RCURLY          reduce using rule 29 (value -> FLOAT .)
+    BREAK           reduce using rule 29 (value -> FLOAT .)
+    RPAREN          reduce using rule 29 (value -> FLOAT .)
+    COLON           reduce using rule 29 (value -> FLOAT .)
 
 
 state 18
 
-    (29) value -> BOOL .
+    (30) value -> STRING .
 
-    PLUS            reduce using rule 29 (value -> BOOL .)
-    MINUS           reduce using rule 29 (value -> BOOL .)
-    TIMES           reduce using rule 29 (value -> BOOL .)
-    DIVIDE          reduce using rule 29 (value -> BOOL .)
-    MOD             reduce using rule 29 (value -> BOOL .)
-    EXP             reduce using rule 29 (value -> BOOL .)
-    SEMICOLON       reduce using rule 29 (value -> BOOL .)
-    COMMA           reduce using rule 29 (value -> BOOL .)
-    $end            reduce using rule 29 (value -> BOOL .)
-    RCURLY          reduce using rule 29 (value -> BOOL .)
-    BREAK           reduce using rule 29 (value -> BOOL .)
-    RPAREN          reduce using rule 29 (value -> BOOL .)
-    COLON           reduce using rule 29 (value -> BOOL .)
+    PLUS            reduce using rule 30 (value -> STRING .)
+    MINUS           reduce using rule 30 (value -> STRING .)
+    TIMES           reduce using rule 30 (value -> STRING .)
+    DIVIDE          reduce using rule 30 (value -> STRING .)
+    MOD             reduce using rule 30 (value -> STRING .)
+    EXP             reduce using rule 30 (value -> STRING .)
+    SEMICOLON       reduce using rule 30 (value -> STRING .)
+    COMMA           reduce using rule 30 (value -> STRING .)
+    SWITCH          reduce using rule 30 (value -> STRING .)
+    ID              reduce using rule 30 (value -> STRING .)
+    FN              reduce using rule 30 (value -> STRING .)
+    ECHO            reduce using rule 30 (value -> STRING .)
+    INTEGER         reduce using rule 30 (value -> STRING .)
+    FLOAT           reduce using rule 30 (value -> STRING .)
+    STRING          reduce using rule 30 (value -> STRING .)
+    BOOL            reduce using rule 30 (value -> STRING .)
+    NULL            reduce using rule 30 (value -> STRING .)
+    $end            reduce using rule 30 (value -> STRING .)
+    RCURLY          reduce using rule 30 (value -> STRING .)
+    BREAK           reduce using rule 30 (value -> STRING .)
+    RPAREN          reduce using rule 30 (value -> STRING .)
+    COLON           reduce using rule 30 (value -> STRING .)
 
 
 state 19
 
-    (30) value -> NULL .
+    (31) value -> BOOL .
 
-    PLUS            reduce using rule 30 (value -> NULL .)
-    MINUS           reduce using rule 30 (value -> NULL .)
-    TIMES           reduce using rule 30 (value -> NULL .)
-    DIVIDE          reduce using rule 30 (value -> NULL .)
-    MOD             reduce using rule 30 (value -> NULL .)
-    EXP             reduce using rule 30 (value -> NULL .)
-    SEMICOLON       reduce using rule 30 (value -> NULL .)
-    COMMA           reduce using rule 30 (value -> NULL .)
-    $end            reduce using rule 30 (value -> NULL .)
-    RCURLY          reduce using rule 30 (value -> NULL .)
-    BREAK           reduce using rule 30 (value -> NULL .)
-    RPAREN          reduce using rule 30 (value -> NULL .)
-    COLON           reduce using rule 30 (value -> NULL .)
+    PLUS            reduce using rule 31 (value -> BOOL .)
+    MINUS           reduce using rule 31 (value -> BOOL .)
+    TIMES           reduce using rule 31 (value -> BOOL .)
+    DIVIDE          reduce using rule 31 (value -> BOOL .)
+    MOD             reduce using rule 31 (value -> BOOL .)
+    EXP             reduce using rule 31 (value -> BOOL .)
+    SEMICOLON       reduce using rule 31 (value -> BOOL .)
+    COMMA           reduce using rule 31 (value -> BOOL .)
+    SWITCH          reduce using rule 31 (value -> BOOL .)
+    ID              reduce using rule 31 (value -> BOOL .)
+    FN              reduce using rule 31 (value -> BOOL .)
+    ECHO            reduce using rule 31 (value -> BOOL .)
+    INTEGER         reduce using rule 31 (value -> BOOL .)
+    FLOAT           reduce using rule 31 (value -> BOOL .)
+    STRING          reduce using rule 31 (value -> BOOL .)
+    BOOL            reduce using rule 31 (value -> BOOL .)
+    NULL            reduce using rule 31 (value -> BOOL .)
+    $end            reduce using rule 31 (value -> BOOL .)
+    RCURLY          reduce using rule 31 (value -> BOOL .)
+    BREAK           reduce using rule 31 (value -> BOOL .)
+    RPAREN          reduce using rule 31 (value -> BOOL .)
+    COLON           reduce using rule 31 (value -> BOOL .)
 
 
 state 20
 
-    (24) arithmeticExpression -> value arithmeticOperator . value
-    (25) value -> . ID
-    (26) value -> . INTEGER
-    (27) value -> . FLOAT
-    (28) value -> . STRING
-    (29) value -> . BOOL
-    (30) value -> . NULL
+    (32) value -> NULL .
 
-    ID              shift and go to state 33
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    STRING          shift and go to state 17
-    BOOL            shift and go to state 18
-    NULL            shift and go to state 19
+    PLUS            reduce using rule 32 (value -> NULL .)
+    MINUS           reduce using rule 32 (value -> NULL .)
+    TIMES           reduce using rule 32 (value -> NULL .)
+    DIVIDE          reduce using rule 32 (value -> NULL .)
+    MOD             reduce using rule 32 (value -> NULL .)
+    EXP             reduce using rule 32 (value -> NULL .)
+    SEMICOLON       reduce using rule 32 (value -> NULL .)
+    COMMA           reduce using rule 32 (value -> NULL .)
+    SWITCH          reduce using rule 32 (value -> NULL .)
+    ID              reduce using rule 32 (value -> NULL .)
+    FN              reduce using rule 32 (value -> NULL .)
+    ECHO            reduce using rule 32 (value -> NULL .)
+    INTEGER         reduce using rule 32 (value -> NULL .)
+    FLOAT           reduce using rule 32 (value -> NULL .)
+    STRING          reduce using rule 32 (value -> NULL .)
+    BOOL            reduce using rule 32 (value -> NULL .)
+    NULL            reduce using rule 32 (value -> NULL .)
+    $end            reduce using rule 32 (value -> NULL .)
+    RCURLY          reduce using rule 32 (value -> NULL .)
+    BREAK           reduce using rule 32 (value -> NULL .)
+    RPAREN          reduce using rule 32 (value -> NULL .)
+    COLON           reduce using rule 32 (value -> NULL .)
 
-    value                          shift and go to state 34
 
 state 21
 
-    (31) arithmeticOperator -> PLUS .
+    (2) programa -> programa cuerpo .
 
-    ID              reduce using rule 31 (arithmeticOperator -> PLUS .)
-    INTEGER         reduce using rule 31 (arithmeticOperator -> PLUS .)
-    FLOAT           reduce using rule 31 (arithmeticOperator -> PLUS .)
-    STRING          reduce using rule 31 (arithmeticOperator -> PLUS .)
-    BOOL            reduce using rule 31 (arithmeticOperator -> PLUS .)
-    NULL            reduce using rule 31 (arithmeticOperator -> PLUS .)
+    SWITCH          reduce using rule 2 (programa -> programa cuerpo .)
+    ID              reduce using rule 2 (programa -> programa cuerpo .)
+    FN              reduce using rule 2 (programa -> programa cuerpo .)
+    ECHO            reduce using rule 2 (programa -> programa cuerpo .)
+    INTEGER         reduce using rule 2 (programa -> programa cuerpo .)
+    FLOAT           reduce using rule 2 (programa -> programa cuerpo .)
+    STRING          reduce using rule 2 (programa -> programa cuerpo .)
+    BOOL            reduce using rule 2 (programa -> programa cuerpo .)
+    NULL            reduce using rule 2 (programa -> programa cuerpo .)
+    $end            reduce using rule 2 (programa -> programa cuerpo .)
 
 
 state 22
 
-    (32) arithmeticOperator -> MINUS .
+    (26) arithmeticExpression -> value arithmeticOperator . value
+    (27) value -> . ID
+    (28) value -> . INTEGER
+    (29) value -> . FLOAT
+    (30) value -> . STRING
+    (31) value -> . BOOL
+    (32) value -> . NULL
 
-    ID              reduce using rule 32 (arithmeticOperator -> MINUS .)
-    INTEGER         reduce using rule 32 (arithmeticOperator -> MINUS .)
-    FLOAT           reduce using rule 32 (arithmeticOperator -> MINUS .)
-    STRING          reduce using rule 32 (arithmeticOperator -> MINUS .)
-    BOOL            reduce using rule 32 (arithmeticOperator -> MINUS .)
-    NULL            reduce using rule 32 (arithmeticOperator -> MINUS .)
+    ID              shift and go to state 35
+    INTEGER         shift and go to state 16
+    FLOAT           shift and go to state 17
+    STRING          shift and go to state 18
+    BOOL            shift and go to state 19
+    NULL            shift and go to state 20
 
+    value                          shift and go to state 36
 
 state 23
 
-    (33) arithmeticOperator -> TIMES .
+    (33) arithmeticOperator -> PLUS .
 
-    ID              reduce using rule 33 (arithmeticOperator -> TIMES .)
-    INTEGER         reduce using rule 33 (arithmeticOperator -> TIMES .)
-    FLOAT           reduce using rule 33 (arithmeticOperator -> TIMES .)
-    STRING          reduce using rule 33 (arithmeticOperator -> TIMES .)
-    BOOL            reduce using rule 33 (arithmeticOperator -> TIMES .)
-    NULL            reduce using rule 33 (arithmeticOperator -> TIMES .)
+    ID              reduce using rule 33 (arithmeticOperator -> PLUS .)
+    INTEGER         reduce using rule 33 (arithmeticOperator -> PLUS .)
+    FLOAT           reduce using rule 33 (arithmeticOperator -> PLUS .)
+    STRING          reduce using rule 33 (arithmeticOperator -> PLUS .)
+    BOOL            reduce using rule 33 (arithmeticOperator -> PLUS .)
+    NULL            reduce using rule 33 (arithmeticOperator -> PLUS .)
 
 
 state 24
 
-    (34) arithmeticOperator -> DIVIDE .
+    (34) arithmeticOperator -> MINUS .
 
-    ID              reduce using rule 34 (arithmeticOperator -> DIVIDE .)
-    INTEGER         reduce using rule 34 (arithmeticOperator -> DIVIDE .)
-    FLOAT           reduce using rule 34 (arithmeticOperator -> DIVIDE .)
-    STRING          reduce using rule 34 (arithmeticOperator -> DIVIDE .)
-    BOOL            reduce using rule 34 (arithmeticOperator -> DIVIDE .)
-    NULL            reduce using rule 34 (arithmeticOperator -> DIVIDE .)
+    ID              reduce using rule 34 (arithmeticOperator -> MINUS .)
+    INTEGER         reduce using rule 34 (arithmeticOperator -> MINUS .)
+    FLOAT           reduce using rule 34 (arithmeticOperator -> MINUS .)
+    STRING          reduce using rule 34 (arithmeticOperator -> MINUS .)
+    BOOL            reduce using rule 34 (arithmeticOperator -> MINUS .)
+    NULL            reduce using rule 34 (arithmeticOperator -> MINUS .)
 
 
 state 25
 
-    (35) arithmeticOperator -> MOD .
+    (35) arithmeticOperator -> TIMES .
 
-    ID              reduce using rule 35 (arithmeticOperator -> MOD .)
-    INTEGER         reduce using rule 35 (arithmeticOperator -> MOD .)
-    FLOAT           reduce using rule 35 (arithmeticOperator -> MOD .)
-    STRING          reduce using rule 35 (arithmeticOperator -> MOD .)
-    BOOL            reduce using rule 35 (arithmeticOperator -> MOD .)
-    NULL            reduce using rule 35 (arithmeticOperator -> MOD .)
+    ID              reduce using rule 35 (arithmeticOperator -> TIMES .)
+    INTEGER         reduce using rule 35 (arithmeticOperator -> TIMES .)
+    FLOAT           reduce using rule 35 (arithmeticOperator -> TIMES .)
+    STRING          reduce using rule 35 (arithmeticOperator -> TIMES .)
+    BOOL            reduce using rule 35 (arithmeticOperator -> TIMES .)
+    NULL            reduce using rule 35 (arithmeticOperator -> TIMES .)
 
 
 state 26
 
-    (36) arithmeticOperator -> EXP .
+    (36) arithmeticOperator -> DIVIDE .
 
-    ID              reduce using rule 36 (arithmeticOperator -> EXP .)
-    INTEGER         reduce using rule 36 (arithmeticOperator -> EXP .)
-    FLOAT           reduce using rule 36 (arithmeticOperator -> EXP .)
-    STRING          reduce using rule 36 (arithmeticOperator -> EXP .)
-    BOOL            reduce using rule 36 (arithmeticOperator -> EXP .)
-    NULL            reduce using rule 36 (arithmeticOperator -> EXP .)
+    ID              reduce using rule 36 (arithmeticOperator -> DIVIDE .)
+    INTEGER         reduce using rule 36 (arithmeticOperator -> DIVIDE .)
+    FLOAT           reduce using rule 36 (arithmeticOperator -> DIVIDE .)
+    STRING          reduce using rule 36 (arithmeticOperator -> DIVIDE .)
+    BOOL            reduce using rule 36 (arithmeticOperator -> DIVIDE .)
+    NULL            reduce using rule 36 (arithmeticOperator -> DIVIDE .)
 
 
 state 27
 
-    (9) switchStatement -> SWITCH LPAREN . value RPAREN LCURLY switchCases switchDefault RCURLY
-    (25) value -> . ID
-    (26) value -> . INTEGER
-    (27) value -> . FLOAT
-    (28) value -> . STRING
-    (29) value -> . BOOL
-    (30) value -> . NULL
+    (37) arithmeticOperator -> MOD .
 
-    ID              shift and go to state 33
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    STRING          shift and go to state 17
-    BOOL            shift and go to state 18
-    NULL            shift and go to state 19
+    ID              reduce using rule 37 (arithmeticOperator -> MOD .)
+    INTEGER         reduce using rule 37 (arithmeticOperator -> MOD .)
+    FLOAT           reduce using rule 37 (arithmeticOperator -> MOD .)
+    STRING          reduce using rule 37 (arithmeticOperator -> MOD .)
+    BOOL            reduce using rule 37 (arithmeticOperator -> MOD .)
+    NULL            reduce using rule 37 (arithmeticOperator -> MOD .)
 
-    value                          shift and go to state 35
 
 state 28
 
-    (14) queueDeclaration -> ID EQUAL . NEW QUEUE SEMICOLON
-    (23) fgets -> ID EQUAL . FGETS LPAREN STDIN RPAREN SEMICOLON
+    (38) arithmeticOperator -> EXP .
 
-    NEW             shift and go to state 36
-    FGETS           shift and go to state 37
+    ID              reduce using rule 38 (arithmeticOperator -> EXP .)
+    INTEGER         reduce using rule 38 (arithmeticOperator -> EXP .)
+    FLOAT           reduce using rule 38 (arithmeticOperator -> EXP .)
+    STRING          reduce using rule 38 (arithmeticOperator -> EXP .)
+    BOOL            reduce using rule 38 (arithmeticOperator -> EXP .)
+    NULL            reduce using rule 38 (arithmeticOperator -> EXP .)
 
 
 state 29
 
-    (15) queueEnqueue -> ID OBJOP . PUSH LPAREN value RPAREN SEMICOLON
-    (16) queueDequeue -> ID OBJOP . POP SEMICOLON
+    (11) switchStatement -> SWITCH LPAREN . value RPAREN LCURLY switchCases switchDefault RCURLY
+    (27) value -> . ID
+    (28) value -> . INTEGER
+    (29) value -> . FLOAT
+    (30) value -> . STRING
+    (31) value -> . BOOL
+    (32) value -> . NULL
 
-    PUSH            shift and go to state 38
-    POP             shift and go to state 39
+    ID              shift and go to state 35
+    INTEGER         shift and go to state 16
+    FLOAT           shift and go to state 17
+    STRING          shift and go to state 18
+    BOOL            shift and go to state 19
+    NULL            shift and go to state 20
 
+    value                          shift and go to state 37
 
 state 30
 
-    (17) arrowFunction -> FN LPAREN . ID RPAREN FNARROW arrowBody SEMICOLON
+    (16) queueDeclaration -> ID EQUAL . NEW QUEUE SEMICOLON
+    (25) fgets -> ID EQUAL . FGETS LPAREN STDIN RPAREN SEMICOLON
 
-    ID              shift and go to state 40
+    NEW             shift and go to state 38
+    FGETS           shift and go to state 39
 
 
 state 31
 
-    (20) echo -> ECHO values . SEMICOLON
-    (22) values -> values . COMMA value
+    (17) queueEnqueue -> ID OBJOP . PUSH LPAREN value RPAREN SEMICOLON
+    (18) queueDequeue -> ID OBJOP . POP SEMICOLON
 
-    SEMICOLON       shift and go to state 41
-    COMMA           shift and go to state 42
+    PUSH            shift and go to state 40
+    POP             shift and go to state 41
 
 
 state 32
 
-    (21) values -> value .
+    (19) arrowFunction -> FN LPAREN . ID RPAREN FNARROW arrowBody SEMICOLON
 
-    SEMICOLON       reduce using rule 21 (values -> value .)
-    COMMA           reduce using rule 21 (values -> value .)
+    ID              shift and go to state 42
 
 
 state 33
 
-    (25) value -> ID .
+    (22) echo -> ECHO values . SEMICOLON
+    (24) values -> values . COMMA value
 
-    SEMICOLON       reduce using rule 25 (value -> ID .)
-    COMMA           reduce using rule 25 (value -> ID .)
-    $end            reduce using rule 25 (value -> ID .)
-    RCURLY          reduce using rule 25 (value -> ID .)
-    BREAK           reduce using rule 25 (value -> ID .)
-    RPAREN          reduce using rule 25 (value -> ID .)
-    COLON           reduce using rule 25 (value -> ID .)
-    PLUS            reduce using rule 25 (value -> ID .)
-    MINUS           reduce using rule 25 (value -> ID .)
-    TIMES           reduce using rule 25 (value -> ID .)
-    DIVIDE          reduce using rule 25 (value -> ID .)
-    MOD             reduce using rule 25 (value -> ID .)
-    EXP             reduce using rule 25 (value -> ID .)
+    SEMICOLON       shift and go to state 43
+    COMMA           shift and go to state 44
 
 
 state 34
 
-    (24) arithmeticExpression -> value arithmeticOperator value .
+    (23) values -> value .
 
-    $end            reduce using rule 24 (arithmeticExpression -> value arithmeticOperator value .)
-    SEMICOLON       reduce using rule 24 (arithmeticExpression -> value arithmeticOperator value .)
-    RCURLY          reduce using rule 24 (arithmeticExpression -> value arithmeticOperator value .)
-    BREAK           reduce using rule 24 (arithmeticExpression -> value arithmeticOperator value .)
+    SEMICOLON       reduce using rule 23 (values -> value .)
+    COMMA           reduce using rule 23 (values -> value .)
 
 
 state 35
 
-    (9) switchStatement -> SWITCH LPAREN value . RPAREN LCURLY switchCases switchDefault RCURLY
+    (27) value -> ID .
 
-    RPAREN          shift and go to state 43
+    SEMICOLON       reduce using rule 27 (value -> ID .)
+    COMMA           reduce using rule 27 (value -> ID .)
+    SWITCH          reduce using rule 27 (value -> ID .)
+    ID              reduce using rule 27 (value -> ID .)
+    FN              reduce using rule 27 (value -> ID .)
+    ECHO            reduce using rule 27 (value -> ID .)
+    INTEGER         reduce using rule 27 (value -> ID .)
+    FLOAT           reduce using rule 27 (value -> ID .)
+    STRING          reduce using rule 27 (value -> ID .)
+    BOOL            reduce using rule 27 (value -> ID .)
+    NULL            reduce using rule 27 (value -> ID .)
+    $end            reduce using rule 27 (value -> ID .)
+    RCURLY          reduce using rule 27 (value -> ID .)
+    BREAK           reduce using rule 27 (value -> ID .)
+    RPAREN          reduce using rule 27 (value -> ID .)
+    COLON           reduce using rule 27 (value -> ID .)
+    PLUS            reduce using rule 27 (value -> ID .)
+    MINUS           reduce using rule 27 (value -> ID .)
+    TIMES           reduce using rule 27 (value -> ID .)
+    DIVIDE          reduce using rule 27 (value -> ID .)
+    MOD             reduce using rule 27 (value -> ID .)
+    EXP             reduce using rule 27 (value -> ID .)
 
 
 state 36
 
-    (14) queueDeclaration -> ID EQUAL NEW . QUEUE SEMICOLON
+    (26) arithmeticExpression -> value arithmeticOperator value .
 
-    QUEUE           shift and go to state 44
+    SWITCH          reduce using rule 26 (arithmeticExpression -> value arithmeticOperator value .)
+    ID              reduce using rule 26 (arithmeticExpression -> value arithmeticOperator value .)
+    FN              reduce using rule 26 (arithmeticExpression -> value arithmeticOperator value .)
+    ECHO            reduce using rule 26 (arithmeticExpression -> value arithmeticOperator value .)
+    INTEGER         reduce using rule 26 (arithmeticExpression -> value arithmeticOperator value .)
+    FLOAT           reduce using rule 26 (arithmeticExpression -> value arithmeticOperator value .)
+    STRING          reduce using rule 26 (arithmeticExpression -> value arithmeticOperator value .)
+    BOOL            reduce using rule 26 (arithmeticExpression -> value arithmeticOperator value .)
+    NULL            reduce using rule 26 (arithmeticExpression -> value arithmeticOperator value .)
+    $end            reduce using rule 26 (arithmeticExpression -> value arithmeticOperator value .)
+    SEMICOLON       reduce using rule 26 (arithmeticExpression -> value arithmeticOperator value .)
+    RCURLY          reduce using rule 26 (arithmeticExpression -> value arithmeticOperator value .)
+    BREAK           reduce using rule 26 (arithmeticExpression -> value arithmeticOperator value .)
 
 
 state 37
 
-    (23) fgets -> ID EQUAL FGETS . LPAREN STDIN RPAREN SEMICOLON
+    (11) switchStatement -> SWITCH LPAREN value . RPAREN LCURLY switchCases switchDefault RCURLY
 
-    LPAREN          shift and go to state 45
+    RPAREN          shift and go to state 45
 
 
 state 38
 
-    (15) queueEnqueue -> ID OBJOP PUSH . LPAREN value RPAREN SEMICOLON
+    (16) queueDeclaration -> ID EQUAL NEW . QUEUE SEMICOLON
 
-    LPAREN          shift and go to state 46
+    QUEUE           shift and go to state 46
 
 
 state 39
 
-    (16) queueDequeue -> ID OBJOP POP . SEMICOLON
+    (25) fgets -> ID EQUAL FGETS . LPAREN STDIN RPAREN SEMICOLON
 
-    SEMICOLON       shift and go to state 47
+    LPAREN          shift and go to state 47
 
 
 state 40
 
-    (17) arrowFunction -> FN LPAREN ID . RPAREN FNARROW arrowBody SEMICOLON
+    (17) queueEnqueue -> ID OBJOP PUSH . LPAREN value RPAREN SEMICOLON
 
-    RPAREN          shift and go to state 48
+    LPAREN          shift and go to state 48
 
 
 state 41
 
-    (20) echo -> ECHO values SEMICOLON .
+    (18) queueDequeue -> ID OBJOP POP . SEMICOLON
 
-    $end            reduce using rule 20 (echo -> ECHO values SEMICOLON .)
-    SEMICOLON       reduce using rule 20 (echo -> ECHO values SEMICOLON .)
+    SEMICOLON       shift and go to state 49
 
 
 state 42
 
-    (22) values -> values COMMA . value
-    (25) value -> . ID
-    (26) value -> . INTEGER
-    (27) value -> . FLOAT
-    (28) value -> . STRING
-    (29) value -> . BOOL
-    (30) value -> . NULL
+    (19) arrowFunction -> FN LPAREN ID . RPAREN FNARROW arrowBody SEMICOLON
 
-    ID              shift and go to state 33
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    STRING          shift and go to state 17
-    BOOL            shift and go to state 18
-    NULL            shift and go to state 19
+    RPAREN          shift and go to state 50
 
-    value                          shift and go to state 49
 
 state 43
 
-    (9) switchStatement -> SWITCH LPAREN value RPAREN . LCURLY switchCases switchDefault RCURLY
+    (22) echo -> ECHO values SEMICOLON .
 
-    LCURLY          shift and go to state 50
+    SWITCH          reduce using rule 22 (echo -> ECHO values SEMICOLON .)
+    ID              reduce using rule 22 (echo -> ECHO values SEMICOLON .)
+    FN              reduce using rule 22 (echo -> ECHO values SEMICOLON .)
+    ECHO            reduce using rule 22 (echo -> ECHO values SEMICOLON .)
+    INTEGER         reduce using rule 22 (echo -> ECHO values SEMICOLON .)
+    FLOAT           reduce using rule 22 (echo -> ECHO values SEMICOLON .)
+    STRING          reduce using rule 22 (echo -> ECHO values SEMICOLON .)
+    BOOL            reduce using rule 22 (echo -> ECHO values SEMICOLON .)
+    NULL            reduce using rule 22 (echo -> ECHO values SEMICOLON .)
+    $end            reduce using rule 22 (echo -> ECHO values SEMICOLON .)
+    SEMICOLON       reduce using rule 22 (echo -> ECHO values SEMICOLON .)
 
 
 state 44
 
-    (14) queueDeclaration -> ID EQUAL NEW QUEUE . SEMICOLON
+    (24) values -> values COMMA . value
+    (27) value -> . ID
+    (28) value -> . INTEGER
+    (29) value -> . FLOAT
+    (30) value -> . STRING
+    (31) value -> . BOOL
+    (32) value -> . NULL
 
-    SEMICOLON       shift and go to state 51
+    ID              shift and go to state 35
+    INTEGER         shift and go to state 16
+    FLOAT           shift and go to state 17
+    STRING          shift and go to state 18
+    BOOL            shift and go to state 19
+    NULL            shift and go to state 20
 
+    value                          shift and go to state 51
 
 state 45
 
-    (23) fgets -> ID EQUAL FGETS LPAREN . STDIN RPAREN SEMICOLON
+    (11) switchStatement -> SWITCH LPAREN value RPAREN . LCURLY switchCases switchDefault RCURLY
 
-    STDIN           shift and go to state 52
+    LCURLY          shift and go to state 52
 
 
 state 46
 
-    (15) queueEnqueue -> ID OBJOP PUSH LPAREN . value RPAREN SEMICOLON
-    (25) value -> . ID
-    (26) value -> . INTEGER
-    (27) value -> . FLOAT
-    (28) value -> . STRING
-    (29) value -> . BOOL
-    (30) value -> . NULL
+    (16) queueDeclaration -> ID EQUAL NEW QUEUE . SEMICOLON
 
-    ID              shift and go to state 33
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    STRING          shift and go to state 17
-    BOOL            shift and go to state 18
-    NULL            shift and go to state 19
+    SEMICOLON       shift and go to state 53
 
-    value                          shift and go to state 53
 
 state 47
 
-    (16) queueDequeue -> ID OBJOP POP SEMICOLON .
+    (25) fgets -> ID EQUAL FGETS LPAREN . STDIN RPAREN SEMICOLON
 
-    $end            reduce using rule 16 (queueDequeue -> ID OBJOP POP SEMICOLON .)
-    SEMICOLON       reduce using rule 16 (queueDequeue -> ID OBJOP POP SEMICOLON .)
+    STDIN           shift and go to state 54
 
 
 state 48
 
-    (17) arrowFunction -> FN LPAREN ID RPAREN . FNARROW arrowBody SEMICOLON
+    (17) queueEnqueue -> ID OBJOP PUSH LPAREN . value RPAREN SEMICOLON
+    (27) value -> . ID
+    (28) value -> . INTEGER
+    (29) value -> . FLOAT
+    (30) value -> . STRING
+    (31) value -> . BOOL
+    (32) value -> . NULL
 
-    FNARROW         shift and go to state 54
+    ID              shift and go to state 35
+    INTEGER         shift and go to state 16
+    FLOAT           shift and go to state 17
+    STRING          shift and go to state 18
+    BOOL            shift and go to state 19
+    NULL            shift and go to state 20
 
+    value                          shift and go to state 55
 
 state 49
 
-    (22) values -> values COMMA value .
+    (18) queueDequeue -> ID OBJOP POP SEMICOLON .
 
-    SEMICOLON       reduce using rule 22 (values -> values COMMA value .)
-    COMMA           reduce using rule 22 (values -> values COMMA value .)
+    SWITCH          reduce using rule 18 (queueDequeue -> ID OBJOP POP SEMICOLON .)
+    ID              reduce using rule 18 (queueDequeue -> ID OBJOP POP SEMICOLON .)
+    FN              reduce using rule 18 (queueDequeue -> ID OBJOP POP SEMICOLON .)
+    ECHO            reduce using rule 18 (queueDequeue -> ID OBJOP POP SEMICOLON .)
+    INTEGER         reduce using rule 18 (queueDequeue -> ID OBJOP POP SEMICOLON .)
+    FLOAT           reduce using rule 18 (queueDequeue -> ID OBJOP POP SEMICOLON .)
+    STRING          reduce using rule 18 (queueDequeue -> ID OBJOP POP SEMICOLON .)
+    BOOL            reduce using rule 18 (queueDequeue -> ID OBJOP POP SEMICOLON .)
+    NULL            reduce using rule 18 (queueDequeue -> ID OBJOP POP SEMICOLON .)
+    $end            reduce using rule 18 (queueDequeue -> ID OBJOP POP SEMICOLON .)
+    SEMICOLON       reduce using rule 18 (queueDequeue -> ID OBJOP POP SEMICOLON .)
 
 
 state 50
 
-    (9) switchStatement -> SWITCH LPAREN value RPAREN LCURLY . switchCases switchDefault RCURLY
-    (12) switchCases -> . switchCase
-    (13) switchCases -> . switchCases switchCase
-    (11) switchCase -> . CASE value COLON arithmeticExpression BREAK SEMICOLON
+    (19) arrowFunction -> FN LPAREN ID RPAREN . FNARROW arrowBody SEMICOLON
 
-    CASE            shift and go to state 57
+    FNARROW         shift and go to state 56
 
-    switchCases                    shift and go to state 55
-    switchCase                     shift and go to state 56
 
 state 51
 
-    (14) queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .
+    (24) values -> values COMMA value .
 
-    $end            reduce using rule 14 (queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .)
-    SEMICOLON       reduce using rule 14 (queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .)
+    SEMICOLON       reduce using rule 24 (values -> values COMMA value .)
+    COMMA           reduce using rule 24 (values -> values COMMA value .)
 
 
 state 52
 
-    (23) fgets -> ID EQUAL FGETS LPAREN STDIN . RPAREN SEMICOLON
+    (11) switchStatement -> SWITCH LPAREN value RPAREN LCURLY . switchCases switchDefault RCURLY
+    (14) switchCases -> . switchCase
+    (15) switchCases -> . switchCases switchCase
+    (13) switchCase -> . CASE value COLON arithmeticExpression BREAK SEMICOLON
 
-    RPAREN          shift and go to state 58
+    CASE            shift and go to state 59
 
+    switchCases                    shift and go to state 57
+    switchCase                     shift and go to state 58
 
 state 53
 
-    (15) queueEnqueue -> ID OBJOP PUSH LPAREN value . RPAREN SEMICOLON
+    (16) queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .
 
-    RPAREN          shift and go to state 59
+    SWITCH          reduce using rule 16 (queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .)
+    ID              reduce using rule 16 (queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .)
+    FN              reduce using rule 16 (queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .)
+    ECHO            reduce using rule 16 (queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .)
+    INTEGER         reduce using rule 16 (queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .)
+    FLOAT           reduce using rule 16 (queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .)
+    STRING          reduce using rule 16 (queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .)
+    BOOL            reduce using rule 16 (queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .)
+    NULL            reduce using rule 16 (queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .)
+    $end            reduce using rule 16 (queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .)
+    SEMICOLON       reduce using rule 16 (queueDeclaration -> ID EQUAL NEW QUEUE SEMICOLON .)
 
 
 state 54
 
-    (17) arrowFunction -> FN LPAREN ID RPAREN FNARROW . arrowBody SEMICOLON
-    (18) arrowBody -> . FN LPAREN ID RPAREN FNARROW arrowBody
-    (19) arrowBody -> . cuerpo
-    (1) cuerpo -> . arithmeticExpression
-    (2) cuerpo -> . switchStatement
-    (3) cuerpo -> . queueDeclaration
-    (4) cuerpo -> . queueEnqueue
-    (5) cuerpo -> . queueDequeue
-    (6) cuerpo -> . arrowFunction
-    (7) cuerpo -> . echo
-    (8) cuerpo -> . fgets
-    (24) arithmeticExpression -> . value arithmeticOperator value
-    (9) switchStatement -> . SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY
-    (14) queueDeclaration -> . ID EQUAL NEW QUEUE SEMICOLON
-    (15) queueEnqueue -> . ID OBJOP PUSH LPAREN value RPAREN SEMICOLON
-    (16) queueDequeue -> . ID OBJOP POP SEMICOLON
-    (17) arrowFunction -> . FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON
-    (20) echo -> . ECHO values SEMICOLON
-    (23) fgets -> . ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON
-    (25) value -> . ID
-    (26) value -> . INTEGER
-    (27) value -> . FLOAT
-    (28) value -> . STRING
-    (29) value -> . BOOL
-    (30) value -> . NULL
+    (25) fgets -> ID EQUAL FGETS LPAREN STDIN . RPAREN SEMICOLON
 
-    FN              shift and go to state 60
-    SWITCH          shift and go to state 11
-    ID              shift and go to state 12
-    ECHO            shift and go to state 14
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    STRING          shift and go to state 17
-    BOOL            shift and go to state 18
-    NULL            shift and go to state 19
+    RPAREN          shift and go to state 60
 
-    arrowBody                      shift and go to state 61
-    cuerpo                         shift and go to state 62
-    arithmeticExpression           shift and go to state 2
-    switchStatement                shift and go to state 3
-    queueDeclaration               shift and go to state 4
-    queueEnqueue                   shift and go to state 5
-    queueDequeue                   shift and go to state 6
-    arrowFunction                  shift and go to state 7
-    echo                           shift and go to state 8
-    fgets                          shift and go to state 9
-    value                          shift and go to state 10
 
 state 55
 
-    (9) switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases . switchDefault RCURLY
-    (13) switchCases -> switchCases . switchCase
-    (10) switchDefault -> . DEFAULT COLON arithmeticExpression
-    (11) switchCase -> . CASE value COLON arithmeticExpression BREAK SEMICOLON
+    (17) queueEnqueue -> ID OBJOP PUSH LPAREN value . RPAREN SEMICOLON
 
-    DEFAULT         shift and go to state 65
-    CASE            shift and go to state 57
+    RPAREN          shift and go to state 61
 
-    switchDefault                  shift and go to state 63
-    switchCase                     shift and go to state 64
 
 state 56
 
-    (12) switchCases -> switchCase .
+    (19) arrowFunction -> FN LPAREN ID RPAREN FNARROW . arrowBody SEMICOLON
+    (20) arrowBody -> . FN LPAREN ID RPAREN FNARROW arrowBody
+    (21) arrowBody -> . cuerpo
+    (3) cuerpo -> . arithmeticExpression
+    (4) cuerpo -> . switchStatement
+    (5) cuerpo -> . queueDeclaration
+    (6) cuerpo -> . queueEnqueue
+    (7) cuerpo -> . queueDequeue
+    (8) cuerpo -> . arrowFunction
+    (9) cuerpo -> . echo
+    (10) cuerpo -> . fgets
+    (26) arithmeticExpression -> . value arithmeticOperator value
+    (11) switchStatement -> . SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY
+    (16) queueDeclaration -> . ID EQUAL NEW QUEUE SEMICOLON
+    (17) queueEnqueue -> . ID OBJOP PUSH LPAREN value RPAREN SEMICOLON
+    (18) queueDequeue -> . ID OBJOP POP SEMICOLON
+    (19) arrowFunction -> . FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON
+    (22) echo -> . ECHO values SEMICOLON
+    (25) fgets -> . ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON
+    (27) value -> . ID
+    (28) value -> . INTEGER
+    (29) value -> . FLOAT
+    (30) value -> . STRING
+    (31) value -> . BOOL
+    (32) value -> . NULL
 
-    DEFAULT         reduce using rule 12 (switchCases -> switchCase .)
-    CASE            reduce using rule 12 (switchCases -> switchCase .)
+    FN              shift and go to state 62
+    SWITCH          shift and go to state 12
+    ID              shift and go to state 13
+    ECHO            shift and go to state 15
+    INTEGER         shift and go to state 16
+    FLOAT           shift and go to state 17
+    STRING          shift and go to state 18
+    BOOL            shift and go to state 19
+    NULL            shift and go to state 20
 
+    arrowBody                      shift and go to state 63
+    cuerpo                         shift and go to state 64
+    arithmeticExpression           shift and go to state 3
+    switchStatement                shift and go to state 4
+    queueDeclaration               shift and go to state 5
+    queueEnqueue                   shift and go to state 6
+    queueDequeue                   shift and go to state 7
+    arrowFunction                  shift and go to state 8
+    echo                           shift and go to state 9
+    fgets                          shift and go to state 10
+    value                          shift and go to state 11
 
 state 57
 
-    (11) switchCase -> CASE . value COLON arithmeticExpression BREAK SEMICOLON
-    (25) value -> . ID
-    (26) value -> . INTEGER
-    (27) value -> . FLOAT
-    (28) value -> . STRING
-    (29) value -> . BOOL
-    (30) value -> . NULL
+    (11) switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases . switchDefault RCURLY
+    (15) switchCases -> switchCases . switchCase
+    (12) switchDefault -> . DEFAULT COLON arithmeticExpression
+    (13) switchCase -> . CASE value COLON arithmeticExpression BREAK SEMICOLON
 
-    ID              shift and go to state 33
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    STRING          shift and go to state 17
-    BOOL            shift and go to state 18
-    NULL            shift and go to state 19
+    DEFAULT         shift and go to state 67
+    CASE            shift and go to state 59
 
-    value                          shift and go to state 66
+    switchDefault                  shift and go to state 65
+    switchCase                     shift and go to state 66
 
 state 58
 
-    (23) fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN . SEMICOLON
+    (14) switchCases -> switchCase .
 
-    SEMICOLON       shift and go to state 67
+    DEFAULT         reduce using rule 14 (switchCases -> switchCase .)
+    CASE            reduce using rule 14 (switchCases -> switchCase .)
 
 
 state 59
 
-    (15) queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN . SEMICOLON
+    (13) switchCase -> CASE . value COLON arithmeticExpression BREAK SEMICOLON
+    (27) value -> . ID
+    (28) value -> . INTEGER
+    (29) value -> . FLOAT
+    (30) value -> . STRING
+    (31) value -> . BOOL
+    (32) value -> . NULL
 
-    SEMICOLON       shift and go to state 68
+    ID              shift and go to state 35
+    INTEGER         shift and go to state 16
+    FLOAT           shift and go to state 17
+    STRING          shift and go to state 18
+    BOOL            shift and go to state 19
+    NULL            shift and go to state 20
 
+    value                          shift and go to state 68
 
 state 60
 
-    (18) arrowBody -> FN . LPAREN ID RPAREN FNARROW arrowBody
-    (17) arrowFunction -> FN . LPAREN ID RPAREN FNARROW arrowBody SEMICOLON
+    (25) fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN . SEMICOLON
 
-    LPAREN          shift and go to state 69
+    SEMICOLON       shift and go to state 69
 
 
 state 61
 
-    (17) arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody . SEMICOLON
+    (17) queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN . SEMICOLON
 
     SEMICOLON       shift and go to state 70
 
 
 state 62
 
-    (19) arrowBody -> cuerpo .
+    (20) arrowBody -> FN . LPAREN ID RPAREN FNARROW arrowBody
+    (19) arrowFunction -> FN . LPAREN ID RPAREN FNARROW arrowBody SEMICOLON
 
-    SEMICOLON       reduce using rule 19 (arrowBody -> cuerpo .)
+    LPAREN          shift and go to state 71
 
 
 state 63
 
-    (9) switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault . RCURLY
+    (19) arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody . SEMICOLON
 
-    RCURLY          shift and go to state 71
+    SEMICOLON       shift and go to state 72
 
 
 state 64
 
-    (13) switchCases -> switchCases switchCase .
+    (21) arrowBody -> cuerpo .
 
-    DEFAULT         reduce using rule 13 (switchCases -> switchCases switchCase .)
-    CASE            reduce using rule 13 (switchCases -> switchCases switchCase .)
+    SEMICOLON       reduce using rule 21 (arrowBody -> cuerpo .)
 
 
 state 65
 
-    (10) switchDefault -> DEFAULT . COLON arithmeticExpression
+    (11) switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault . RCURLY
 
-    COLON           shift and go to state 72
+    RCURLY          shift and go to state 73
 
 
 state 66
 
-    (11) switchCase -> CASE value . COLON arithmeticExpression BREAK SEMICOLON
+    (15) switchCases -> switchCases switchCase .
 
-    COLON           shift and go to state 73
+    DEFAULT         reduce using rule 15 (switchCases -> switchCases switchCase .)
+    CASE            reduce using rule 15 (switchCases -> switchCases switchCase .)
 
 
 state 67
 
-    (23) fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .
+    (12) switchDefault -> DEFAULT . COLON arithmeticExpression
 
-    $end            reduce using rule 23 (fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .)
-    SEMICOLON       reduce using rule 23 (fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .)
+    COLON           shift and go to state 74
 
 
 state 68
 
-    (15) queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .
+    (13) switchCase -> CASE value . COLON arithmeticExpression BREAK SEMICOLON
 
-    $end            reduce using rule 15 (queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .)
-    SEMICOLON       reduce using rule 15 (queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .)
+    COLON           shift and go to state 75
 
 
 state 69
 
-    (18) arrowBody -> FN LPAREN . ID RPAREN FNARROW arrowBody
-    (17) arrowFunction -> FN LPAREN . ID RPAREN FNARROW arrowBody SEMICOLON
+    (25) fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .
 
-    ID              shift and go to state 74
+    SWITCH          reduce using rule 25 (fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .)
+    ID              reduce using rule 25 (fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .)
+    FN              reduce using rule 25 (fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .)
+    ECHO            reduce using rule 25 (fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .)
+    INTEGER         reduce using rule 25 (fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .)
+    FLOAT           reduce using rule 25 (fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .)
+    STRING          reduce using rule 25 (fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .)
+    BOOL            reduce using rule 25 (fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .)
+    NULL            reduce using rule 25 (fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .)
+    $end            reduce using rule 25 (fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .)
+    SEMICOLON       reduce using rule 25 (fgets -> ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON .)
 
 
 state 70
 
-    (17) arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .
+    (17) queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .
 
-    $end            reduce using rule 17 (arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .)
-    SEMICOLON       reduce using rule 17 (arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .)
+    SWITCH          reduce using rule 17 (queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .)
+    ID              reduce using rule 17 (queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .)
+    FN              reduce using rule 17 (queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .)
+    ECHO            reduce using rule 17 (queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .)
+    INTEGER         reduce using rule 17 (queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .)
+    FLOAT           reduce using rule 17 (queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .)
+    STRING          reduce using rule 17 (queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .)
+    BOOL            reduce using rule 17 (queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .)
+    NULL            reduce using rule 17 (queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .)
+    $end            reduce using rule 17 (queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .)
+    SEMICOLON       reduce using rule 17 (queueEnqueue -> ID OBJOP PUSH LPAREN value RPAREN SEMICOLON .)
 
 
 state 71
 
-    (9) switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .
+    (20) arrowBody -> FN LPAREN . ID RPAREN FNARROW arrowBody
+    (19) arrowFunction -> FN LPAREN . ID RPAREN FNARROW arrowBody SEMICOLON
 
-    $end            reduce using rule 9 (switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .)
-    SEMICOLON       reduce using rule 9 (switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .)
+    ID              shift and go to state 76
 
 
 state 72
 
-    (10) switchDefault -> DEFAULT COLON . arithmeticExpression
-    (24) arithmeticExpression -> . value arithmeticOperator value
-    (25) value -> . ID
-    (26) value -> . INTEGER
-    (27) value -> . FLOAT
-    (28) value -> . STRING
-    (29) value -> . BOOL
-    (30) value -> . NULL
+    (19) arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .
 
-    ID              shift and go to state 33
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    STRING          shift and go to state 17
-    BOOL            shift and go to state 18
-    NULL            shift and go to state 19
+    SWITCH          reduce using rule 19 (arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .)
+    ID              reduce using rule 19 (arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .)
+    FN              reduce using rule 19 (arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .)
+    ECHO            reduce using rule 19 (arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .)
+    INTEGER         reduce using rule 19 (arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .)
+    FLOAT           reduce using rule 19 (arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .)
+    STRING          reduce using rule 19 (arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .)
+    BOOL            reduce using rule 19 (arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .)
+    NULL            reduce using rule 19 (arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .)
+    $end            reduce using rule 19 (arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .)
+    SEMICOLON       reduce using rule 19 (arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON .)
 
-    arithmeticExpression           shift and go to state 75
-    value                          shift and go to state 10
 
 state 73
 
-    (11) switchCase -> CASE value COLON . arithmeticExpression BREAK SEMICOLON
-    (24) arithmeticExpression -> . value arithmeticOperator value
-    (25) value -> . ID
-    (26) value -> . INTEGER
-    (27) value -> . FLOAT
-    (28) value -> . STRING
-    (29) value -> . BOOL
-    (30) value -> . NULL
+    (11) switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .
 
-    ID              shift and go to state 33
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    STRING          shift and go to state 17
-    BOOL            shift and go to state 18
-    NULL            shift and go to state 19
+    SWITCH          reduce using rule 11 (switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .)
+    ID              reduce using rule 11 (switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .)
+    FN              reduce using rule 11 (switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .)
+    ECHO            reduce using rule 11 (switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .)
+    INTEGER         reduce using rule 11 (switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .)
+    FLOAT           reduce using rule 11 (switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .)
+    STRING          reduce using rule 11 (switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .)
+    BOOL            reduce using rule 11 (switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .)
+    NULL            reduce using rule 11 (switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .)
+    $end            reduce using rule 11 (switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .)
+    SEMICOLON       reduce using rule 11 (switchStatement -> SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY .)
 
-    value                          shift and go to state 10
-    arithmeticExpression           shift and go to state 76
 
 state 74
 
-    (18) arrowBody -> FN LPAREN ID . RPAREN FNARROW arrowBody
-    (17) arrowFunction -> FN LPAREN ID . RPAREN FNARROW arrowBody SEMICOLON
+    (12) switchDefault -> DEFAULT COLON . arithmeticExpression
+    (26) arithmeticExpression -> . value arithmeticOperator value
+    (27) value -> . ID
+    (28) value -> . INTEGER
+    (29) value -> . FLOAT
+    (30) value -> . STRING
+    (31) value -> . BOOL
+    (32) value -> . NULL
 
-    RPAREN          shift and go to state 77
+    ID              shift and go to state 35
+    INTEGER         shift and go to state 16
+    FLOAT           shift and go to state 17
+    STRING          shift and go to state 18
+    BOOL            shift and go to state 19
+    NULL            shift and go to state 20
 
+    arithmeticExpression           shift and go to state 77
+    value                          shift and go to state 11
 
 state 75
 
-    (10) switchDefault -> DEFAULT COLON arithmeticExpression .
+    (13) switchCase -> CASE value COLON . arithmeticExpression BREAK SEMICOLON
+    (26) arithmeticExpression -> . value arithmeticOperator value
+    (27) value -> . ID
+    (28) value -> . INTEGER
+    (29) value -> . FLOAT
+    (30) value -> . STRING
+    (31) value -> . BOOL
+    (32) value -> . NULL
 
-    RCURLY          reduce using rule 10 (switchDefault -> DEFAULT COLON arithmeticExpression .)
+    ID              shift and go to state 35
+    INTEGER         shift and go to state 16
+    FLOAT           shift and go to state 17
+    STRING          shift and go to state 18
+    BOOL            shift and go to state 19
+    NULL            shift and go to state 20
 
+    value                          shift and go to state 11
+    arithmeticExpression           shift and go to state 78
 
 state 76
 
-    (11) switchCase -> CASE value COLON arithmeticExpression . BREAK SEMICOLON
+    (20) arrowBody -> FN LPAREN ID . RPAREN FNARROW arrowBody
+    (19) arrowFunction -> FN LPAREN ID . RPAREN FNARROW arrowBody SEMICOLON
 
-    BREAK           shift and go to state 78
+    RPAREN          shift and go to state 79
 
 
 state 77
 
-    (18) arrowBody -> FN LPAREN ID RPAREN . FNARROW arrowBody
-    (17) arrowFunction -> FN LPAREN ID RPAREN . FNARROW arrowBody SEMICOLON
+    (12) switchDefault -> DEFAULT COLON arithmeticExpression .
 
-    FNARROW         shift and go to state 79
+    RCURLY          reduce using rule 12 (switchDefault -> DEFAULT COLON arithmeticExpression .)
 
 
 state 78
 
-    (11) switchCase -> CASE value COLON arithmeticExpression BREAK . SEMICOLON
+    (13) switchCase -> CASE value COLON arithmeticExpression . BREAK SEMICOLON
 
-    SEMICOLON       shift and go to state 80
+    BREAK           shift and go to state 80
 
 
 state 79
 
-    (18) arrowBody -> FN LPAREN ID RPAREN FNARROW . arrowBody
-    (17) arrowFunction -> FN LPAREN ID RPAREN FNARROW . arrowBody SEMICOLON
-    (18) arrowBody -> . FN LPAREN ID RPAREN FNARROW arrowBody
-    (19) arrowBody -> . cuerpo
-    (1) cuerpo -> . arithmeticExpression
-    (2) cuerpo -> . switchStatement
-    (3) cuerpo -> . queueDeclaration
-    (4) cuerpo -> . queueEnqueue
-    (5) cuerpo -> . queueDequeue
-    (6) cuerpo -> . arrowFunction
-    (7) cuerpo -> . echo
-    (8) cuerpo -> . fgets
-    (24) arithmeticExpression -> . value arithmeticOperator value
-    (9) switchStatement -> . SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY
-    (14) queueDeclaration -> . ID EQUAL NEW QUEUE SEMICOLON
-    (15) queueEnqueue -> . ID OBJOP PUSH LPAREN value RPAREN SEMICOLON
-    (16) queueDequeue -> . ID OBJOP POP SEMICOLON
-    (17) arrowFunction -> . FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON
-    (20) echo -> . ECHO values SEMICOLON
-    (23) fgets -> . ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON
-    (25) value -> . ID
-    (26) value -> . INTEGER
-    (27) value -> . FLOAT
-    (28) value -> . STRING
-    (29) value -> . BOOL
-    (30) value -> . NULL
+    (20) arrowBody -> FN LPAREN ID RPAREN . FNARROW arrowBody
+    (19) arrowFunction -> FN LPAREN ID RPAREN . FNARROW arrowBody SEMICOLON
 
-    FN              shift and go to state 60
-    SWITCH          shift and go to state 11
-    ID              shift and go to state 12
-    ECHO            shift and go to state 14
-    INTEGER         shift and go to state 15
-    FLOAT           shift and go to state 16
-    STRING          shift and go to state 17
-    BOOL            shift and go to state 18
-    NULL            shift and go to state 19
+    FNARROW         shift and go to state 81
 
-    arrowBody                      shift and go to state 81
-    cuerpo                         shift and go to state 62
-    arithmeticExpression           shift and go to state 2
-    switchStatement                shift and go to state 3
-    queueDeclaration               shift and go to state 4
-    queueEnqueue                   shift and go to state 5
-    queueDequeue                   shift and go to state 6
-    arrowFunction                  shift and go to state 7
-    echo                           shift and go to state 8
-    fgets                          shift and go to state 9
-    value                          shift and go to state 10
 
 state 80
 
-    (11) switchCase -> CASE value COLON arithmeticExpression BREAK SEMICOLON .
+    (13) switchCase -> CASE value COLON arithmeticExpression BREAK . SEMICOLON
 
-    DEFAULT         reduce using rule 11 (switchCase -> CASE value COLON arithmeticExpression BREAK SEMICOLON .)
-    CASE            reduce using rule 11 (switchCase -> CASE value COLON arithmeticExpression BREAK SEMICOLON .)
+    SEMICOLON       shift and go to state 82
 
 
 state 81
 
-    (18) arrowBody -> FN LPAREN ID RPAREN FNARROW arrowBody .
-    (17) arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody . SEMICOLON
+    (20) arrowBody -> FN LPAREN ID RPAREN FNARROW . arrowBody
+    (19) arrowFunction -> FN LPAREN ID RPAREN FNARROW . arrowBody SEMICOLON
+    (20) arrowBody -> . FN LPAREN ID RPAREN FNARROW arrowBody
+    (21) arrowBody -> . cuerpo
+    (3) cuerpo -> . arithmeticExpression
+    (4) cuerpo -> . switchStatement
+    (5) cuerpo -> . queueDeclaration
+    (6) cuerpo -> . queueEnqueue
+    (7) cuerpo -> . queueDequeue
+    (8) cuerpo -> . arrowFunction
+    (9) cuerpo -> . echo
+    (10) cuerpo -> . fgets
+    (26) arithmeticExpression -> . value arithmeticOperator value
+    (11) switchStatement -> . SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY
+    (16) queueDeclaration -> . ID EQUAL NEW QUEUE SEMICOLON
+    (17) queueEnqueue -> . ID OBJOP PUSH LPAREN value RPAREN SEMICOLON
+    (18) queueDequeue -> . ID OBJOP POP SEMICOLON
+    (19) arrowFunction -> . FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON
+    (22) echo -> . ECHO values SEMICOLON
+    (25) fgets -> . ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON
+    (27) value -> . ID
+    (28) value -> . INTEGER
+    (29) value -> . FLOAT
+    (30) value -> . STRING
+    (31) value -> . BOOL
+    (32) value -> . NULL
+
+    FN              shift and go to state 62
+    SWITCH          shift and go to state 12
+    ID              shift and go to state 13
+    ECHO            shift and go to state 15
+    INTEGER         shift and go to state 16
+    FLOAT           shift and go to state 17
+    STRING          shift and go to state 18
+    BOOL            shift and go to state 19
+    NULL            shift and go to state 20
+
+    arrowBody                      shift and go to state 83
+    cuerpo                         shift and go to state 64
+    arithmeticExpression           shift and go to state 3
+    switchStatement                shift and go to state 4
+    queueDeclaration               shift and go to state 5
+    queueEnqueue                   shift and go to state 6
+    queueDequeue                   shift and go to state 7
+    arrowFunction                  shift and go to state 8
+    echo                           shift and go to state 9
+    fgets                          shift and go to state 10
+    value                          shift and go to state 11
+
+state 82
+
+    (13) switchCase -> CASE value COLON arithmeticExpression BREAK SEMICOLON .
+
+    DEFAULT         reduce using rule 13 (switchCase -> CASE value COLON arithmeticExpression BREAK SEMICOLON .)
+    CASE            reduce using rule 13 (switchCase -> CASE value COLON arithmeticExpression BREAK SEMICOLON .)
+
+
+state 83
+
+    (20) arrowBody -> FN LPAREN ID RPAREN FNARROW arrowBody .
+    (19) arrowFunction -> FN LPAREN ID RPAREN FNARROW arrowBody . SEMICOLON
 
   ! shift/reduce conflict for SEMICOLON resolved as shift
-    SEMICOLON       shift and go to state 70
+    SEMICOLON       shift and go to state 72
 
-  ! SEMICOLON       [ reduce using rule 18 (arrowBody -> FN LPAREN ID RPAREN FNARROW arrowBody .) ]
+  ! SEMICOLON       [ reduce using rule 20 (arrowBody -> FN LPAREN ID RPAREN FNARROW arrowBody .) ]
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for SEMICOLON in state 81 resolved as shift
+WARNING: shift/reduce conflict for SEMICOLON in state 83 resolved as shift

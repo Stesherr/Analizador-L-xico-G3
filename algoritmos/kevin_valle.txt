@@ -1,76 +1,12 @@
-<?php
-
-class Objeto {
-    public $nombre;
-    public $cantidad;
-
-    function __construct($nombre, $cantidad) {
-        $this->nombre = $nombre;
-        $this->cantidad = $cantidad;
-    }
-
-    function presentarse() {
-        printf("El objeto %s tiene una cantidad de %d.\n", $this->nombre, $this->cantidad);
-    }
-}
-
-class Cola {
-    private $items = [];
-
-    public function enqueue($item) {
-        array_push($this->items, $item);
-    }
-
-    public function dequeue() {
-        return array_shift($this->items);
-    }
-
-    public function isEmpty() {
-        return empty($this->items);
-    }
-}
-
-function ejemplo3() {
-    $objetos = new Cola();
-    $objetos->enqueue(new Objeto("Libro", 3));
-    $objetos->enqueue(new Objeto("Lápiz", 5));
-    $objetos->enqueue(new Objeto("Cuaderno", 2));
-
-    for ($i = 0; $i < 10; $i++) {
-        if ($i % 2 == 0) {
-            continue; // CONTINUE DENTRO DE IF DENTRO DE FOR
-        } else {
-            switch ($i) {
+switch ($i) {
                 case 1:
-                    printf("Acción 1 realizada\n");
-                    $num1 = 8;
-                    $num2 = 4;
-                    $result = $num1 * $num2; // SOLO NUMEROS EN OPERACIONES ARITMETICAS
-                    printf("Resultado de la multiplicación: %d\n", $result); // CONCATENACION DE STRING CON OTRO TIPO DE DATO
+                   
                     break;
                 case 3:
-                    printf("Acción 2 realizada\n");
-                    $num = 6;
-                    printf("Cuadrado de %d: %d\n", $num, $num * $num);
+                    1+2
                     break;
-                default: // DEFAULT DENTRO DE SWITCH
-                    printf("Acción por defecto\n");
-                    $strNumber = "12";
-                    $resultConversion = $strNumber + 6; // CADENA A NUMERO
-                    printf("Resultado de la operación con conversión implícita: %d\n", $resultConversion);
-            }
-        }
-        printf("%d %f\n", $i, tan(5)); // FUNCION QUE SOLO RECIBE NUMERO
-    }
-
-    // Impresión de la información de objetos
-    while (!$objetos->isEmpty()) {
-        $objeto = $objetos->dequeue();
-        $objeto->presentarse();
-    }
+                default:
+                    1+2
 }
-
-// Llamada a la función que encapsula todos los ejemplos
-ejemplo3();
-
-?>
+echo 1;
+echo "NOSE";

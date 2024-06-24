@@ -255,7 +255,6 @@ for key, value in algoritmos.items():
         tok = lexer.token()
         if not tok:
                 break
-        #print(tok)
         if key in resultados:
              resultados[key].append(str(tok))
         else:

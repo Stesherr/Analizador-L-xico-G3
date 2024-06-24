@@ -1,6 +1,12 @@
 import ply.yacc as yacc
 from Analizador_lexico import tokens
+import Generador_log
 
+def p_programa(p):
+    '''programa : cuerpo
+                | programa cuerpo
+    '''
+    
 def p_cuerpo(p):
     '''cuerpo : arithmeticExpression
               | switchStatement
@@ -86,17 +92,14 @@ def p_arithmeticOperator(p):
 
 # Error rule for syntax errors
 def p_error(p):
-    print("Syntax error in input!")
+    print("Syntax error in input! -> {}".format(p))
 
 
 # Build the parser
 parser = yacc.yacc()
 
-while True:
-    try:
-        s = input('lp > ')
-    except EOFError:
-        break
-    if not s: continue
-    result = parser.parse(s)
-    print(result)
+algoritmos = Generador_log.algoritmos_3
+resultados = {}
+
+result = parser.parse(algoritmos['kevin_valle'])
+print(result)
