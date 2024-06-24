@@ -1,12 +1,60 @@
-switch ($i) {
+<?php
+
+class Objeto {
+    public $nombre;
+    public $cantidad;
+
+    function __construct($nombre, $cantidad) {
+        $this->nombre = $nombre;
+        $this->cantidad = $cantidad;
+    }
+
+    function presentarse() {
+        printf("El objeto %s tiene una cantidad de %d.\n", $this->nombre, $this->cantidad);
+    }
+}
+
+function ejemplo3() {
+    $objetos = new SplQueue();
+    $objetos->enqueue(new Objeto("Libro", 3));
+    $objetos->enqueue(new Objeto("Lápiz", 5));
+    $objetos->enqueue(new Objeto("Cuaderno", 2));
+
+    for ($i = 0; $i < 10; $i++) {
+        if ($i % 2 == 0) {
+            continue; // CONTINUE DENTRO DE IF DENTRO DE FOR
+        } else {
+            switch ($i) {
                 case 1:
-                    1+2
+                    print("Acción 1 realizada");
+                    $num1 = 8;
+                    $num2 = 4;
+                    $result = $num1 * $num2; // SOLO NUMEROS EN OPERACIONES ARITMETICAS
+                    printf("Resultado de la multiplicación: %d\n", $result); // CONCATENACION DE STRING CON OTRO TIPO DE DATO
                     break;
                 case 3:
-                    1+2
+                    printf("Acción 2 realizada\n");
+                    $num = 6;
+                    printf("Cuadrado de %d: %d\n", $num, $num * $num);
                     break;
-                default:
-                    1+2
+                default: // DEFAULT DENTRO DE SWITCH
+                    printf("Acción por defecto\n");
+                    $strNumber = "12";
+                    $resultConversion = $strNumber + 6; // CADENA A NUMERO
+                    printf("Resultado de la operación con conversión implícita: %d\n", $resultConversion);
+            }
+        }
+        printf("%d %f\n", $i, tan(5)); // FUNCION QUE SOLO RECIBE NUMERO
+    }
+
+    // Impresión de la información de objetos
+    while (!$objetos->isEmpty()) {
+        $objeto = $objetos->dequeue();
+        $objeto->presentarse();
+    }
 }
-echo 1;
-echo "NOSE";
+
+// Llamada a la función que encapsula todos los ejemplos
+ejemplo3();
+
+?>
