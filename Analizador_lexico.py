@@ -65,7 +65,8 @@ tokens= (
     'COLON',
     'FNARROW',
     'QUOTE',
-    'COMMA'
+    'COMMA',
+    'DOUBLEQUOTE'
 )+tuple(reserved.values())
 
 # Lista Operadores - Kevin Valle
@@ -78,6 +79,7 @@ t_LCURLY = r'\{'
 t_RCURLY = r'\}'
 t_COLON = r':'
 t_QUOTE = r'\''
+t_DOUBLEQUOTE = r'\"'
 t_COMMA = r','
     # Aritmeticos
 t_PLUS = r'\+'

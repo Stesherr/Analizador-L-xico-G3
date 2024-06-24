@@ -22,22 +22,22 @@ def p_cuerpo(p):
               | stackPush
               | stackPop
               | line
+              | print
     '''
 # ESTRUCTURA SWITCH - KEVIN VALLE
 def p_switchStatement(p):
     'switchStatement : SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY'
 
 def p_switchDefault(p):
-    'switchDefault : DEFAULT COLON arithmeticExpression'
+    'switchDefault : DEFAULT COLON cuerpo'
 
 def p_switchCase(p):
-    'switchCase : CASE value COLON arithmeticExpression BREAK SEMICOLON'
+    'switchCase : CASE value COLON cuerpo BREAK SEMICOLON'
 
 def p_switchCases(p):
     '''switchCases : switchCase
                    | switchCases switchCase
     '''
-# ESTRUCTURA SWITCH - KEVIN VALLE
 
 # ESTRUCTURA FOR - LUIS QUEZADA
 def p_forStatement(p):
@@ -51,7 +51,6 @@ def p_forStatementCondition(p):
 def p_forStatementBody(p):
     '''forStatementBody : cuerpo 
                         | forStatementBody cuerpo'''
-# ESTRUCTURA FOR - LUIS QUEZADA
 
 # ESTRUCTURA COLA - STEFANO SUAREZ
 def p_stackDeclaration(p):
@@ -72,7 +71,6 @@ def p_queueEnqueue(p):
 
 def p_queueDequeue(p):
     'queueDequeue : ID OBJOP POP SEMICOLON'
-# ESTRUCTURA COLA - KEVIN VALLE
 
 # DEFINE FUNCTION - LUIS QUEZADA
 def p_defineFunction(p):
@@ -92,17 +90,21 @@ def p_arrowBody(p):
     '''arrowBody : FN LPAREN ID RPAREN FNARROW arrowBody
                  | cuerpo
     '''
-#  FUNCION FLECHA - KEVIN VALLE
 
-#  ECHO (IMPRIMIR values) - KEVIN VALLE
+#  ECHO (IMPRIMIR values), PRINT - KEVIN VALLE
 def p_echo(p):
     'echo : ECHO values SEMICOLON'
 
+def p_print(p):
+    '''
+    print : PRINT LPAREN values RPAREN SEMICOLON
+          | PRINT value SEMICOLON
+    '''
+
 def p_values(p):
     '''values : value
-               | values COMMA value
+              | values COMMA value
     '''
-#  ECHO (IMPRIMIR valueES) - KEVIN VALLE
 
 #  FGETS (INGRESAR value POR TECLADO) - KEVIN VALLE
 def p_fgets(p):
@@ -110,7 +112,6 @@ def p_fgets(p):
 
 def p_arithmeticExpression(p):
     'arithmeticExpression : value arithmeticOperator value'
-#  FGETS (INGRESAR value POR TECLADO) - KEVIN VALLE
 
 def p_value(p):
     '''value : ID 
@@ -157,8 +158,8 @@ def p_comparingValue(p):
 
 # Error rule for syntax errors
 def p_error(p):
-    print("Error en -> {}".format(p))
-
+    error = "Error en -> {}".format(p)
+    print(error)
 
 # Build the parser
 parser = yacc.yacc()
@@ -168,9 +169,3 @@ resultados = {}
 
 result = parser.parse(algoritmos['stefano_suarez'])
 print(result)
-'''
-for key, value in algoritmos.items():
-    result = parser.parse(value)
-
-print(resultados['luis_quezada'])
-'''

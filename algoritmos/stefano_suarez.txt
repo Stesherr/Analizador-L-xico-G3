@@ -7,10 +7,6 @@
             $this->nombre = $nombre;
             $this->edad = $edad;
         }
-
-        function presentarse() {
-            printf("Hola, soy %s y tengo %d años.\n", $this->nombre, $this->edad);
-        }
     }
 
     function ejemplo2() {
@@ -31,22 +27,19 @@
                         $result = $num1 * $num2; // SOLO NUMEROS EN OPERACIONES ARITMETICAS
                         break;
                     case 3:
-                        printf("Acción 2 realizada\n");
+                        print("Acción 2 realizada");
                         $num = 8;
-                        printf("Cuadrado de %d: %d\n", $num, $num * $num);
+                        print("Cuadrado de $num: $num * $num");
                         break;
                     default: // DEFAULT DENTRO DE SWITCH
                         echo "Acción por defecto\n";
                         $strNumber = "20";
                         $resultConversion = $strNumber + 10; // CADENA A NUMERO
-                        printf("Resultado de la operación con conversión implícita: %d\n", $resultConversion);
+                        print("Resultado de la operación con conversión implícita: $resultConversion");
                 }
             }
-            printf("%d %f\n", $i, cos(5)); // FUNCION QUE SOLO RECIBE NUMERO
+            print "cos de 5 es cos(5)"; // FUNCION QUE SOLO RECIBE NUMERO
         }
     }
-
-    // Llamada a la función que encapsula todos los ejemplos
     ejemplo2();
-
 ?>
