@@ -48,7 +48,9 @@ def p_if_elseStatement(p):
 
 def p_ifStatementBody(p):
     '''ifStatementBody : cuerpo
-                       | ifStatementBody cuerpo'''
+                       | cuerpo CONTINUE SEMICOLON
+                       | ifStatementBody cuerpo
+                       '''
 
 # ESTRUCTURA FOR - LUIS QUEZADA
 def p_forStatement(p):
@@ -172,16 +174,26 @@ def p_comparingSign(p):
 def p_comparingValue(p):
     'comparingValue : value comparingSign value'
 
-# Error rule for syntax errors
-def p_error(p):
-    error = "Error en -> {}".format(p)
-    print(error)
 
-# Build the parser
+def p_error(p):
+    global current_key
+    error_message = "Error en -> {}".format(p)
+    if current_key in resultados:
+        resultados[current_key].append(error_message)
+    else:
+        resultados[current_key] = [error_message]
+
 parser = yacc.yacc()
 
 algoritmos = Generador_log.algoritmos_3
 resultados = {}
 
-result = parser.parse(algoritmos['stefano_suarez'])
-print(result)
+for key, value in algoritmos.items():
+    current_key = key 
+    result = parser.parse(value)
+    if current_key in resultados:
+        resultados[current_key].append(str(result))
+    else:
+        resultados[current_key] = [str(result)]
+
+Generador_log.generar_log_sintactico(resultados)
