@@ -9,12 +9,14 @@ def p_programa(p):
 
 def p_cuerpo(p):
     '''cuerpo : arithmeticExpression
+              | if_elseStatement
               | forStatement
               | switchStatement
               | queueDeclaration
               | queueEnqueue
               | queueDequeue
               | defineFunction
+              | anonymousFunction
               | arrowFunction
               | echo
               | fgets
@@ -38,6 +40,15 @@ def p_switchCases(p):
     '''switchCases : switchCase
                    | switchCases switchCase
     '''
+
+# ESTRUCTURA IF/ELSE - STEFANO SUAREZ
+def p_if_elseStatement(p):
+    '''if_elseStatement : IF LPAREN comparingValue RPAREN LCURLY ifStatementBody RCURLY ELSE ifStatementBody
+                        | IF LPAREN comparingValue RPAREN LCURLY ifStatementBody'''
+
+def p_ifStatementBody(p):
+    '''ifStatementBody : cuerpo
+                       | ifStatementBody cuerpo'''
 
 # ESTRUCTURA FOR - LUIS QUEZADA
 def p_forStatement(p):
@@ -81,6 +92,11 @@ def p_defineFunction(p):
 def p_arguments(p):
     '''arguments : ID
                 | ID COMMA arguments'''
+    
+# FUNCION ANONIMA - STEFANO SUAREZ
+def p_anonymousFunction(p):
+    '''anonymousFunction : FUNCTION LPAREN RPAREN LCURLY cuerpo RCURLY 
+                         | FUNCTION LPAREN arguments RPAREN LCURLY cuerpo RCURLY'''
 
 #  FUNCION FLECHA - KEVIN VALLE
 def p_arrowFunction(p):
