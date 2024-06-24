@@ -16,6 +16,7 @@ def p_cuerpo(p):
               | queueEnqueue
               | queueDequeue
               | defineFunction
+              | anonymousFunction
               | arrowFunction
               | echo
               | fgets
@@ -93,6 +94,11 @@ def p_defineFunction(p):
 def p_arguments(p):
     '''arguments : ID
                 | ID COMMA arguments'''
+    
+# FUNCION ANONIMA - STEFANO SUAREZ
+def p_anonymousFunction(p):
+    '''anonymousFunction : FUNCTION LPAREN RPAREN LCURLY cuerpo RCURLY 
+                         | FUNCTION LPAREN arguments RPAREN LCURLY cuerpo RCURLY'''
 
 #  FUNCION FLECHA - KEVIN VALLE
 def p_arrowFunction(p):
