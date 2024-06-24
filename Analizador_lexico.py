@@ -2,7 +2,7 @@ import ply.lex as lex
 import Generador_log
 
 # Todas las palabras reservadas Stefano Suarez
-reserved = {"__halt_compiler()" : "__HALT_COMPILER", "abstract" : "ABSTRACT", "and" : "AND", "array()" : "ARRAY", "as" : "AS", 
+reserved = {"__halt_compiler()" : "__HALT_COMPILER", "abstract" : "ABSTRACT", "and" : "AND", "array(" : "ARRAY", "as" : "AS", 
 "break" : "BREAK", "callable" : "CALLABLE", "case" : "CASE", "catch" : "CATCH", "class" : "CLASS", "clone" : "CLONE", "const" : "CONST", "continue" : "CONTINUE",
 "declare" : "DECLARE", "default" : "DEFAULT", "die()" : "DIE", "do" : "DO", "echo" : "ECHO", "else" : "ELSE", "elseif" : "ELSEIF",
 "empty()" : "EMPTY", "endwhile" : "ENDWHILE", "eval()" : "EVAL", "exit()" : "EXIT", "extends" : "EXTENDS", "final" : "FINAL", "finally" : "FINALLY",
@@ -137,7 +137,7 @@ def t_CLOSE_TAG(t):
 def t_DOC_COMMENT(t):
     r'(\/\*(.|\n)*?\*\/)|(\/\/.*)'
     t.type = reserved.get(t.value, 'DOC_COMMENT')
-    return t
+    pass
 
 # Palabras reservadas compuestas - Stefano Suarez
 def t_HALT_COMPILER(t):
@@ -146,7 +146,7 @@ def t_HALT_COMPILER(t):
      return t
 
 def t_ARRAY(t):
-     r'array\(\)'
+     r'array\('
      t.type = reserved.get(t.value, 'ARRAY')
      return t
 

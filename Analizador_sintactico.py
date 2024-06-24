@@ -12,6 +12,7 @@ def p_cuerpo(p):
               | if_elseStatement
               | forStatement
               | switchStatement
+              | arrayAsignation
               | queueDeclaration
               | queueEnqueue
               | queueDequeue
@@ -64,6 +65,23 @@ def p_forStatementCondition(p):
 def p_forStatementBody(p):
     '''forStatementBody : cuerpo 
                         | forStatementBody cuerpo'''
+
+#ESTRUCTURA ARREGLO - LUIS QUEZADA
+def p_arrayAsignation(p):
+    'arrayAsignation : ID EQUAL arrayDeclaration SEMICOLON'
+
+def p_arrayDeclaration(p):
+    ''' arrayDeclaration : ARRAY arraysValues RPAREN
+                        | LSQUARE arraysValues RSQUARE
+                        | arrayValue '''
+
+def p_arraysValues(p):
+    ''' arraysValues : arrayValue 
+                    | arraysValues COMMA arrayValue'''
+
+def p_arrayValue(p):
+    '''arrayValue : ARRAY values RPAREN
+                    | LSQUARE values RSQUARE'''
 
 # ESTRUCTURA COLA - STEFANO SUAREZ
 def p_stackDeclaration(p):
