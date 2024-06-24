@@ -1,74 +1,52 @@
-class Animal {
-    public $nombre;
-    public $edad;
+<?php
+    class Animal {
+        public $nombre;
+        public $edad;
 
-    function __construct($nombre, $edad) {
-        $this->nombre = $nombre;
-        $this->edad = $edad;
-    }
-
-    function presentarse() {
-        printf("Hola, soy %s y tengo %d años.\n", $this->nombre, $this->edad);
-    }
-}
-
-class Cola {
-    private $items = [];
-
-    public function enqueue($item) {
-        array_push($this->items, $item);
-    }
-
-    public function dequeue() {
-        return array_shift($this->items);
-    }
-
-    public function isEmpty() {
-        return empty($this->items);
-    }
-}
-
-function ejemplo2() {
-    $animales = new Cola();
-    $animales->enqueue(new Animal("Perro", 3));
-    $animales->enqueue(new Animal("Gato", 5));
-    $animales->enqueue(new Animal("Pájaro", 2));
-
-    for ($i = 0; $i < 10; $i++) {
-        if ($i % 2 == 0) {
-            continue; // CONTINUE DENTRO DE IF DENTRO DE FOR
-        } else {
-            switch ($i) {
-                case 1:
-                    printf("Acción 1 realizada\n");
-                    $num1 = 15;
-                    $num2 = 7;
-                    $result = $num1 * $num2; // SOLO NUMEROS EN OPERACIONES ARITMETICAS
-                    printf("Resultado de la multiplicación: %d\n", $result); // CONCATENACION DE STRING CON OTRO TIPO DE DATO
-                    break;
-                case 3:
-                    printf("Acción 2 realizada\n");
-                    $num = 8;
-                    printf("Cuadrado de %d: %d\n", $num, $num * $num);
-                    break;
-                default: // DEFAULT DENTRO DE SWITCH
-                    printf("Acción por defecto\n");
-                    $strNumber = "20";
-                    $resultConversion = $strNumber + 10; // CADENA A NUMERO
-                    printf("Resultado de la operación con conversión implícita: %d\n", $resultConversion);
-            }
+        function __construct($nombre, $edad) {
+            $this->nombre = $nombre;
+            $this->edad = $edad;
         }
-        printf("%d %f\n", $i, cos(5)); // FUNCION QUE SOLO RECIBE NUMERO
+
+        function presentarse() {
+            printf("Hola, soy %s y tengo %d años.\n", $this->nombre, $this->edad);
+        }
     }
 
-    // Impresión de la información de animales
-    while (!$animales->isEmpty()) {
-        $animal = $animales->dequeue();
-        $animal->presentarse();
-    }
-}
+    function ejemplo2() {
+        $animales = new SplQueue();
+        $animales->enqueue(new Animal("Perro", 3));
+        $animales->enqueue(new Animal("Gato", 5));
+        $animales->enqueue(new Animal("Pájaro", 2));
 
-// Llamada a la función que encapsula todos los ejemplos
-ejemplo2();
+        for ($i = 0; $i < 10; $i=$i+1) {
+            if ($i % 2 == 0) {
+                continue; // CONTINUE DENTRO DE IF DENTRO DE FOR
+            } else {
+                switch ($i) {
+                    case 1:
+                        echo "Acción 1 realizada";
+                        $num1 = 15;
+                        $num2 = 7;
+                        $result = $num1 * $num2; // SOLO NUMEROS EN OPERACIONES ARITMETICAS
+                        break;
+                    case 3:
+                        printf("Acción 2 realizada\n");
+                        $num = 8;
+                        printf("Cuadrado de %d: %d\n", $num, $num * $num);
+                        break;
+                    default: // DEFAULT DENTRO DE SWITCH
+                        echo "Acción por defecto\n";
+                        $strNumber = "20";
+                        $resultConversion = $strNumber + 10; // CADENA A NUMERO
+                        printf("Resultado de la operación con conversión implícita: %d\n", $resultConversion);
+                }
+            }
+            printf("%d %f\n", $i, cos(5)); // FUNCION QUE SOLO RECIBE NUMERO
+        }
+    }
+
+    // Llamada a la función que encapsula todos los ejemplos
+    ejemplo2();
 
 ?>

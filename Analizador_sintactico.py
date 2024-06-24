@@ -6,7 +6,7 @@ def p_programa(p):
     '''programa : cuerpo
                 | programa cuerpo
     '''
-    
+
 def p_cuerpo(p):
     '''cuerpo : arithmeticExpression
               | forStatement
@@ -94,7 +94,7 @@ def p_arrowBody(p):
     '''
 #  FUNCION FLECHA - KEVIN VALLE
 
-#  ECHO (IMPRIMIR valueES) - KEVIN VALLE
+#  ECHO (IMPRIMIR values) - KEVIN VALLE
 def p_echo(p):
     'echo : ECHO values SEMICOLON'
 
@@ -157,7 +157,7 @@ def p_comparingValue(p):
 
 # Error rule for syntax errors
 def p_error(p):
-    print("Syntax error in input! -> {}".format(p))
+    print("Error en -> {}".format(p))
 
 
 # Build the parser
@@ -166,5 +166,11 @@ parser = yacc.yacc()
 algoritmos = Generador_log.algoritmos_3
 resultados = {}
 
-result = parser.parse(algoritmos['kevin_valle'])
+result = parser.parse(algoritmos['stefano_suarez'])
 print(result)
+'''
+for key, value in algoritmos.items():
+    result = parser.parse(value)
+
+print(resultados['luis_quezada'])
+'''
