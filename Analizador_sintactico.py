@@ -9,6 +9,7 @@ def p_programa(p):
 
 def p_cuerpo(p):
     '''cuerpo : arithmeticExpression
+              | if_elseStatement
               | forStatement
               | switchStatement
               | queueDeclaration
@@ -38,6 +39,15 @@ def p_switchCases(p):
                    | switchCases switchCase
     '''
 # ESTRUCTURA SWITCH - KEVIN VALLE
+
+# ESTRUCTURA IF/ELSE - STEFANO SUAREZ
+def p_if_elseStatement(p):
+    '''if_elseStatement : IF LPAREN comparingValue RPAREN LCURLY ifStatementBody RCURLY ELSE ifStatementBody
+                        | IF LPAREN comparingValue RPAREN LCURLY ifStatementBody'''
+
+def p_ifStatementBody(p):
+    '''ifStatementBody : cuerpo
+                       | ifStatementBody cuerpo'''
 
 # ESTRUCTURA FOR - LUIS QUEZADA
 def p_forStatement(p):
