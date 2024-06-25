@@ -26,6 +26,9 @@ def p_cuerpo(p):
               | stackPop
               | line
               | print
+              | logicalCondition
+              | OPEN_TAG
+              | CLOSE_TAG
     '''
 # ESTRUCTURA SWITCH - KEVIN VALLE
 def p_switchStatement(p):
@@ -44,8 +47,8 @@ def p_switchCases(p):
 
 # ESTRUCTURA IF/ELSE - STEFANO SUAREZ
 def p_if_elseStatement(p):
-    '''if_elseStatement : IF LPAREN comparingValue RPAREN LCURLY ifStatementBody RCURLY ELSE ifStatementBody
-                        | IF LPAREN comparingValue RPAREN LCURLY ifStatementBody'''
+    '''if_elseStatement : IF LPAREN logicalCondition RPAREN LCURLY ifStatementBody RCURLY ELSE ifStatementBody
+                        | IF LPAREN logicalCondition RPAREN LCURLY ifStatementBody'''
 
 def p_ifStatementBody(p):
     '''ifStatementBody : cuerpo
@@ -191,9 +194,24 @@ def p_comparingSign(p):
                         | GREATEREQUALTHAN
     '''
 
-# COMPARING VALUES - LUIS QUEZADA
+# COMPARING VALUES - LUIS QUEZADA 1>2 AND 2>1
 def p_comparingValue(p):
     'comparingValue : value comparingSign value'
+
+# LOGICAL
+def p_logicalCondition(p):
+    """logicalCondition : comparingValue
+                        | comparingValue conditionOperator comparingValue
+                        | LPAREN logicalCondition RPAREN
+    
+    
+    """
+
+def p_conditionOperator(p):
+    """conditionOperator : AND
+                         | OR
+                         | XOR 
+    """
 
 
 def p_error(p):

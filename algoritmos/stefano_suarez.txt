@@ -9,6 +9,8 @@
         }
     }
 
+    fn($prueba) => $prueba + $test;
+
     function ejemplo2() {
         $datos = fgets(STDIN);
         $animales = new SplStack();

@@ -1,14 +1,5 @@
 <?php
-
-class Objeto {
-    public $nombre;
-    public $cantidad;
-
-    function __construct($nombre, $cantidad) {
-        $this->nombre = $nombre;
-        $this->cantidad = $cantidad;
-    }
-}
+fn($x) => $x + $y;
 
 function ejemplo3() {
     $ingreso = fgets(STDIN);
@@ -18,7 +9,7 @@ function ejemplo3() {
     $objetos->push("Borrador");
     $objetos->pop();
     for ($i = 0; $i < 10; $i=$i+2) {
-        if ($i % 2 == 0) {
+        if ($i == 0 and $i < 10 or $i > 9) {
             continue; // CONTINUE DENTRO DE IF DENTRO DE FOR
         } else {
             switch ($i) {
@@ -30,7 +21,7 @@ function ejemplo3() {
                     print("Resultado de la multiplicación: $result"); // CONCATENACION DE STRING CON OTRO TIPO DE DATO
                     break;
                 case 3:
-                    echo "Acción 2 realizada";
+                    echo "Acción 2 realizada", 1;
                     $num = 6;
                     break;
                 default: // DEFAULT DENTRO DE SWITCH
@@ -40,12 +31,6 @@ function ejemplo3() {
             }
         }
         print "tan de 5 es tan(5)"; // FUNCION QUE SOLO RECIBE NUMERO
-    }
-
-    // Impresión de la información de objetos
-    while (!$objetos->isEmpty()) {
-        $objeto = $objetos->dequeue();
-        $objeto->presentarse();
     }
 }
 

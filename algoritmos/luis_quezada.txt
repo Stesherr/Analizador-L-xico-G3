@@ -10,6 +10,9 @@ class Persona {
         printf("Hola, mi nombre es %s y tengo %d años.\n", $this->nombre, $this->edad);
     }
 }
+
+fn($nose) => $nose + $sise;
+
 function ejemplo1() {
     $personas = [
         "Juan",
