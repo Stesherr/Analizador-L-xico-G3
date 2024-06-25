@@ -13,7 +13,7 @@ class Persona {
 function ejemplo1() {
     $personas = [
         "Juan",
-        "Maria,
+        "Maria",
         "Pedro"
     ];
     $teclado = fgets(STDIN);
