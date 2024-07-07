@@ -2,6 +2,8 @@ import ply.yacc as yacc
 from Analizador_lexico import tokens
 import Generador_log
 
+variables = {}
+
 def p_programa(p):
     '''programa : cuerpo
                 | programa cuerpo
@@ -150,11 +152,47 @@ def p_values(p):
 def p_fgets(p):
     'fgets : ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON'
 
+def p_arithmeticExpressionNumber(p):
+    'arithmeticExpression : value'
+    #Aporte Luis Quezada p[0] = p[1]
+    p[0] = p[1]
+
+def p_arithmeticExpressionGroup(p):
+    'arithmeticExpression : LPAREN arithmeticExpression RPAREN'
+    #Aporte Luis Quezada p[0] = p[2]
+    p[0] = p[2]
+
 def p_arithmeticExpression(p):
-    '''arithmeticExpression : value
-                            | arithmeticExpression arithmeticOperator arithmeticExpression
-                            | LPAREN arithmeticExpression RPAREN
-    '''
+    'arithmeticExpression : arithmeticExpression arithmeticOperator arithmeticExpression'
+    #Aporte Luis Quezada Operacion entre numeros------------------------
+    if not isinstance(p[len(p)-3], str) or p[len(p)-3] in variables:
+        pass
+    else:
+        print(f'Error {p[len(p)-3]} no es un numero')
+        return
+
+    if not isinstance(p[len(p)-1], str) or p[len(p)-1] in variables:
+        pass
+    else:
+        print(f'Error {p[len(p)-1]} no es un numero')
+        return
+
+    if not(p[len(p)-1] and p[len(p)-3]):
+        return
+    
+    if p[len(p)-2] == "+":
+        p[0] = p[len(p)-3] + p[len(p)-1]
+    elif p[len(p)-2] == "-":
+        p[0] = p[len(p)-3] - p[len(p)-1]
+    elif p[len(p)-2] == "*":
+        p[0] = p[len(p)-3] * p[len(p)-1]
+    elif p[len(p)-2] == "/":
+        p[0] = p[len(p)-3] / p[len(p)-1]
+    elif p[len(p)-2] == "%":
+        p[0] = p[len(p)-3] % p[len(p)-1]
+    elif p[len(p)-2] == "**":
+        p[0] = p[len(p)-3] ** p[len(p)-1]
+    #Aporte Luis Quezada -----------------------------------------------
 
 def p_value(p):
     '''value : ID
@@ -162,6 +200,11 @@ def p_value(p):
              | FLOAT
              | STRING
     '''
+    #Aporte Luis Quezada
+    if isinstance(p[1], str) and p[1] in variables:
+        p[0] = variables[p[1]]
+    else:
+        p[0] = p[1]
 
 def p_arithmeticOperator(p):
     '''arithmeticOperator : PLUS
@@ -171,6 +214,8 @@ def p_arithmeticOperator(p):
                           | MOD
                           | EXP
     '''
+    #Aporte Luis Quezada p[0] = p[1]
+    p[0] = p[1]
 
 # LINE - LUIS QUEZADA
 def p_line(p):
