@@ -34,6 +34,7 @@ def p_cuerpo(p):
 def p_switchStatement(p):
     'switchStatement : SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY'
 
+
 def p_switchDefault(p):
     'switchDefault : DEFAULT COLON programa'
 
@@ -156,12 +157,10 @@ def p_arithmeticExpression(p):
     '''
 
 def p_value(p):
-    '''value : ID 
+    '''value : ID
              | INTEGER
              | FLOAT
              | STRING
-             | BOOL
-             | NULL
     '''
 
 def p_arithmeticOperator(p):
@@ -175,12 +174,14 @@ def p_arithmeticOperator(p):
 
 # LINE - LUIS QUEZADA
 def p_line(p):
-    '''line : variableAsignation SEMICOLON'''
+    '''line : variableAsignation SEMICOLON
+            | stringConcatenation SEMICOLON
+    '''
     
 # VARIABLE ASIGNATION - LUIS QUEZADA
 def p_variableAsignation(p):
     '''variableAsignation : ID EQUAL value
-                            | ID EQUAL arithmeticExpression
+                          | ID EQUAL arithmeticExpression
     '''
 
 # COMPARING SIGN - LUIS QUEZADA
@@ -204,7 +205,6 @@ def p_logicalCondition(p):
                         | comparingValue conditionOperator comparingValue
                         | LPAREN logicalCondition RPAREN
     
-    
     """
 
 def p_conditionOperator(p):
@@ -213,7 +213,20 @@ def p_conditionOperator(p):
                          | XOR 
     """
 
+# CONCAT KEVIN VALLE
+def p_stringConcatenation(p):
+    """stringConcatenation : value CONCAT value
+                           | value CONCAT stringConcatenation
+                           | stringConcatenation CONCAT value
+    """
 
+
+# Error rule for syntax errors
+def p_error(p):
+    error_message = "Error en -> {}".format(p)
+    print(error_message)
+
+'''
 def p_error(p):
     global current_key
     error_message = "Error en -> {}".format(p)
@@ -235,4 +248,17 @@ for key, value in algoritmos.items():
     else:
         resultados[current_key] = [str(result)]
 
+        
 Generador_log.generar_log_sintactico(resultados)
+'''
+# Build the parser
+parser = yacc.yacc()
+
+while True:
+   try:
+       s = input('lp > ')
+   except EOFError:
+       break
+   if not s: continue
+   result = parser.parse(s)
+   print(result)

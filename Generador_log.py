@@ -13,9 +13,11 @@ ext_log = '.txt'
 
 logs_lexico = 'logs_lexico'
 logs_sintactico = 'logs_sintactico'
+logs_semantico = 'logs_semantico'
 algoritmos_folder = 'algoritmos'
 os.makedirs(logs_lexico, exist_ok=True)
 os.makedirs(logs_sintactico, exist_ok=True)
+os.makedirs(logs_semantico, exist_ok=True)
 
 algoritmos_3 = {}
 
@@ -41,3 +43,10 @@ def generar_log_sintactico(resultados):
         with open(nombre_log_sintactico, 'w') as file:
             file.write('\n'.join((resultados[integrante])))
         print(f"Se creó el archivo de {integrante} con el nombre: '{nombre_log_sintactico}'")
+
+def generar_log_semantico(resultados):
+    for integrante, usuario_log in grupo_3.items():
+        nombre_log_semantico = os.path.join(logs_semantico, f"sintactico-{usuario_log}-{fecha_log}-{hora_log}{ext_log}")
+        with open(nombre_log_semantico, 'w') as file:
+            file.write('\n'.join((resultados[integrante])))
+        print(f"Se creó el archivo de {integrante} con el nombre: '{nombre_log_semantico}'")

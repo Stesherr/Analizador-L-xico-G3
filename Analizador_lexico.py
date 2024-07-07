@@ -66,7 +66,7 @@ tokens= (
     'FNARROW',
     'QUOTE',
     'COMMA',
-    'DOUBLEQUOTE'
+    'DOUBLEQUOTE',
 )+tuple(reserved.values())
 
 # Lista Operadores - Kevin Valle
