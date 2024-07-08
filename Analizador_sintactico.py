@@ -349,12 +349,27 @@ def p_logicalCondition(p):
                         | comparingValue conditionOperator comparingValue
                         | LPAREN logicalCondition RPAREN
     """
+    #Aporte Stefano Suarez
+    if len(p) == 2:
+        p[0] = p[1]
+    elif len(p) == 4 and p[1] == '(':
+        p[0] = p[2]
+    elif len(p) == 4:
+        if p[2] == '&&':
+            p[0] = p[1] and p[3]
+        elif p[2] == '||':
+            p[0] = p[1] or p[3]
+        elif p[2] == 'xor':
+            p[0] = bool(p[1]) != bool(p[3])
 
 def p_conditionOperator(p):
     """conditionOperator : AND
                          | OR
                          | XOR 
     """
+    #Aporte Stefano Suarez
+    p[0] = p[1]
+    
 
 # Aporte Kevin Valle --- Conversion Concatenacion Int con String
 def p_stringConcatenationGroup(p):
