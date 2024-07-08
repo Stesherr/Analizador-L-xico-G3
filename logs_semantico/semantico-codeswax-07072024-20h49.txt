@@ -1,0 +1,9 @@
+Error $x no es un numero
+Error en -> LexToken(ID,'$objetos',199,81)
+Error $i no es un numero
+Error en -> LexToken(OR,'or',205,288)
+Error en -> LexToken(RPAREN,')',205,297)
+Error $num1 no es un numero
+Error $strNumber no es un numero
+Error en -> LexToken(RCURLY,'}',225,1169)
+Error en -> LexToken(RCURLY,'}',227,1245)

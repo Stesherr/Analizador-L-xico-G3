@@ -166,7 +166,12 @@ def p_arithmeticExpressionCastInt(p):
     try:
         p[0] = int(p[1].strip('"'))
     except ValueError:
-        print(f"Error: Numero no valido {p[1]}")
+        error_message = f"Error: Numero no valido {p[1]}"
+        print(error_message)
+        if current_key in resultados_semantico:
+            resultados_semantico[current_key].append(error_message)
+        else:
+            resultados_semantico[current_key] = [error_message]
         return
 
 #Aporte Kevin Valle - Conversion Implicita -----
@@ -182,13 +187,23 @@ def p_arithmeticExpression(p):
     if not isinstance(p[len(p)-3], str) or p[len(p)-3] in variables:
         pass
     else:
-        print(f'Error {p[len(p)-3]} no es un numero')
+        error_message = f'Error {p[len(p)-3]} no es un numero'
+        print(error_message)
+        if current_key in resultados_semantico:
+            resultados_semantico[current_key].append(error_message)
+        else:
+            resultados_semantico[current_key] = [error_message]
         return
         
     if not isinstance(p[len(p)-1], str) or p[len(p)-1] in variables:
         pass
     else:
-        print(f'Error {p[len(p)-1]} no es un numero')
+        error_message = f'Error {p[len(p)-1]} no es un numero'
+        print(error_message)
+        if current_key in resultados_semantico:
+            resultados_semantico[current_key].append(error_message)
+        else:
+            resultados_semantico[current_key] = [error_message]
         return
 
     if not(p[len(p)-1] and p[len(p)-3]):
@@ -216,7 +231,12 @@ def p_callFunction(p):
         if p[1] == "pi":
             p[0] = math.pi
         elif p[1] == "abs" or p[1] == "sin" or p[1] == "cos" or p[1] == "tan":
-            print('Error, faltan argumentos')
+            error_message = 'Error, faltan argumentos'
+            print(error_message)
+            if current_key in resultados_semantico:
+                resultados_semantico[current_key].append(error_message)
+            else:
+                resultados_semantico[current_key] = [error_message]
             return
         
 
@@ -226,7 +246,12 @@ def p_callFunctionArguments(p):
         if not isinstance(p[3], str) or p[3] in variables:
             pass
         else:
-            print(f'Error, {p[3]} no es un argumento valido')
+            error_message = f'Error, {p[3]} no es un argumento valido'
+            print(error_message)
+            if current_key in resultados_semantico:
+                resultados_semantico[current_key].append(error_message)
+            else:
+                resultados_semantico[current_key] = [error_message]
             return
 
         if p[1] == "abs":
@@ -238,7 +263,12 @@ def p_callFunctionArguments(p):
         elif p[1] == "tan":
             p[0] = math.tan(p[3])
         elif p[1] == "pi":
-            print(f'Error, {p[1]} no requiere de argumentos')
+            error_message = f'Error, {p[1]} no requiere de argumentos'
+            print(error_message)
+            if current_key in resultados_semantico:
+                resultados_semantico[current_key].append(error_message)
+            else:
+                resultados_semantico[current_key] = [error_message]
             return
 #callFuntion Luis Quezada------------------------------------------------------
 
@@ -317,13 +347,23 @@ def p_stringConcatenation(p):
     if isinstance(p[len(p)-3], str) or p[len(p)-3] in variables:
         pass
     else:
-        print(f'Error al concatenar {p[len(p)-3]}')
+        error_message = f'Error al concatenar {p[len(p)-3]}'
+        print(error_message)
+        if current_key in resultados_semantico:
+            resultados_semantico[current_key].append(error_message)
+        else:
+            resultados_semantico[current_key] = [error_message]
         return
         
     if isinstance(p[len(p)-1], str) or p[len(p)-1] in variables:
         pass
     else:
-        print(f'Error al concatenar {p[len(p)-1]}')
+        error_message = f'Error al concatenar {p[len(p)-1]}'
+        print(error_message)
+        if current_key in resultados_semantico:
+            resultados_semantico[current_key].append(error_message)
+        else:
+            resultados_semantico[current_key] = [error_message]
         return
 
     if not(p[len(p)-1] and p[len(p)-3]):
@@ -334,16 +374,17 @@ def p_stringConcatenation(p):
 
 # Error rule for syntax errors
 def p_error(p):
-    error_message = "Error en -> {}".format(p)
-    print(error_message)
-
-def p_error(p):
     global current_key
     error_message = "Error en -> {}".format(p)
     if current_key in resultados:
         resultados[current_key].append(error_message)
     else:
         resultados[current_key] = [error_message]
+
+    if current_key in resultados_semantico:
+        resultados_semantico[current_key].append(error_message)
+    else:
+        resultados_semantico[current_key] = [error_message]
 
 parser = yacc.yacc()
 
@@ -359,6 +400,5 @@ for key, value in algoritmos.items():
     else:
         resultados[current_key] = [str(result)]
 
-        
 #Generador_log.generar_log_sintactico(resultados)
 Generador_log.generar_log_semantico(resultados_semantico)
