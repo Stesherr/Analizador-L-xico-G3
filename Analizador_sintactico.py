@@ -8,7 +8,8 @@ mathFunctions = {"abs", "sin", "cos", "tan", "pi"}
 #Aporte Stefano Suarez
 precedence = (
     ('left', 'AND', 'OR', 'XOR'),
-    ('left', 'LESSTHAN', 'GREATERTHAN', 'LESSEQUALTHAN', 'GREATEREQUALTHAN', 'IS_EQUAL', 'NOTEQUAL')
+    ('left', 'LESSTHAN', 'GREATERTHAN', 'LESSEQUALTHAN', 'GREATEREQUALTHAN', 'IS_EQUAL', 'NOTEQUAL'),
+    ('right', 'EQUAL')
 )
 
 def p_programa(p):
@@ -65,7 +66,7 @@ def p_if_elseStatement(p):
     '''if_elseStatement : IF LPAREN logicalCondition RPAREN LCURLY ifStatementBody RCURLY ELSE LCURLY ifStatementBody RCURLY
                         | IF LPAREN logicalCondition RPAREN LCURLY ifStatementBody
                         '''
-    #Aporte Stefano Suarez
+    #Aporte Stefano Suarez - Revisa que la condicion del if sea un tipo booleano
     if len(p) == 12:
         p[0] = ('if_else', p[3], p[6], p[10])
     else:
@@ -98,7 +99,7 @@ def p_forStatementCondition(p):
                             |  variableAsignation SEMICOLON SEMICOLON variableAsignation
                             |  variableAsignation SEMICOLON comparingValue SEMICOLON variableAsignation
                             '''
-    #Aporte Stefano Suarez
+    #Aporte Stefano Suarez - Revisa que la condicion del for sea un tipo booleano
     if len(p) == 3:
         p[0] = ('for_cond', None, None, None)
     elif len(p) == 5:
@@ -378,7 +379,7 @@ def p_comparingSign(p):
 # COMPARING VALUES - LUIS QUEZADA 1>2 AND 2>1
 def p_comparingValue(p):
     'comparingValue : value comparingSign value'
-    #Aporte Stefano Suarez
+    #Aporte Stefano Suarez - Validar que los valores sean del mismo tipo
     if type(p[1]) != type(p[3]):
         print(f"Error: los operandos deben ser del mismo tipo, pero se encontró {type(p[1]).__name__} y {type(p[3]).__name__}")
         return
@@ -404,7 +405,7 @@ def p_logicalCondition(p):
                         | comparingValue conditionOperator comparingValue
                         | LPAREN logicalCondition RPAREN
     """
-    #Aporte Stefano Suarez
+    #Aporte Stefano Suarez - Identificar el tipo de operador de condicion
     if len(p) == 2:
         p[0] = p[1]
     elif len(p) == 4 and p[1] == '(':
