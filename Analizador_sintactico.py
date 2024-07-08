@@ -1,8 +1,10 @@
 import ply.yacc as yacc
 from Analizador_lexico import tokens
 import Generador_log
+import math
 
 variables = {}
+mathFunctions = {"abs", "sin", "cos", "tan", "pi"}
 
 def p_programa(p):
     '''programa : cuerpo
@@ -206,6 +208,39 @@ def p_arithmeticExpression(p):
         p[0] = p[len(p)-3] ** p[len(p)-1]
 
     #Aporte Luis Quezada -----------------------------------------------
+
+#callFuntion Luis Quezada------------------------------------------------------
+def p_callFunction(p):
+    'callFunction : ID LPAREN RPAREN'
+    if p[1] in mathFunctions:
+        if p[1] == "pi":
+            p[0] = math.pi
+        elif p[1] == "abs" or p[1] == "sin" or p[1] == "cos" or p[1] == "tan":
+            print('Error, faltan argumentos')
+            return
+        
+
+def p_callFunctionArguments(p):
+    'callFunction : ID LPAREN value RPAREN'
+    if p[1] in mathFunctions:
+        if not isinstance(p[3], str) or p[3] in variables:
+            pass
+        else:
+            print(f'Error, {p[3]} no es un argumento valido')
+            return
+
+        if p[1] == "abs":
+            p[0] = abs(p[3])
+        elif p[1] == "sin":
+            p[0] = math.sin(p[3])
+        elif p[1] == "cos":
+            p[0] = math.cos(p[3])
+        elif p[1] == "tan":
+            p[0] = math.tan(p[3])
+        elif p[1] == "pi":
+            print(f'Error, {p[1]} no requiere de argumentos')
+            return
+#callFuntion Luis Quezada------------------------------------------------------
 
 def p_value(p):
     '''value : ID
