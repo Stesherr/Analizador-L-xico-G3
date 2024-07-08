@@ -302,7 +302,6 @@ def p_error(p):
     error_message = "Error en -> {}".format(p)
     print(error_message)
 
-'''
 def p_error(p):
     global current_key
     error_message = "Error en -> {}".format(p)
@@ -315,6 +314,7 @@ parser = yacc.yacc()
 
 algoritmos = Generador_log.algoritmos_3
 resultados = {}
+resultados_semantico = {}
 
 for key, value in algoritmos.items():
     current_key = key 
@@ -325,16 +325,5 @@ for key, value in algoritmos.items():
         resultados[current_key] = [str(result)]
 
         
-Generador_log.generar_log_sintactico(resultados)
-'''
-# Build the parser
-parser = yacc.yacc()
-print(int('1'))
-while True:
-   try:
-       s = input('lp > ')
-   except EOFError:
-       break
-   if not s: continue
-   result = parser.parse(s)
-   print(result)
+#Generador_log.generar_log_sintactico(resultados)
+Generador_log.generar_log_semantico(resultados_semantico)

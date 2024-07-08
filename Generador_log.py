@@ -46,7 +46,7 @@ def generar_log_sintactico(resultados):
 
 def generar_log_semantico(resultados):
     for integrante, usuario_log in grupo_3.items():
-        nombre_log_semantico = os.path.join(logs_semantico, f"sintactico-{usuario_log}-{fecha_log}-{hora_log}{ext_log}")
+        nombre_log_semantico = os.path.join(logs_semantico, f"semantico-{usuario_log}-{fecha_log}-{hora_log}{ext_log}")
         with open(nombre_log_semantico, 'w') as file:
             file.write('\n'.join((resultados[integrante])))
         print(f"Se creó el archivo de {integrante} con el nombre: '{nombre_log_semantico}'")
