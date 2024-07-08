@@ -213,7 +213,7 @@ def t_EXECUTION(t):
 
 # Tipos de Datos - Kevin Valle
 def t_INTEGER(t):
-    r'\d+'
+    r'([-]?)\d+'
     t.value = int(t.value)
     return t
 

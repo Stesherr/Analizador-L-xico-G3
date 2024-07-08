@@ -34,6 +34,7 @@ def p_cuerpo(p):
               | OPEN_TAG
               | CLOSE_TAG
               | stringConcatenation
+              | callFunction
     '''
 # ESTRUCTURA SWITCH - KEVIN VALLE
 def p_switchStatement(p):
@@ -316,10 +317,31 @@ def p_comparingSign(p):
                         | LESSEQUALTHAN
                         | GREATEREQUALTHAN
     '''
+    #Aporte Stefano Suarez
+    p[0] = p[1]
 
 # COMPARING VALUES - LUIS QUEZADA 1>2 AND 2>1
 def p_comparingValue(p):
     'comparingValue : value comparingSign value'
+    #Aporte Stefano Suarez
+    if type(p[1]) != type(p[3]):
+        print(f"Error: los operandos deben ser del mismo tipo, pero se encontró {type(p[1]).__name__} y {type(p[3]).__name__}")
+        return
+    else:
+        if p[2] == '<':
+            p[0] = p[1] < p[3]
+        elif p[2] == '>':
+            p[0] = p[1] > p[3]
+        elif p[2] == '==':
+            p[0] = p[1] == p[3]
+        elif p[2] == '!=':
+            p[0] = p[1] != p[3]
+        elif p[2] == '<=':
+            p[0] = p[1] <= p[3]
+        elif p[2] == '>=':
+            p[0] = p[1] >= p[3]
+        elif p[2] == '===':
+            p[0] = p[1] is p[3]
 
 # LOGICAL
 def p_logicalCondition(p):
