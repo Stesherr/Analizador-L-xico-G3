@@ -31,6 +31,7 @@ def p_cuerpo(p):
               | logicalCondition
               | OPEN_TAG
               | CLOSE_TAG
+              | stringConcatenation
     '''
 # ESTRUCTURA SWITCH - KEVIN VALLE
 def p_switchStatement(p):
@@ -157,6 +158,17 @@ def p_arithmeticExpressionNumber(p):
     #Aporte Luis Quezada p[0] = p[1]
     p[0] = p[1]
 
+#Aporte Kevin Valle - Conversion Implicita -----
+def p_arithmeticExpressionCastInt(p):
+    'arithmeticExpression : STRING'
+    try:
+        p[0] = int(p[1].strip('"'))
+    except ValueError:
+        print(f"Error: Numero no valido {p[1]}")
+        return
+
+#Aporte Kevin Valle - Conversion Implicita -----
+
 def p_arithmeticExpressionGroup(p):
     'arithmeticExpression : LPAREN arithmeticExpression RPAREN'
     #Aporte Luis Quezada p[0] = p[2]
@@ -170,7 +182,7 @@ def p_arithmeticExpression(p):
     else:
         print(f'Error {p[len(p)-3]} no es un numero')
         return
-
+        
     if not isinstance(p[len(p)-1], str) or p[len(p)-1] in variables:
         pass
     else:
@@ -192,6 +204,7 @@ def p_arithmeticExpression(p):
         p[0] = p[len(p)-3] % p[len(p)-1]
     elif p[len(p)-2] == "**":
         p[0] = p[len(p)-3] ** p[len(p)-1]
+
     #Aporte Luis Quezada -----------------------------------------------
 
 def p_value(p):
@@ -220,7 +233,6 @@ def p_arithmeticOperator(p):
 # LINE - LUIS QUEZADA
 def p_line(p):
     '''line : variableAsignation SEMICOLON
-            | stringConcatenation SEMICOLON
     '''
     
 # VARIABLE ASIGNATION - LUIS QUEZADA
@@ -249,7 +261,6 @@ def p_logicalCondition(p):
     """logicalCondition : comparingValue
                         | comparingValue conditionOperator comparingValue
                         | LPAREN logicalCondition RPAREN
-    
     """
 
 def p_conditionOperator(p):
@@ -258,13 +269,33 @@ def p_conditionOperator(p):
                          | XOR 
     """
 
-# CONCAT KEVIN VALLE
-def p_stringConcatenation(p):
-    """stringConcatenation : value CONCAT value
-                           | value CONCAT stringConcatenation
-                           | stringConcatenation CONCAT value
-    """
+# Aporte Kevin Valle --- Conversion Concatenacion Int con String
+def p_stringConcatenationGroup(p):
+    'stringConcatenation : value CONCAT value'
+    try:
+        p[0] = str(p[1]) + str(p[3])
+    except ValueError:
+        return
 
+def p_stringConcatenation(p):
+    'stringConcatenation : stringConcatenation CONCAT stringConcatenation'
+    if isinstance(p[len(p)-3], str) or p[len(p)-3] in variables:
+        pass
+    else:
+        print(f'Error al concatenar {p[len(p)-3]}')
+        return
+        
+    if isinstance(p[len(p)-1], str) or p[len(p)-1] in variables:
+        pass
+    else:
+        print(f'Error al concatenar {p[len(p)-1]}')
+        return
+
+    if not(p[len(p)-1] and p[len(p)-3]):
+        return
+    
+    p[0] = p[len(p)-3] + p[len(p)-1]
+# Aporte Kevin Valle --- Conversion Concatenacion Int con String
 
 # Error rule for syntax errors
 def p_error(p):
@@ -298,7 +329,7 @@ Generador_log.generar_log_sintactico(resultados)
 '''
 # Build the parser
 parser = yacc.yacc()
-
+print(int('1'))
 while True:
    try:
        s = input('lp > ')
