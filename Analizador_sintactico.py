@@ -34,6 +34,7 @@ def p_cuerpo(p):
               | OPEN_TAG
               | CLOSE_TAG
               | stringConcatenation
+              | callFunction
     '''
 # ESTRUCTURA SWITCH - KEVIN VALLE
 def p_switchStatement(p):
