@@ -90,15 +90,33 @@ def p_ifStatementBody(p):
 # ESTRUCTURA FOR - LUIS QUEZADA
 def p_forStatement(p):
     'forStatement : FOR LPAREN forStatementCondition RPAREN LCURLY forStatementBody RCURLY'
+    #Aporte Stefano Suarez
+    p[0] = ('for', p[3], p[6])
 
 def p_forStatementCondition(p):
     '''forStatementCondition :  SEMICOLON SEMICOLON 
                             |  variableAsignation SEMICOLON SEMICOLON variableAsignation
-                            |  variableAsignation SEMICOLON comparingValue SEMICOLON variableAsignation'''
+                            |  variableAsignation SEMICOLON comparingValue SEMICOLON variableAsignation
+                            '''
+    #Aporte Stefano Suarez
+    if len(p) == 3:
+        p[0] = ('for_cond', None, None, None)
+    elif len(p) == 5:
+        p[0] = ('for_cond', p[1], None, p[4])
+    elif len(p) == 6:
+        if not isinstance(p[3], bool):
+            print(f"Error la condicion del 'for' deber ser un booleano, no '{type(p[3]).__name__}'")
+        p[0] = ('for_cond', p[1], p[3], p[5])
 
 def p_forStatementBody(p):
     '''forStatementBody : cuerpo 
-                        | forStatementBody cuerpo'''
+                        | forStatementBody cuerpo
+                        '''
+    #Aporte Stefano Suarez
+    if len(p) == 2:
+        p[0] = p[1]
+    else:
+        p[0] = p[1] + p[2]
 
 #ESTRUCTURA ARREGLO - LUIS QUEZADA
 def p_arrayAsignation(p):
@@ -107,15 +125,18 @@ def p_arrayAsignation(p):
 def p_arrayDeclaration(p):
     ''' arrayDeclaration : ARRAY arraysValues RPAREN
                         | LSQUARE arraysValues RSQUARE
-                        | arrayValue '''
+                        | arrayValue 
+                        '''
 
 def p_arraysValues(p):
     ''' arraysValues : arrayValue 
-                    | arraysValues COMMA arrayValue'''
+                    | arraysValues COMMA arrayValue
+                    '''
 
 def p_arrayValue(p):
     '''arrayValue : ARRAY values RPAREN
-                    | LSQUARE values RSQUARE'''
+                    | LSQUARE values RSQUARE
+                    '''
 
 # ESTRUCTURA COLA - STEFANO SUAREZ
 def p_stackDeclaration(p):
@@ -140,17 +161,20 @@ def p_queueDequeue(p):
 # DEFINE FUNCTION - LUIS QUEZADA
 def p_defineFunction(p):
     '''defineFunction : FUNCTION ID LPAREN arguments RPAREN LCURLY cuerpo RCURLY
-                    | FUNCTION ID LPAREN RPAREN LCURLY cuerpo RCURLY'''
+                    | FUNCTION ID LPAREN RPAREN LCURLY cuerpo RCURLY
+                    '''
 
 # ARGUMENTS - LUIS QUEZADA
 def p_arguments(p):
     '''arguments : ID
-                | ID COMMA arguments'''
+                | ID COMMA arguments
+                '''
     
 # FUNCION ANONIMA - STEFANO SUAREZ
 def p_anonymousFunction(p):
     '''anonymousFunction : FUNCTION LPAREN RPAREN LCURLY cuerpo RCURLY 
-                         | FUNCTION LPAREN arguments RPAREN LCURLY cuerpo RCURLY'''
+                         | FUNCTION LPAREN arguments RPAREN LCURLY cuerpo RCURLY
+                         '''
 
 #  FUNCION FLECHA - KEVIN VALLE
 def p_arrowFunction(p):
@@ -329,7 +353,14 @@ def p_line(p):
 def p_variableAsignation(p):
     '''variableAsignation : ID EQUAL value
                           | ID EQUAL arithmeticExpression
+                          | ID INCREMENT
+                          | ID DECREMENT
     '''
+    #Aporte Stefano Suarez
+    if len(p) == 4:
+        p[0] = ('assign', p[1], p[3])
+    else:
+        p[0] = ('inc_dec', p[1], [2])
 
 # COMPARING SIGN - LUIS QUEZADA
 def p_comparingSign(p):
