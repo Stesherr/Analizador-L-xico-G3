@@ -1,0 +1,12 @@
+Error $x no es un numero
+Error en -> LexToken(CONCAT,'.',199,39)
+Error: Numero no valido "idk"
+Error en -> LexToken(ID,'$objetos',203,106)
+Error $i no es un numero
+Error en -> LexToken(OR,'or',209,313)
+Error en -> LexToken(RPAREN,')',209,322)
+Error $num1 no es un numero
+Error $strNumber no es un numero
+Error en -> LexToken(RCURLY,'}',229,1194)
+Error en -> LexToken(RCURLY,'}',231,1270)
+Error en -> LexToken(SEMICOLON,';',235,1343)

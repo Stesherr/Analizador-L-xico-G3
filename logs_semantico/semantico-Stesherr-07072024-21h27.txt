@@ -1,0 +1,12 @@
+Error en -> LexToken(CLASS,'class',148,10)
+Error en -> LexToken(ID,'nombre',153,138)
+Error $prueba no es un numero
+Error en -> LexToken(ID,'$animales',162,308)
+Error $i no es un numero
+Error en -> LexToken(CONTINUE,'continue',170,548)
+Error $num2 no es un numero
+Error $num1 no es un numero
+Error $strNumber no es un numero
+Error en -> LexToken(RCURLY,'}',190,1389)
+Error en -> LexToken(RCURLY,'}',192,1473)
+Error en -> LexToken(SEMICOLON,';',194,1495)

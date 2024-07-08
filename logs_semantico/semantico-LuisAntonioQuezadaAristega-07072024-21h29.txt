@@ -1,0 +1,14 @@
+Error en -> LexToken(CLASS,'class',246,6)
+Error en -> LexToken(ID,'nombre',250,118)
+Error en -> LexToken(COMMA,',',254,258)
+Error $nose no es un numero
+Error en -> LexToken(ID,'$teclado',266,427)
+Error $i no es un numero
+Error en -> LexToken(MOD,'%',268,504)
+Error en -> LexToken(RPAREN,')',268,512)
+Error $numero2 no es un numero
+Error $numero1 no es un numero
+Error $numeroComoString no es un numero
+Error en -> LexToken(RCURLY,'}',289,1510)
+Error en -> LexToken(RCURLY,'}',291,1585)
+Error en -> LexToken(SEMICOLON,';',299,1784)

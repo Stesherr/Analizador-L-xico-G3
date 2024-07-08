@@ -1,6 +1,12 @@
 <?php
 fn($x) => $x + $y;
 
+$cadena = "1"."idk".23;
+
+if($cadena){
+    print "prueba";
+}
+
 function ejemplo3() {
     $ingreso = fgets(STDIN);
     $objetos = new SplQueue();
@@ -9,7 +15,7 @@ function ejemplo3() {
     $objetos->push("Borrador");
     $objetos->pop();
     for ($i = 0; $i < 10; $i=$i+2) {
-        if ($i == 0 and $i < 10 or $i > 9) {
+        if ($i == 0 && $i < 10 || $i > 9) {
             continue; // CONTINUE DENTRO DE IF DENTRO DE FOR
         } else {
             switch ($i) {

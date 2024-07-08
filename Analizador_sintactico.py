@@ -5,6 +5,11 @@ import math
 
 variables = {}
 mathFunctions = {"abs", "sin", "cos", "tan", "pi"}
+#Aporte Stefano Suarez
+precedence = (
+    ('left', 'AND', 'OR', 'XOR'),
+    ('left', 'LESSTHAN', 'GREATERTHAN', 'LESSEQUALTHAN', 'GREATEREQUALTHAN', 'IS_EQUAL', 'NOTEQUAL')
+)
 
 def p_programa(p):
     '''programa : cuerpo
@@ -36,6 +41,9 @@ def p_cuerpo(p):
               | stringConcatenation
               | callFunction
     '''
+    #Aporte Stefano Suarez
+    p[0] = p[1]
+
 # ESTRUCTURA SWITCH - KEVIN VALLE
 def p_switchStatement(p):
     'switchStatement : SWITCH LPAREN value RPAREN LCURLY switchCases switchDefault RCURLY'
@@ -54,14 +62,30 @@ def p_switchCases(p):
 
 # ESTRUCTURA IF/ELSE - STEFANO SUAREZ
 def p_if_elseStatement(p):
-    '''if_elseStatement : IF LPAREN logicalCondition RPAREN LCURLY ifStatementBody RCURLY ELSE ifStatementBody
-                        | IF LPAREN logicalCondition RPAREN LCURLY ifStatementBody'''
+    '''if_elseStatement : IF LPAREN logicalCondition RPAREN LCURLY ifStatementBody RCURLY ELSE LCURLY ifStatementBody RCURLY
+                        | IF LPAREN logicalCondition RPAREN LCURLY ifStatementBody
+                        '''
+    #Aporte Stefano Suarez
+    if len(p) == 12:
+        p[0] = ('if_else', p[3], p[6], p[10])
+    else:
+        p[0] = ('if', p[3], p[6])
+
+    if not isinstance(p[3], bool):
+        print(f"Error la condicion del 'if' debe ser un booleano, no '{type(p[3]).__name__}'")
 
 def p_ifStatementBody(p):
     '''ifStatementBody : cuerpo
                        | cuerpo CONTINUE SEMICOLON
                        | ifStatementBody cuerpo
                        '''
+    #Aporte Stefano Suarez
+    if len(p) == 2:
+        p[0] = p[1]
+    elif len(p) == 4:
+        p[0] = (p[1], 'continue')
+    else:
+        p[0] = p[1] + p[2]
 
 # ESTRUCTURA FOR - LUIS QUEZADA
 def p_forStatement(p):
