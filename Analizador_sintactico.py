@@ -3,6 +3,9 @@ from Analizador_lexico import tokens
 import Generador_log
 import math
 
+syntax_error = []
+semantic_error = []
+
 variables = {}
 mathFunctions = {"abs", "sin", "cos", "tan", "pi"}
 #Aporte Stefano Suarez
@@ -73,8 +76,8 @@ def p_if_elseStatement(p):
         p[0] = ('if', p[3], p[6])
 
     if not isinstance(p[3], bool):
-        print(f"Error la condicion del 'if' debe ser un booleano, no '{type(p[3]).__name__}'")
-
+        error_message = (f"Error la condicion del 'if' debe ser un booleano, no '{type(p[3]).__name__}'")
+        semantic_error.append(error_message)
 def p_ifStatementBody(p):
     '''ifStatementBody : cuerpo
                        | cuerpo CONTINUE SEMICOLON
@@ -106,7 +109,9 @@ def p_forStatementCondition(p):
         p[0] = ('for_cond', p[1], None, p[4])
     elif len(p) == 6:
         if not isinstance(p[3], bool):
-            print(f"Error la condicion del 'for' deber ser un booleano, no '{type(p[3]).__name__}'")
+            error_message = (f"Error la condicion del 'for' deber ser un booleano, no '{type(p[3]).__name__}'")
+            semantic_error.append(error_message)
+            print(error_message)
         p[0] = ('for_cond', p[1], p[3], p[5])
 
 def p_forStatementBody(p):
@@ -217,12 +222,7 @@ def p_arithmeticExpressionCastInt(p):
         p[0] = int(p[1].strip('"'))
     except ValueError:
         error_message = f"Error: Numero no valido {p[1]}"
-        print(error_message)
-        if current_key in resultados_semantico:
-            resultados_semantico[current_key].append(error_message)
-        else:
-            resultados_semantico[current_key] = [error_message]
-        return
+        semantic_error.append(error_message)
 
 #Aporte Kevin Valle - Conversion Implicita -----
 
@@ -238,23 +238,13 @@ def p_arithmeticExpression(p):
         pass
     else:
         error_message = f'Error {p[len(p)-3]} no es un numero'
-        print(error_message)
-        if current_key in resultados_semantico:
-            resultados_semantico[current_key].append(error_message)
-        else:
-            resultados_semantico[current_key] = [error_message]
-        return
+        semantic_error.append(error_message)
         
     if not isinstance(p[len(p)-1], str) or p[len(p)-1] in variables:
         pass
     else:
         error_message = f'Error {p[len(p)-1]} no es un numero'
-        print(error_message)
-        if current_key in resultados_semantico:
-            resultados_semantico[current_key].append(error_message)
-        else:
-            resultados_semantico[current_key] = [error_message]
-        return
+        semantic_error.append(error_message)
 
     if not(p[len(p)-1] and p[len(p)-3]):
         return
@@ -282,12 +272,7 @@ def p_callFunction(p):
             p[0] = math.pi
         elif p[1] == "abs" or p[1] == "sin" or p[1] == "cos" or p[1] == "tan":
             error_message = 'Error, faltan argumentos'
-            print(error_message)
-            if current_key in resultados_semantico:
-                resultados_semantico[current_key].append(error_message)
-            else:
-                resultados_semantico[current_key] = [error_message]
-            return
+            semantic_error.append(error_message)
         
 
 def p_callFunctionArguments(p):
@@ -297,13 +282,7 @@ def p_callFunctionArguments(p):
             pass
         else:
             error_message = f'Error, {p[3]} no es un argumento valido'
-            print(error_message)
-            if current_key in resultados_semantico:
-                resultados_semantico[current_key].append(error_message)
-            else:
-                resultados_semantico[current_key] = [error_message]
-            return
-
+            semantic_error.append(error_message)
         if p[1] == "abs":
             p[0] = abs(p[3])
         elif p[1] == "sin":
@@ -314,12 +293,7 @@ def p_callFunctionArguments(p):
             p[0] = math.tan(p[3])
         elif p[1] == "pi":
             error_message = f'Error, {p[1]} no requiere de argumentos'
-            print(error_message)
-            if current_key in resultados_semantico:
-                resultados_semantico[current_key].append(error_message)
-            else:
-                resultados_semantico[current_key] = [error_message]
-            return
+            semantic_error.append(error_message)
 #callFuntion Luis Quezada------------------------------------------------------
 
 def p_value(p):
@@ -381,8 +355,8 @@ def p_comparingValue(p):
     'comparingValue : value comparingSign value'
     #Aporte Stefano Suarez - Validar que los valores sean del mismo tipo
     if type(p[1]) != type(p[3]):
-        print(f"Error: los operandos deben ser del mismo tipo, pero se encontró {type(p[1]).__name__} y {type(p[3]).__name__}")
-        return
+        error_message = (f"Error: los operandos deben ser del mismo tipo, pero se encontró {type(p[1]).__name__} y {type(p[3]).__name__}")
+        semantic_error.append(error_message)
     else:
         if p[2] == '<':
             p[0] = p[1] < p[3]
@@ -441,57 +415,22 @@ def p_stringConcatenation(p):
         pass
     else:
         error_message = f'Error al concatenar {p[len(p)-3]}'
-        print(error_message)
-        if current_key in resultados_semantico:
-            resultados_semantico[current_key].append(error_message)
-        else:
-            resultados_semantico[current_key] = [error_message]
-        return
+        semantic_error.append(error_message)
         
     if isinstance(p[len(p)-1], str) or p[len(p)-1] in variables:
         pass
     else:
         error_message = f'Error al concatenar {p[len(p)-1]}'
-        print(error_message)
-        if current_key in resultados_semantico:
-            resultados_semantico[current_key].append(error_message)
-        else:
-            resultados_semantico[current_key] = [error_message]
-        return
+        semantic_error.append(error_message)
 
     if not(p[len(p)-1] and p[len(p)-3]):
         return
     
-    p[0] = p[len(p)-3] + p[len(p)-1]
+    #p[0] = p[len(p)-3] + p[len(p)-1]
 # Aporte Kevin Valle --- Conversion Concatenacion Int con String
 
-# Error rule for syntax errors
 def p_error(p):
-    global current_key
-    error_message = "Error en -> {}".format(p)
-    if current_key in resultados:
-        resultados[current_key].append(error_message)
-    else:
-        resultados[current_key] = [error_message]
-
-    if current_key in resultados_semantico:
-        resultados_semantico[current_key].append(error_message)
-    else:
-        resultados_semantico[current_key] = [error_message]
-
+    error_message = f"Error en ->: {p}"
+    syntax_error.append(error_message)
+    
 parser = yacc.yacc()
-
-algoritmos = Generador_log.algoritmos_3
-resultados = {}
-resultados_semantico = {}
-
-for key, value in algoritmos.items():
-    current_key = key 
-    result = parser.parse(value)
-    if current_key in resultados:
-        resultados[current_key].append(str(result))
-    else:
-        resultados[current_key] = [str(result)]
-
-#Generador_log.generar_log_sintactico(resultados)
-Generador_log.generar_log_semantico(resultados_semantico)

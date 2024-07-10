@@ -244,22 +244,22 @@ def t_error(t):
 # Constructor lexer
 lexer = lex.lex()
 
-# ALGORITMO PARA PRUEBA DE OPERADORES
-Generador_log.obtener_alg()
-# RESULTADOS
-algoritmos = Generador_log.algoritmos_3
-resultados = {}
+# # ALGORITMO PARA PRUEBA DE OPERADORES
+# Generador_log.obtener_alg()
+# # RESULTADOS
+# algoritmos = Generador_log.algoritmos_3
+# resultados = {}
 
-for key, value in algoritmos.items():
-    lexer.input(value)
-    # Tokenize
-    while True:
-        tok = lexer.token()
-        if not tok:
-                break
-        if key in resultados:
-             resultados[key].append(str(tok))
-        else:
-             resultados[key]  = [str(tok)]
+# for key, value in algoritmos.items():
+#     lexer.input(value)
+#     # Tokenize
+#     while True:
+#         tok = lexer.token()
+#         if not tok:
+#                 break
+#         if key in resultados:
+#              resultados[key].append(str(tok))
+#         else:
+#              resultados[key]  = [str(tok)]
 
 #Generador_log.generar_log(resultados)

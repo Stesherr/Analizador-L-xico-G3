@@ -1,52 +1,61 @@
 import os
 from datetime import datetime
 
-grupo_3 = {
+group_members = {
     'stefano_suarez': 'Stesherr',
     'kevin_valle': 'codeswax',
     'luis_quezada': 'LuisAntonioQuezadaAristega'
 }
 
-fecha_log = datetime.today().strftime('%d%m%Y')
-hora_log = datetime.today().strftime('%Hh%M')
-ext_log = '.txt'
+log_date = datetime.today().strftime('%d%m%Y')
+log_time = datetime.today().strftime('%Hh%M')
+log_ext = '.txt'
 
-logs_lexico = 'logs_lexico'
-logs_sintactico = 'logs_sintactico'
-logs_semantico = 'logs_semantico'
-algoritmos_folder = 'algoritmos'
-os.makedirs(logs_lexico, exist_ok=True)
-os.makedirs(logs_sintactico, exist_ok=True)
-os.makedirs(logs_semantico, exist_ok=True)
+# logs_lexico = 'logs_lexico'
+# logs_sintactico = 'logs_sintactico'
+# logs_semantico = 'logs_semantico'
 
-algoritmos_3 = {}
+algorithms_folder = 'algoritmos'
+editor_folder = 'editor_code'
 
-resultados = {}
+# os.makedirs(logs_lexico, exist_ok=True)
+# os.makedirs(logs_sintactico, exist_ok=True)
+# os.makedirs(logs_semantico, exist_ok=True)
 
-def obtener_alg():
-    for integrante in grupo_3.items():
-        ruta = os.path.join(algoritmos_folder, f"{integrante[0]}.txt")
+os.makedirs(editor_folder, exist_ok=True)
+
+algorithms_3 = {}
+# editor_txt = []
+# resultados = {}
+
+def get_random_algorithms():
+    for member in group_members.items():
+        ruta = os.path.join(algorithms_folder, f"{member[0]}.txt")
         with open(ruta, "r") as file:
-            algoritmos_3[integrante[0]] = file.read()
+            algorithms_3[member[0]] = file.read()
 
-def generar_log_lexico(resultados):
-    for integrante, usuario_log in grupo_3.items():
-        nombre_log_lexico = os.path.join(
-            logs_lexico, f"lexico-{usuario_log}-{fecha_log}-{hora_log}{ext_log}")
-        with open(nombre_log_lexico, 'w') as file:
-            file.write('\n'.join((resultados[integrante])))
-        print(f"Se creó el archivo de {integrante} con el nombre: '{nombre_log_lexico}'")
+def create_log(lexical,syntax,semantic):
+    test_log = os.path.join(
+        editor_folder, f"log-{log_date}-{log_time}{log_ext}")
+    with open(test_log, 'w') as file:
+        for lex in lexical:
+            file.write(f"{lex}\n")
+        for syn in syntax:
+            file.write(f"{syn}\n")
+        for sem in semantic:
+           file.write(f"{sem}\n")
+    print(f"Se creó el archivo log con nombre: '{test_log}'")
 
-def generar_log_sintactico(resultados):
-    for integrante, usuario_log in grupo_3.items():
-        nombre_log_sintactico = os.path.join(logs_sintactico, f"sintactico-{usuario_log}-{fecha_log}-{hora_log}{ext_log}")
-        with open(nombre_log_sintactico, 'w') as file:
-            file.write('\n'.join((resultados[integrante])))
-        print(f"Se creó el archivo de {integrante} con el nombre: '{nombre_log_sintactico}'")
+# def generar_log_sintactico(resultados):
+#     for integrante, usuario_log in group_members.items():
+#         nombre_log_sintactico = os.path.join(logs_sintactico, f"sintactico-{usuario_log}-{log_date}-{log_time}{log_ext}")
+#         with open(nombre_log_sintactico, 'w') as file:
+#             file.write('\n'.join((resultados[integrante])))
+#         print(f"Se creó el archivo de {integrante} con el nombre: '{nombre_log_sintactico}'")
 
-def generar_log_semantico(resultados):
-    for integrante, usuario_log in grupo_3.items():
-        nombre_log_semantico = os.path.join(logs_semantico, f"semantico-{usuario_log}-{fecha_log}-{hora_log}{ext_log}")
-        with open(nombre_log_semantico, 'w') as file:
-            file.write('\n'.join((resultados[integrante])))
-        print(f"Se creó el archivo de {integrante} con el nombre: '{nombre_log_semantico}'")
+# def generar_log_semantico(resultados):
+#     for integrante, usuario_log in group_members.items():
+#         nombre_log_semantico = os.path.join(logs_semantico, f"semantico-{usuario_log}-{log_date}-{log_time}{log_ext}")
+#         with open(nombre_log_semantico, 'w') as file:
+#             file.write('\n'.join((resultados[integrante])))
+#         print(f"Se creó el archivo de {integrante} con el nombre: '{nombre_log_semantico}'")
