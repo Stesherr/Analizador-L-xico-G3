@@ -323,6 +323,7 @@ def p_arithmeticOperator(p):
 def p_line(p):
     '''line : variableAsignation SEMICOLON
     '''
+    p[0] = p[1]
     
 # VARIABLE ASIGNATION - LUIS QUEZADA
 def p_variableAsignation(p):
@@ -331,11 +332,22 @@ def p_variableAsignation(p):
                           | ID INCREMENT
                           | ID DECREMENT
     '''
-    #Aporte Stefano Suarez
+    #Aporte Stefano Suarez y Luis Quezada
     if len(p) == 4:
-        p[0] = ('assign', p[1], p[3])
+        variables[p[1]] = p[3]
+        print(variables[p[1]])
     else:
-        p[0] = ('inc_dec', p[1], [2])
+        if not p[1] in variables:
+            print(f'Error {p[1]} no ha sido inicializado.')
+            return
+        if (isinstance(variables[p[1]], int) or isinstance(variables[p[1]], float)):
+            if p[2] == "++":
+                variables[p[1]] = variables[p[1]] + 1
+            elif p[2] == "--":
+                variables[p[1]] = variables[p[1]] - 1
+            print(variables[p[1]])
+        else:
+            print(f'Error {p[1]} no es una variable a la que se le pueda aplicar estas operaciones.')
 
 # COMPARING SIGN - LUIS QUEZADA
 def p_comparingSign(p):
