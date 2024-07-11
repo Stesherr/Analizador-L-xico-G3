@@ -1,45 +1,42 @@
 <?php
-    class Animal {
-        public $nombre;
-        public $edad;
-
-        function __construct($nombre, $edad) {
-            $this->nombre = $nombre;
-            $this->edad = $edad;
-        }
-    }
-
-    fn($prueba) => $prueba + $test;
+    //Stefano Suarez
+    //Funcion anonima
+    $prueba = function($nombre){
+        echo "Hola ",$nombre;
+    };
 
     function ejemplo2() {
         $datos = fgets(STDIN);
+        //Estrucuta de control - Pila
         $animales = new SplStack();
         $animales->push("Perro");
         $animales->push("Gato");
         $animales->push("Pollo");
         $animales->pop();
 
-        for ($i = 0; $i < 10; $i=$i+1) {
+        //Validacion de la condicion del for
+        for ($i = 0; $i < 10; $i++) {
+            //Validacion de la condicion del if
             if ($i == 0) {
                 continue;
             } else {
                 switch ($i) {
                     case 1:
-                        echo "Acción 1 realizada";
+                        echo "Accion 1 realizada";
                         $num1 = 15;
                         $num2 = 7;
                         $result = $num1 * $num2 + 10 * (21/2);
                         break;
                     case 3:
-                        print("Acción 2 realizada");
+                        print("Accion 2 realizada");
                         $num = 8;
                         print("Cuadrado de $num: $num * $num");
                         break;
                     default:
-                        echo "Acción por defecto\n";
+                        echo "Accion por defecto\n";
                         $strNumber = "20";
                         $resultConversion = $strNumber + 10;
-                        print("Resultado de la operación con conversión implícita: $resultConversion");
+                        print("Resultado de la operacion con conversion implicita: $resultConversion");
                 }
             }
             print "cos de 5 es cos(5)"; // FUNCION QUE SOLO RECIBE NUMERO

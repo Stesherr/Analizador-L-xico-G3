@@ -76,16 +76,19 @@ def p_if_elseStatement(p):
         p[0] = ('if', p[3], p[6])
 
     if not isinstance(p[3], bool):
-        error_message = (f"Error la condicion del 'if' debe ser un booleano, no '{type(p[3]).__name__}'")
+        error_message = (f"Error la condicion del 'if' debe ser un booleano")
         semantic_error.append(error_message)
 def p_ifStatementBody(p):
     '''ifStatementBody : cuerpo
                        | cuerpo CONTINUE SEMICOLON
+                       | CONTINUE SEMICOLON
                        | ifStatementBody cuerpo
                        '''
     #Aporte Stefano Suarez
     if len(p) == 2:
         p[0] = p[1]
+    elif len(p) == 4 and p[1] == 'continue':
+        p[0] = ('ifStatementBody', 'continue')
     elif len(p) == 4:
         p[0] = (p[1], 'continue')
     else:
@@ -109,20 +112,14 @@ def p_forStatementCondition(p):
         p[0] = ('for_cond', p[1], None, p[4])
     elif len(p) == 6:
         if not isinstance(p[3], bool):
-            error_message = (f"Error la condicion del 'for' deber ser un booleano, no '{type(p[3]).__name__}'")
+            error_message = (f"Error la condicion del 'for' deber ser un booleano")
             semantic_error.append(error_message)
-            print(error_message)
         p[0] = ('for_cond', p[1], p[3], p[5])
 
 def p_forStatementBody(p):
     '''forStatementBody : cuerpo 
                         | forStatementBody cuerpo
                         '''
-    #Aporte Stefano Suarez
-    if len(p) == 2:
-        p[0] = p[1]
-    else:
-        p[0] = p[1] + p[2]
 
 #ESTRUCTURA ARREGLO - LUIS QUEZADA
 def p_arrayAsignation(p):
@@ -144,7 +141,7 @@ def p_arrayValue(p):
                     | LSQUARE values RSQUARE
                     '''
 
-# ESTRUCTURA COLA - STEFANO SUAREZ
+# ESTRUCTURA PILA - STEFANO SUAREZ
 def p_stackDeclaration(p):
     'stackDeclaration : VAR EQUAL NEW STACK SEMICOLON'
 
