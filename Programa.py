@@ -51,7 +51,7 @@ def run_code():
         # disable fields (avoid text editing)
         disable_fields()
         # generate log
-        # genlog.create_log(lexical_analysis, syntax.syntax_error, syntax.semantic_error)
+        genlog.create_log(lexical_analysis, syntax.syntax_error, syntax.semantic_error)
 
 def clean_all():
     checker_text_lexical.config(state=tk.NORMAL)
