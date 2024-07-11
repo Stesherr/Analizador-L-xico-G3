@@ -126,7 +126,7 @@ def p_forStatementBody(p):
 
 #ESTRUCTURA ARREGLO - LUIS QUEZADA
 def p_arrayAsignation(p):
-    'arrayAsignation : ID EQUAL arrayDeclaration SEMICOLON'
+    'arrayAsignation : VAR EQUAL arrayDeclaration SEMICOLON'
 
 def p_arrayDeclaration(p):
     ''' arrayDeclaration : ARRAY arraysValues RPAREN
@@ -146,23 +146,23 @@ def p_arrayValue(p):
 
 # ESTRUCTURA COLA - STEFANO SUAREZ
 def p_stackDeclaration(p):
-    'stackDeclaration : ID EQUAL NEW STACK SEMICOLON'
+    'stackDeclaration : VAR EQUAL NEW STACK SEMICOLON'
 
 def p_stackPush(p):
-    'stackPush : ID OBJOP PUSH LPAREN value RPAREN SEMICOLON'
+    'stackPush : VAR OBJOP PUSH LPAREN value RPAREN SEMICOLON'
 
 def p_stackPop(p):
-    'stackPop : ID OBJOP POP SEMICOLON'
+    'stackPop : VAR OBJOP POP SEMICOLON'
 
 # ESTRUCTURA COLA - KEVIN VALLE
 def p_queueDeclaration(p):
-    'queueDeclaration : ID EQUAL NEW QUEUE SEMICOLON'
+    'queueDeclaration : VAR EQUAL NEW QUEUE SEMICOLON'
 
 def p_queueEnqueue(p):
-    'queueEnqueue : ID OBJOP PUSH LPAREN value RPAREN SEMICOLON'
+    'queueEnqueue : VAR OBJOP PUSH LPAREN value RPAREN SEMICOLON'
 
 def p_queueDequeue(p):
-    'queueDequeue : ID OBJOP POP SEMICOLON'
+    'queueDequeue : VAR OBJOP POP SEMICOLON'
 
 # DEFINE FUNCTION - LUIS QUEZADA
 def p_defineFunction(p):
@@ -208,7 +208,7 @@ def p_values(p):
 
 #  FGETS (INGRESAR value POR TECLADO) - KEVIN VALLE
 def p_fgets(p):
-    'fgets : ID EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON'
+    'fgets : VAR EQUAL FGETS LPAREN STDIN RPAREN SEMICOLON'
 
 def p_arithmeticExpressionNumber(p):
     'arithmeticExpression : value'
@@ -327,10 +327,10 @@ def p_line(p):
     
 # VARIABLE ASIGNATION - LUIS QUEZADA
 def p_variableAsignation(p):
-    '''variableAsignation : ID EQUAL value
-                          | ID EQUAL arithmeticExpression
-                          | ID INCREMENT
-                          | ID DECREMENT
+    '''variableAsignation : VAR EQUAL value
+                          | VAR EQUAL arithmeticExpression
+                          | VAR INCREMENT
+                          | VAR DECREMENT
     '''
     #Aporte Stefano Suarez y Luis Quezada
     if len(p) == 4:

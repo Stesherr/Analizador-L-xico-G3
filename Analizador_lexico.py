@@ -10,7 +10,7 @@ reserved = {"__halt_compiler()" : "__HALT_COMPILER", "abstract" : "ABSTRACT", "a
 "include" : "INCLUDE", "include_once" : "INCLUDE_ONCE", "instanceof" : "INSTANCEOF", "insteadof" : "INSTEADOF", "interface" : "INTERFACE", "isset()" : "ISSET",
 "list()" : "LIST", "match" : "MATCH", "namespace" : "NAMESPACE", "new" : "NEW", "or" : "OR", "print" : "PRINT", "private" : "PRIVATE", "protected" : "PROTECTED", "push" : "PUSH", "pop()" : "POP",
 "public" : "PUBLIC", "require" : "REQUIRE", "require_once" : "REQUIRE_ONCE", "return" : "RETURN", "static" : "STATIC", "switch" : "SWITCH",
-"throw" : "THROW", "trait" : "TRAIT", "try" : "TRY", "unset()" : "UNSET", "use" : "USE", "var" : "VAR", "while" : "WHILE", "xor" : "XOR",
+"throw" : "THROW", "trait" : "TRAIT", "try" : "TRY", "unset()" : "UNSET", "use" : "USE", "while" : "WHILE", "xor" : "XOR",
 "yield" : "YIELD", "yield_from" : "YIELD_FROM", "SplQueue()" : "QUEUE", "SplStack()" : "STACK", "STDIN" : "STDIN"}
 
 # Lista de tokens
@@ -22,6 +22,7 @@ tokens= (
     'BOOL',
     'NULL',
     'ID',
+    'VAR',
     'LPAREN',
     'RPAREN',
     'LSQUARE',
@@ -202,8 +203,13 @@ def t_UNSET(t):
 
 # Variables - Stefano Suarez
 def t_ID(t):
-    r'[a-zA-Z_$][a-zA-Z0-9_]*'
+    r'[a-zA-Z][a-zA-Z0-9_]*'
     t.type = reserved.get(t.value, 'ID')
+    return t
+
+def t_VAR(t):
+    r'[$][a-zA-Z0-9_]*'
+    t.type = reserved.get(t.value, 'VAR')
     return t
 
 def t_EXECUTION(t):

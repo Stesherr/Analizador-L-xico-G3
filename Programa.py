@@ -123,7 +123,7 @@ editor_frame = ttk.LabelFrame(main_frame, text="Editor")
 editor_frame.grid(row=0, column=0, columnspan=2, sticky="NSEW", padx=5, pady=5)
 editor_text = tk.Text(editor_frame, height=20)
 editor_text.pack(fill="both", expand=True)
-editor_text.insert(tk.END, "<?php echo 'Hola Mundo'; ?>")
+editor_text.insert(tk.END, "<?php echo \"Hola Mundo\"; ?>")
 
 # output
 output_frame = ttk.LabelFrame(main_frame, text="Salida")
