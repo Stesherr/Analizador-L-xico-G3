@@ -172,8 +172,8 @@ def p_defineFunction(p):
 
 # ARGUMENTS - LUIS QUEZADA
 def p_arguments(p):
-    '''arguments : ID
-                | ID COMMA arguments
+    '''arguments : VAR
+                | VAR COMMA arguments
                 '''
     
 # FUNCION ANONIMA - STEFANO SUAREZ

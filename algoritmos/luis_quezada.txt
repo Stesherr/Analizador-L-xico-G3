@@ -1,15 +1,18 @@
 <?php
-class Persona {
-    public $nombre;
-    public $edad;
+function Persona(){
     function __construct($nombre, $edad) {
-        $this->nombre = $nombre;
-        $this->edad = $edad;
+        /*$this->nombre = $nombre;
+        $this->edad = $edad;*/
+	printf($nombre);
+	printf($edad);
     }
     function presentarse() {
-        printf("Hola, mi nombre es %s y tengo %d años.\n", $this->nombre, $this->edad);
+        printf("Hola, mi nombre es %s y tengo %d años.\n");
     }
 }
+
+$nose = 0;
+$sise = 20;
 
 fn($nose) => $nose + $sise;
 
@@ -20,9 +23,10 @@ function ejemplo1() {
         "Pedro"
     ];
     $teclado = fgets(STDIN);
-    for ($i = 0; $i < 10; $i=$i+1) {
-        if ($i % 2 == 0) {
-            continue; // CONTINUE DENTRO DE IF DENTRO DE FOR
+    for ($i = 0; $i < 10; $i++) {
+        if ($i == 0) {
+            $i++;
+	    continue;// CONTINUE DENTRO DE IF DENTRO DE FOR
         } else {
             switch ($i) {
                 case 1:
