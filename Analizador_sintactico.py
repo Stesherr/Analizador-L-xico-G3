@@ -330,6 +330,7 @@ def p_variableAsignation(p):
                           | VAR INCREMENT
                           | VAR DECREMENT
                           | VAR EQUAL stringConcatenation
+                          | VAR EQUAL anonymousFunction
     '''
     #Aporte Stefano Suarez y Luis Quezada
     if len(p) == 4:

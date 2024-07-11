@@ -2,16 +2,10 @@ import ply.lex as lex
 import Generador_log
 
 # Todas las palabras reservadas Stefano Suarez
-reserved = {"__halt_compiler()" : "__HALT_COMPILER", "abstract" : "ABSTRACT", "and" : "AND", "array(" : "ARRAY", "as" : "AS", 
-"break" : "BREAK", "callable" : "CALLABLE", "case" : "CASE", "catch" : "CATCH", "class" : "CLASS", "clone" : "CLONE", "const" : "CONST", "continue" : "CONTINUE",
-"declare" : "DECLARE", "default" : "DEFAULT", "die()" : "DIE", "do" : "DO", "echo" : "ECHO", "else" : "ELSE", "elseif" : "ELSEIF",
-"empty()" : "EMPTY", "endwhile" : "ENDWHILE", "eval()" : "EVAL", "exit()" : "EXIT", "extends" : "EXTENDS", "final" : "FINAL", "finally" : "FINALLY",
-"fn" : "FN", "for" : "FOR", "foreach" : "FOREACH", "fgets" : "FGETS", "function" : "FUNCTION", "global" : "GLOBAL", "goto" : "GOTO", "if" : "IF", "implements" : "IMPLEMENTS",
-"include" : "INCLUDE", "include_once" : "INCLUDE_ONCE", "instanceof" : "INSTANCEOF", "insteadof" : "INSTEADOF", "interface" : "INTERFACE", "isset()" : "ISSET",
-"list()" : "LIST", "match" : "MATCH", "namespace" : "NAMESPACE", "new" : "NEW", "or" : "OR", "print" : "PRINT", "private" : "PRIVATE", "protected" : "PROTECTED", "push" : "PUSH", "pop()" : "POP",
-"public" : "PUBLIC", "require" : "REQUIRE", "require_once" : "REQUIRE_ONCE", "return" : "RETURN", "static" : "STATIC", "switch" : "SWITCH",
-"throw" : "THROW", "trait" : "TRAIT", "try" : "TRY", "unset()" : "UNSET", "use" : "USE", "while" : "WHILE", "xor" : "XOR",
-"yield" : "YIELD", "yield_from" : "YIELD_FROM", "SplQueue()" : "QUEUE", "SplStack()" : "STACK", "STDIN" : "STDIN"}
+reserved = {"abstract" : "ABSTRACT", "and" : "AND", "array(" : "ARRAY", "break" : "BREAK", "case" : "CASE", "continue" : "CONTINUE",
+"default" : "DEFAULT", "echo" : "ECHO", "else" : "ELSE", "fgets" : "FGETS", "fn" : "FN", "for" : "FOR", "function" : "FUNCTION", "if" : "IF",
+"new" : "NEW", "print" : "PRINT", "push" : "PUSH", "pop()" : "POP", "switch" : "SWITCH", "xor" : "XOR", "SplQueue()" : "QUEUE",
+"SplStack()" : "STACK", "STDIN" : "STDIN"}
 
 # Lista de tokens
 tokens= (
@@ -141,11 +135,6 @@ def t_DOC_COMMENT(t):
     pass
 
 # Palabras reservadas compuestas - Stefano Suarez
-def t_HALT_COMPILER(t):
-     r'__halt_compiler\(\)'
-     t.type = reserved.get(t.value, '__HALT_COMPILER')
-     return t
-
 def t_ARRAY(t):
      r'array\('
      t.type = reserved.get(t.value, 'ARRAY')
@@ -165,41 +154,6 @@ def t_STACK(t):
     r'SplStack\(\)'
     t.type = reserved.get(t.value, 'STACK')
     return t
-
-def t_DIE(t):
-     r'die\(\)'
-     t.type = reserved.get(t.value, 'DIE')
-     return t
-
-def t_EMPTY(t):
-     r'empty\(\)'
-     t.type = reserved.get(t.value, 'EMPTY')
-     return t
-
-def t_EVAL(t):
-     r'eval\(\)'
-     t.type = reserved.get(t.value, 'EVAL')
-     return t
-
-def t_EXIT(t):
-     r'exit\(\)'
-     t.type = reserved.get(t.value, 'EXIT')
-     return t
-
-def t_ISSET(t):
-     r'isset\(\)'
-     t.type = reserved.get(t.value, 'ISSET')
-     return t
-
-def t_LIST(t):
-     r'list\(\)'
-     t.type = reserved.get(t.value, 'LIST')
-     return t
-
-def t_UNSET(t):
-     r'unset\(\)'
-     t.type = reserved.get(t.value, 'UNSET')
-     return t
 
 # Variables - Stefano Suarez
 def t_ID(t):
