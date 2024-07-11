@@ -47,7 +47,7 @@ function ejemplo1() {
                     print("Resultado de la operación con conversión implícita: $resultadoConversion");
             }
         }
-        print "sin de 5 es sin(5)"; //FUNCION QUE SOLO RECIBE NUMERO
+
     }
 
     // Impresión de la información de personas
