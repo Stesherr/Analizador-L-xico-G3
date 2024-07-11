@@ -1,46 +1,42 @@
 <?php
-fn($x) => $x + $y;
+    // KEVIN VALLE
+    // VALIDAR FUNCION FLECHA - SINTAXIS
+    fn($x) => $x + $y;
 
-$cadena = "1"."idk".23;
+    // VALIDAR CONCATENACION DE CADENA Y CONVERSION
+    $cadena = "1"."idk".23;
 
-if($cadena){
-    print "prueba";
-}
+    //VALIDAR IMPRESION ECHO Y PRINT
+    echo $cadena;
+    print($cadena);
 
-function ejemplo3() {
+    // VALIDAR INGRESO DE DATOS
     $ingreso = fgets(STDIN);
+
+    // VALIDAR COLA
     $objetos = new SplQueue();
     $objetos->push("Libro");
     $objetos->push("Pluma");
     $objetos->push("Borrador");
     $objetos->pop();
-    for ($i = 0; $i < 10; $i=$i+2) {
-        if ($i == 0 && $i < 10 || $i > 9) {
-            continue; // CONTINUE DENTRO DE IF DENTRO DE FOR
-        } else {
-            switch ($i) {
-                case 1:
-                    print("Acción 1 realizada");
-                    $num1 = (1+2)*5/2-(121-(21+21));
-                    $num2 = 4;
-                    $result = $num1 * $num2; // SOLO NUMEROS EN OPERACIONES ARITMETICAS
-                    print("Resultado de la multiplicación: $result"); // CONCATENACION DE STRING CON OTRO TIPO DE DATO
-                    break;
-                case 3:
-                    echo "Acción 2 realizada", 1;
-                    $num = 6;
-                    break;
-                default: // DEFAULT DENTRO DE SWITCH
-                    print("Acción por defecto");
-                    $strNumber = "12";
-                    $resultConversion = $strNumber + 6; // CADENA A NUMERO
-            }
-        }
-        print "tan de 5 es tan(5)"; // FUNCION QUE SOLO RECIBE NUMERO
+    $id = 1;
+    //VALIDAR SWITCH
+    switch ($i) {
+        case 1:
+            print("Acción 1 realizada");
+            break;
+        case 2:
+            echo "Acción 2 realizada", 1;
+            $num = 1;
+            break;
+        case 3:
+            echo "Acción 2 realizada", 1;
+            $num = 2;
+            break;
+        default: // DEFAULT DENTRO DE SWITCH
+            print("Acción por defecto");
+            $strNumber = "12";
+            $resultConversion = $strNumber + 6; // VALIDAR CONVERSION CADENA NUMERO
     }
-}
-
-// Llamada a la función que encapsula todos los ejemplos
-ejemplo3();
 
 ?>

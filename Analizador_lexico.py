@@ -224,7 +224,7 @@ def t_INTEGER(t):
     return t
 
 def t_FLOAT(t):
-     r'([-]?)(\d+\.\d*|\.\d+)'
+     r'([-]?)(\d+\.\d*)'
      t.value = float(t.value)
      return t
 

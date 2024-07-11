@@ -184,10 +184,10 @@ def p_anonymousFunction(p):
 
 #  FUNCION FLECHA - KEVIN VALLE
 def p_arrowFunction(p):
-    'arrowFunction : FN LPAREN ID RPAREN FNARROW arrowBody SEMICOLON'
+    'arrowFunction : FN LPAREN VAR RPAREN FNARROW arrowBody SEMICOLON'
 
 def p_arrowBody(p):
-    '''arrowBody : FN LPAREN ID RPAREN FNARROW arrowBody
+    '''arrowBody : FN LPAREN VAR RPAREN FNARROW arrowBody
                  | cuerpo
     '''
 
@@ -218,11 +218,8 @@ def p_arithmeticExpressionNumber(p):
 #Aporte Kevin Valle - Conversion Implicita -----
 def p_arithmeticExpressionCastInt(p):
     'arithmeticExpression : STRING'
-    try:
+    if p[1].isdigit():
         p[0] = int(p[1].strip('"'))
-    except ValueError:
-        error_message = f"Error: Numero no valido {p[1]}"
-        semantic_error.append(error_message)
 
 #Aporte Kevin Valle - Conversion Implicita -----
 
@@ -297,10 +294,11 @@ def p_callFunctionArguments(p):
 #callFuntion Luis Quezada------------------------------------------------------
 
 def p_value(p):
-    '''value : ID
+    '''value : VAR
              | INTEGER
              | FLOAT
              | STRING
+             | stringConcatenation
     '''
     #Aporte Luis Quezada
     if isinstance(p[1], str) and p[1] in variables:
@@ -331,6 +329,7 @@ def p_variableAsignation(p):
                           | VAR EQUAL arithmeticExpression
                           | VAR INCREMENT
                           | VAR DECREMENT
+                          | VAR EQUAL stringConcatenation
     '''
     #Aporte Stefano Suarez y Luis Quezada
     if len(p) == 4:
