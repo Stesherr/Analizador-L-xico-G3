@@ -147,7 +147,7 @@ Rule 73    arithmeticExpression -> LPAREN arithmeticExpression RPAREN
 Rule 74    arithmeticExpression -> arithmeticExpression arithmeticOperator arithmeticExpression
 Rule 75    callFunction -> ID LPAREN RPAREN
 Rule 76    callFunction -> ID LPAREN value RPAREN
-Rule 77    value -> ID
+Rule 77    value -> VAR
 Rule 78    value -> INTEGER
 Rule 79    value -> FLOAT
 Rule 80    value -> STRING
@@ -237,7 +237,7 @@ GLOBAL               :
 GOTO                 : 
 GREATEREQUALTHAN     : 98
 GREATERTHAN          : 96
-ID                   : 56 57 58 59 62 63 75 76 77
+ID                   : 56 57 58 59 62 63 75 76
 IDENTICAL            : 93
 IF                   : 31 32
 IMPLEMENTS           : 
@@ -298,7 +298,7 @@ TRAIT                :
 TRY                  : 
 UNSET                : 
 USE                  : 
-VAR                  : 42 50 51 52 53 54 55 70 88 89 90 91
+VAR                  : 42 50 51 52 53 54 55 70 77 88 89 90 91
 WHILE                : 
 XOR                  : 105
 YIELD                : 
@@ -412,7 +412,7 @@ state 0
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -524,7 +524,7 @@ state 1
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -1372,7 +1372,7 @@ state 28
     (100) logicalCondition -> . comparingValue
     (101) logicalCondition -> . comparingValue conditionOperator comparingValue
     (102) logicalCondition -> . LPAREN logicalCondition RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -1380,7 +1380,7 @@ state 28
 
     STRING          shift and go to state 27
     LPAREN          shift and go to state 28
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
 
@@ -1421,6 +1421,7 @@ state 32
     (50) stackDeclaration -> VAR . EQUAL NEW STACK SEMICOLON
     (51) stackPush -> VAR . OBJOP PUSH LPAREN value RPAREN SEMICOLON
     (52) stackPop -> VAR . OBJOP POP SEMICOLON
+    (77) value -> VAR .
     (88) variableAsignation -> VAR . EQUAL value
     (89) variableAsignation -> VAR . EQUAL arithmeticExpression
     (90) variableAsignation -> VAR . INCREMENT
@@ -1428,6 +1429,40 @@ state 32
 
     EQUAL           shift and go to state 67
     OBJOP           shift and go to state 68
+    CONCAT          reduce using rule 77 (value -> VAR .)
+    IS_EQUAL        reduce using rule 77 (value -> VAR .)
+    IDENTICAL       reduce using rule 77 (value -> VAR .)
+    NOTEQUAL        reduce using rule 77 (value -> VAR .)
+    LESSTHAN        reduce using rule 77 (value -> VAR .)
+    GREATERTHAN     reduce using rule 77 (value -> VAR .)
+    LESSEQUALTHAN   reduce using rule 77 (value -> VAR .)
+    GREATEREQUALTHAN reduce using rule 77 (value -> VAR .)
+    PLUS            reduce using rule 77 (value -> VAR .)
+    MINUS           reduce using rule 77 (value -> VAR .)
+    TIMES           reduce using rule 77 (value -> VAR .)
+    DIVIDE          reduce using rule 77 (value -> VAR .)
+    MOD             reduce using rule 77 (value -> VAR .)
+    EXP             reduce using rule 77 (value -> VAR .)
+    OPEN_TAG        reduce using rule 77 (value -> VAR .)
+    CLOSE_TAG       reduce using rule 77 (value -> VAR .)
+    STRING          reduce using rule 77 (value -> VAR .)
+    LPAREN          reduce using rule 77 (value -> VAR .)
+    IF              reduce using rule 77 (value -> VAR .)
+    FOR             reduce using rule 77 (value -> VAR .)
+    SWITCH          reduce using rule 77 (value -> VAR .)
+    VAR             reduce using rule 77 (value -> VAR .)
+    FUNCTION        reduce using rule 77 (value -> VAR .)
+    FN              reduce using rule 77 (value -> VAR .)
+    ECHO            reduce using rule 77 (value -> VAR .)
+    PRINT           reduce using rule 77 (value -> VAR .)
+    ID              reduce using rule 77 (value -> VAR .)
+    INTEGER         reduce using rule 77 (value -> VAR .)
+    FLOAT           reduce using rule 77 (value -> VAR .)
+    $end            reduce using rule 77 (value -> VAR .)
+    RCURLY          reduce using rule 77 (value -> VAR .)
+    CONTINUE        reduce using rule 77 (value -> VAR .)
+    SEMICOLON       reduce using rule 77 (value -> VAR .)
+    BREAK           reduce using rule 77 (value -> VAR .)
     INCREMENT       shift and go to state 69
     DECREMENT       shift and go to state 70
 
@@ -1447,45 +1482,8 @@ state 34
 
     (75) callFunction -> ID . LPAREN RPAREN
     (76) callFunction -> ID . LPAREN value RPAREN
-    (77) value -> ID .
 
-  ! shift/reduce conflict for LPAREN resolved as shift
     LPAREN          shift and go to state 73
-    CONCAT          reduce using rule 77 (value -> ID .)
-    IS_EQUAL        reduce using rule 77 (value -> ID .)
-    IDENTICAL       reduce using rule 77 (value -> ID .)
-    NOTEQUAL        reduce using rule 77 (value -> ID .)
-    LESSTHAN        reduce using rule 77 (value -> ID .)
-    GREATERTHAN     reduce using rule 77 (value -> ID .)
-    LESSEQUALTHAN   reduce using rule 77 (value -> ID .)
-    GREATEREQUALTHAN reduce using rule 77 (value -> ID .)
-    PLUS            reduce using rule 77 (value -> ID .)
-    MINUS           reduce using rule 77 (value -> ID .)
-    TIMES           reduce using rule 77 (value -> ID .)
-    DIVIDE          reduce using rule 77 (value -> ID .)
-    MOD             reduce using rule 77 (value -> ID .)
-    EXP             reduce using rule 77 (value -> ID .)
-    OPEN_TAG        reduce using rule 77 (value -> ID .)
-    CLOSE_TAG       reduce using rule 77 (value -> ID .)
-    STRING          reduce using rule 77 (value -> ID .)
-    IF              reduce using rule 77 (value -> ID .)
-    FOR             reduce using rule 77 (value -> ID .)
-    SWITCH          reduce using rule 77 (value -> ID .)
-    VAR             reduce using rule 77 (value -> ID .)
-    FUNCTION        reduce using rule 77 (value -> ID .)
-    FN              reduce using rule 77 (value -> ID .)
-    ECHO            reduce using rule 77 (value -> ID .)
-    PRINT           reduce using rule 77 (value -> ID .)
-    ID              reduce using rule 77 (value -> ID .)
-    INTEGER         reduce using rule 77 (value -> ID .)
-    FLOAT           reduce using rule 77 (value -> ID .)
-    $end            reduce using rule 77 (value -> ID .)
-    RCURLY          reduce using rule 77 (value -> ID .)
-    CONTINUE        reduce using rule 77 (value -> ID .)
-    SEMICOLON       reduce using rule 77 (value -> ID .)
-    BREAK           reduce using rule 77 (value -> ID .)
-
-  ! LPAREN          [ reduce using rule 77 (value -> ID .) ]
 
 
 state 35
@@ -1500,12 +1498,12 @@ state 36
     (65) echo -> ECHO . values SEMICOLON
     (68) values -> . value
     (69) values -> . values COMMA value
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -1524,13 +1522,13 @@ state 38
 
     (66) print -> PRINT . LPAREN values RPAREN SEMICOLON
     (67) print -> PRINT . value SEMICOLON
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
     LPAREN          shift and go to state 79
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -1697,14 +1695,14 @@ state 43
     (72) arithmeticExpression -> . STRING
     (73) arithmeticExpression -> . LPAREN arithmeticExpression RPAREN
     (74) arithmeticExpression -> . arithmeticExpression arithmeticOperator arithmeticExpression
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
     STRING          shift and go to state 27
     LPAREN          shift and go to state 87
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
 
@@ -1717,7 +1715,7 @@ state 44
 
     STRING          reduce using rule 81 (arithmeticOperator -> PLUS .)
     LPAREN          reduce using rule 81 (arithmeticOperator -> PLUS .)
-    ID              reduce using rule 81 (arithmeticOperator -> PLUS .)
+    VAR             reduce using rule 81 (arithmeticOperator -> PLUS .)
     INTEGER         reduce using rule 81 (arithmeticOperator -> PLUS .)
     FLOAT           reduce using rule 81 (arithmeticOperator -> PLUS .)
 
@@ -1728,7 +1726,7 @@ state 45
 
     STRING          reduce using rule 82 (arithmeticOperator -> MINUS .)
     LPAREN          reduce using rule 82 (arithmeticOperator -> MINUS .)
-    ID              reduce using rule 82 (arithmeticOperator -> MINUS .)
+    VAR             reduce using rule 82 (arithmeticOperator -> MINUS .)
     INTEGER         reduce using rule 82 (arithmeticOperator -> MINUS .)
     FLOAT           reduce using rule 82 (arithmeticOperator -> MINUS .)
 
@@ -1739,7 +1737,7 @@ state 46
 
     STRING          reduce using rule 83 (arithmeticOperator -> TIMES .)
     LPAREN          reduce using rule 83 (arithmeticOperator -> TIMES .)
-    ID              reduce using rule 83 (arithmeticOperator -> TIMES .)
+    VAR             reduce using rule 83 (arithmeticOperator -> TIMES .)
     INTEGER         reduce using rule 83 (arithmeticOperator -> TIMES .)
     FLOAT           reduce using rule 83 (arithmeticOperator -> TIMES .)
 
@@ -1750,7 +1748,7 @@ state 47
 
     STRING          reduce using rule 84 (arithmeticOperator -> DIVIDE .)
     LPAREN          reduce using rule 84 (arithmeticOperator -> DIVIDE .)
-    ID              reduce using rule 84 (arithmeticOperator -> DIVIDE .)
+    VAR             reduce using rule 84 (arithmeticOperator -> DIVIDE .)
     INTEGER         reduce using rule 84 (arithmeticOperator -> DIVIDE .)
     FLOAT           reduce using rule 84 (arithmeticOperator -> DIVIDE .)
 
@@ -1761,7 +1759,7 @@ state 48
 
     STRING          reduce using rule 85 (arithmeticOperator -> MOD .)
     LPAREN          reduce using rule 85 (arithmeticOperator -> MOD .)
-    ID              reduce using rule 85 (arithmeticOperator -> MOD .)
+    VAR             reduce using rule 85 (arithmeticOperator -> MOD .)
     INTEGER         reduce using rule 85 (arithmeticOperator -> MOD .)
     FLOAT           reduce using rule 85 (arithmeticOperator -> MOD .)
 
@@ -1772,7 +1770,7 @@ state 49
 
     STRING          reduce using rule 86 (arithmeticOperator -> EXP .)
     LPAREN          reduce using rule 86 (arithmeticOperator -> EXP .)
-    ID              reduce using rule 86 (arithmeticOperator -> EXP .)
+    VAR             reduce using rule 86 (arithmeticOperator -> EXP .)
     INTEGER         reduce using rule 86 (arithmeticOperator -> EXP .)
     FLOAT           reduce using rule 86 (arithmeticOperator -> EXP .)
 
@@ -1782,12 +1780,12 @@ state 50
     (107) stringConcatenation -> stringConcatenation CONCAT . stringConcatenation
     (106) stringConcatenation -> . value CONCAT value
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -1798,12 +1796,12 @@ state 50
 state 51
 
     (106) stringConcatenation -> value CONCAT . value
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -1813,12 +1811,12 @@ state 51
 state 52
 
     (99) comparingValue -> value comparingSign . value
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -1829,7 +1827,7 @@ state 53
 
     (92) comparingSign -> IS_EQUAL .
 
-    ID              reduce using rule 92 (comparingSign -> IS_EQUAL .)
+    VAR             reduce using rule 92 (comparingSign -> IS_EQUAL .)
     INTEGER         reduce using rule 92 (comparingSign -> IS_EQUAL .)
     FLOAT           reduce using rule 92 (comparingSign -> IS_EQUAL .)
     STRING          reduce using rule 92 (comparingSign -> IS_EQUAL .)
@@ -1839,7 +1837,7 @@ state 54
 
     (93) comparingSign -> IDENTICAL .
 
-    ID              reduce using rule 93 (comparingSign -> IDENTICAL .)
+    VAR             reduce using rule 93 (comparingSign -> IDENTICAL .)
     INTEGER         reduce using rule 93 (comparingSign -> IDENTICAL .)
     FLOAT           reduce using rule 93 (comparingSign -> IDENTICAL .)
     STRING          reduce using rule 93 (comparingSign -> IDENTICAL .)
@@ -1849,7 +1847,7 @@ state 55
 
     (94) comparingSign -> NOTEQUAL .
 
-    ID              reduce using rule 94 (comparingSign -> NOTEQUAL .)
+    VAR             reduce using rule 94 (comparingSign -> NOTEQUAL .)
     INTEGER         reduce using rule 94 (comparingSign -> NOTEQUAL .)
     FLOAT           reduce using rule 94 (comparingSign -> NOTEQUAL .)
     STRING          reduce using rule 94 (comparingSign -> NOTEQUAL .)
@@ -1859,7 +1857,7 @@ state 56
 
     (95) comparingSign -> LESSTHAN .
 
-    ID              reduce using rule 95 (comparingSign -> LESSTHAN .)
+    VAR             reduce using rule 95 (comparingSign -> LESSTHAN .)
     INTEGER         reduce using rule 95 (comparingSign -> LESSTHAN .)
     FLOAT           reduce using rule 95 (comparingSign -> LESSTHAN .)
     STRING          reduce using rule 95 (comparingSign -> LESSTHAN .)
@@ -1869,7 +1867,7 @@ state 57
 
     (96) comparingSign -> GREATERTHAN .
 
-    ID              reduce using rule 96 (comparingSign -> GREATERTHAN .)
+    VAR             reduce using rule 96 (comparingSign -> GREATERTHAN .)
     INTEGER         reduce using rule 96 (comparingSign -> GREATERTHAN .)
     FLOAT           reduce using rule 96 (comparingSign -> GREATERTHAN .)
     STRING          reduce using rule 96 (comparingSign -> GREATERTHAN .)
@@ -1879,7 +1877,7 @@ state 58
 
     (97) comparingSign -> LESSEQUALTHAN .
 
-    ID              reduce using rule 97 (comparingSign -> LESSEQUALTHAN .)
+    VAR             reduce using rule 97 (comparingSign -> LESSEQUALTHAN .)
     INTEGER         reduce using rule 97 (comparingSign -> LESSEQUALTHAN .)
     FLOAT           reduce using rule 97 (comparingSign -> LESSEQUALTHAN .)
     STRING          reduce using rule 97 (comparingSign -> LESSEQUALTHAN .)
@@ -1889,7 +1887,7 @@ state 59
 
     (98) comparingSign -> GREATEREQUALTHAN .
 
-    ID              reduce using rule 98 (comparingSign -> GREATEREQUALTHAN .)
+    VAR             reduce using rule 98 (comparingSign -> GREATEREQUALTHAN .)
     INTEGER         reduce using rule 98 (comparingSign -> GREATEREQUALTHAN .)
     FLOAT           reduce using rule 98 (comparingSign -> GREATEREQUALTHAN .)
     STRING          reduce using rule 98 (comparingSign -> GREATEREQUALTHAN .)
@@ -1954,49 +1952,49 @@ state 62
 
 state 63
 
-    (77) value -> ID .
+    (77) value -> VAR .
 
-    IS_EQUAL        reduce using rule 77 (value -> ID .)
-    IDENTICAL       reduce using rule 77 (value -> ID .)
-    NOTEQUAL        reduce using rule 77 (value -> ID .)
-    LESSTHAN        reduce using rule 77 (value -> ID .)
-    GREATERTHAN     reduce using rule 77 (value -> ID .)
-    LESSEQUALTHAN   reduce using rule 77 (value -> ID .)
-    GREATEREQUALTHAN reduce using rule 77 (value -> ID .)
-    RPAREN          reduce using rule 77 (value -> ID .)
-    PLUS            reduce using rule 77 (value -> ID .)
-    MINUS           reduce using rule 77 (value -> ID .)
-    TIMES           reduce using rule 77 (value -> ID .)
-    DIVIDE          reduce using rule 77 (value -> ID .)
-    MOD             reduce using rule 77 (value -> ID .)
-    EXP             reduce using rule 77 (value -> ID .)
-    SEMICOLON       reduce using rule 77 (value -> ID .)
-    COMMA           reduce using rule 77 (value -> ID .)
-    OPEN_TAG        reduce using rule 77 (value -> ID .)
-    CLOSE_TAG       reduce using rule 77 (value -> ID .)
-    STRING          reduce using rule 77 (value -> ID .)
-    LPAREN          reduce using rule 77 (value -> ID .)
-    IF              reduce using rule 77 (value -> ID .)
-    FOR             reduce using rule 77 (value -> ID .)
-    SWITCH          reduce using rule 77 (value -> ID .)
-    VAR             reduce using rule 77 (value -> ID .)
-    FUNCTION        reduce using rule 77 (value -> ID .)
-    FN              reduce using rule 77 (value -> ID .)
-    ECHO            reduce using rule 77 (value -> ID .)
-    PRINT           reduce using rule 77 (value -> ID .)
-    ID              reduce using rule 77 (value -> ID .)
-    INTEGER         reduce using rule 77 (value -> ID .)
-    FLOAT           reduce using rule 77 (value -> ID .)
-    $end            reduce using rule 77 (value -> ID .)
-    RCURLY          reduce using rule 77 (value -> ID .)
-    CONTINUE        reduce using rule 77 (value -> ID .)
-    BREAK           reduce using rule 77 (value -> ID .)
-    CONCAT          reduce using rule 77 (value -> ID .)
-    AND             reduce using rule 77 (value -> ID .)
-    OR              reduce using rule 77 (value -> ID .)
-    XOR             reduce using rule 77 (value -> ID .)
-    RSQUARE         reduce using rule 77 (value -> ID .)
-    COLON           reduce using rule 77 (value -> ID .)
+    IS_EQUAL        reduce using rule 77 (value -> VAR .)
+    IDENTICAL       reduce using rule 77 (value -> VAR .)
+    NOTEQUAL        reduce using rule 77 (value -> VAR .)
+    LESSTHAN        reduce using rule 77 (value -> VAR .)
+    GREATERTHAN     reduce using rule 77 (value -> VAR .)
+    LESSEQUALTHAN   reduce using rule 77 (value -> VAR .)
+    GREATEREQUALTHAN reduce using rule 77 (value -> VAR .)
+    RPAREN          reduce using rule 77 (value -> VAR .)
+    PLUS            reduce using rule 77 (value -> VAR .)
+    MINUS           reduce using rule 77 (value -> VAR .)
+    TIMES           reduce using rule 77 (value -> VAR .)
+    DIVIDE          reduce using rule 77 (value -> VAR .)
+    MOD             reduce using rule 77 (value -> VAR .)
+    EXP             reduce using rule 77 (value -> VAR .)
+    SEMICOLON       reduce using rule 77 (value -> VAR .)
+    COMMA           reduce using rule 77 (value -> VAR .)
+    OPEN_TAG        reduce using rule 77 (value -> VAR .)
+    CLOSE_TAG       reduce using rule 77 (value -> VAR .)
+    STRING          reduce using rule 77 (value -> VAR .)
+    LPAREN          reduce using rule 77 (value -> VAR .)
+    IF              reduce using rule 77 (value -> VAR .)
+    FOR             reduce using rule 77 (value -> VAR .)
+    SWITCH          reduce using rule 77 (value -> VAR .)
+    VAR             reduce using rule 77 (value -> VAR .)
+    FUNCTION        reduce using rule 77 (value -> VAR .)
+    FN              reduce using rule 77 (value -> VAR .)
+    ECHO            reduce using rule 77 (value -> VAR .)
+    PRINT           reduce using rule 77 (value -> VAR .)
+    ID              reduce using rule 77 (value -> VAR .)
+    INTEGER         reduce using rule 77 (value -> VAR .)
+    FLOAT           reduce using rule 77 (value -> VAR .)
+    $end            reduce using rule 77 (value -> VAR .)
+    RCURLY          reduce using rule 77 (value -> VAR .)
+    CONTINUE        reduce using rule 77 (value -> VAR .)
+    BREAK           reduce using rule 77 (value -> VAR .)
+    CONCAT          reduce using rule 77 (value -> VAR .)
+    AND             reduce using rule 77 (value -> VAR .)
+    OR              reduce using rule 77 (value -> VAR .)
+    XOR             reduce using rule 77 (value -> VAR .)
+    RSQUARE         reduce using rule 77 (value -> VAR .)
+    COLON           reduce using rule 77 (value -> VAR .)
 
 
 state 64
@@ -2007,13 +2005,13 @@ state 64
     (101) logicalCondition -> . comparingValue conditionOperator comparingValue
     (102) logicalCondition -> . LPAREN logicalCondition RPAREN
     (99) comparingValue -> . value comparingSign value
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
     LPAREN          shift and go to state 94
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -2042,12 +2040,12 @@ state 65
 state 66
 
     (26) switchStatement -> SWITCH LPAREN . value RPAREN LCURLY switchCases switchDefault RCURLY
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -2065,7 +2063,7 @@ state 67
     (43) arrayDeclaration -> . ARRAY arraysValues RPAREN
     (44) arrayDeclaration -> . LSQUARE arraysValues RSQUARE
     (45) arrayDeclaration -> . arrayValue
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -2080,7 +2078,7 @@ state 67
     FGETS           shift and go to state 104
     ARRAY           shift and go to state 107
     LSQUARE         shift and go to state 108
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 110
@@ -2142,13 +2140,13 @@ state 73
 
     (75) callFunction -> ID LPAREN . RPAREN
     (76) callFunction -> ID LPAREN . value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
     RPAREN          shift and go to state 117
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -2253,12 +2251,12 @@ state 79
     (66) print -> PRINT LPAREN . values RPAREN SEMICOLON
     (68) values -> . value
     (69) values -> . values COMMA value
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -2277,12 +2275,12 @@ state 81
 
     (101) logicalCondition -> comparingValue conditionOperator . comparingValue
     (99) comparingValue -> . value comparingSign value
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -2294,7 +2292,7 @@ state 82
 
     (103) conditionOperator -> AND .
 
-    ID              reduce using rule 103 (conditionOperator -> AND .)
+    VAR             reduce using rule 103 (conditionOperator -> AND .)
     INTEGER         reduce using rule 103 (conditionOperator -> AND .)
     FLOAT           reduce using rule 103 (conditionOperator -> AND .)
     STRING          reduce using rule 103 (conditionOperator -> AND .)
@@ -2304,7 +2302,7 @@ state 83
 
     (104) conditionOperator -> OR .
 
-    ID              reduce using rule 104 (conditionOperator -> OR .)
+    VAR             reduce using rule 104 (conditionOperator -> OR .)
     INTEGER         reduce using rule 104 (conditionOperator -> OR .)
     FLOAT           reduce using rule 104 (conditionOperator -> OR .)
     STRING          reduce using rule 104 (conditionOperator -> OR .)
@@ -2314,7 +2312,7 @@ state 84
 
     (105) conditionOperator -> XOR .
 
-    ID              reduce using rule 105 (conditionOperator -> XOR .)
+    VAR             reduce using rule 105 (conditionOperator -> XOR .)
     INTEGER         reduce using rule 105 (conditionOperator -> XOR .)
     FLOAT           reduce using rule 105 (conditionOperator -> XOR .)
     STRING          reduce using rule 105 (conditionOperator -> XOR .)
@@ -2414,14 +2412,14 @@ state 87
     (72) arithmeticExpression -> . STRING
     (73) arithmeticExpression -> . LPAREN arithmeticExpression RPAREN
     (74) arithmeticExpression -> . arithmeticExpression arithmeticOperator arithmeticExpression
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
     STRING          shift and go to state 27
     LPAREN          shift and go to state 87
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
 
@@ -2590,13 +2588,13 @@ state 94
     (101) logicalCondition -> . comparingValue conditionOperator comparingValue
     (102) logicalCondition -> . LPAREN logicalCondition RPAREN
     (99) comparingValue -> . value comparingSign value
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
     LPAREN          shift and go to state 94
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -2750,14 +2748,14 @@ state 107
     (69) values -> . values COMMA value
     (48) arrayValue -> . ARRAY values RPAREN
     (49) arrayValue -> . LSQUARE values RSQUARE
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
     ARRAY           shift and go to state 135
     LSQUARE         shift and go to state 139
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -2777,14 +2775,14 @@ state 108
     (69) values -> . values COMMA value
     (48) arrayValue -> . ARRAY values RPAREN
     (49) arrayValue -> . LSQUARE values RSQUARE
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
     ARRAY           shift and go to state 135
     LSQUARE         shift and go to state 139
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -2953,12 +2951,12 @@ state 120
 state 121
 
     (69) values -> values COMMA . value
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -3054,13 +3052,13 @@ state 128
     (38) forStatementCondition -> variableAsignation SEMICOLON . SEMICOLON variableAsignation
     (39) forStatementCondition -> variableAsignation SEMICOLON . comparingValue SEMICOLON variableAsignation
     (99) comparingValue -> . value comparingSign value
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
     SEMICOLON       shift and go to state 155
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -3072,7 +3070,7 @@ state 129
 
     (88) variableAsignation -> VAR EQUAL . value
     (89) variableAsignation -> VAR EQUAL . arithmeticExpression
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -3081,7 +3079,7 @@ state 129
     (73) arithmeticExpression -> . LPAREN arithmeticExpression RPAREN
     (74) arithmeticExpression -> . arithmeticExpression arithmeticOperator arithmeticExpression
 
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 110
@@ -3149,12 +3147,12 @@ state 135
     (48) arrayValue -> ARRAY . values RPAREN
     (68) values -> . value
     (69) values -> . values COMMA value
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -3194,12 +3192,12 @@ state 139
     (49) arrayValue -> LSQUARE . values RSQUARE
     (68) values -> . value
     (69) values -> . values COMMA value
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -3229,12 +3227,12 @@ state 142
 
     (54) queueEnqueue -> VAR OBJOP PUSH LPAREN . value RPAREN SEMICOLON
     (51) stackPush -> VAR OBJOP PUSH LPAREN . value RPAREN SEMICOLON
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -3381,7 +3379,7 @@ state 146
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -3562,7 +3560,7 @@ state 153
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -3675,7 +3673,7 @@ state 154
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -3936,7 +3934,7 @@ state 168
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -4053,7 +4051,7 @@ state 170
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -4172,7 +4170,7 @@ state 172
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -4311,7 +4309,7 @@ state 174
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -4490,7 +4488,7 @@ state 176
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -4608,12 +4606,12 @@ state 181
 state 182
 
     (28) switchCase -> CASE . value COLON programa BREAK SEMICOLON
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
 
-    ID              shift and go to state 63
+    VAR             shift and go to state 63
     INTEGER         shift and go to state 40
     FLOAT           shift and go to state 41
     STRING          shift and go to state 77
@@ -4702,7 +4700,7 @@ state 186
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -5246,7 +5244,7 @@ state 213
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -5359,7 +5357,7 @@ state 214
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -5507,7 +5505,7 @@ state 217
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -5619,7 +5617,7 @@ state 218
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -5731,7 +5729,7 @@ state 219
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -5851,7 +5849,7 @@ state 221
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -5972,7 +5970,7 @@ state 223
     (107) stringConcatenation -> . stringConcatenation CONCAT stringConcatenation
     (75) callFunction -> . ID LPAREN RPAREN
     (76) callFunction -> . ID LPAREN value RPAREN
-    (77) value -> . ID
+    (77) value -> . VAR
     (78) value -> . INTEGER
     (79) value -> . FLOAT
     (80) value -> . STRING
@@ -6072,7 +6070,6 @@ state 226
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for LPAREN in state 34 resolved as shift
 WARNING: shift/reduce conflict for PLUS in state 85 resolved as shift
 WARNING: shift/reduce conflict for MINUS in state 85 resolved as shift
 WARNING: shift/reduce conflict for TIMES in state 85 resolved as shift

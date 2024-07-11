@@ -297,7 +297,7 @@ def p_callFunctionArguments(p):
 #callFuntion Luis Quezada------------------------------------------------------
 
 def p_value(p):
-    '''value : ID
+    '''value : VAR
              | INTEGER
              | FLOAT
              | STRING
