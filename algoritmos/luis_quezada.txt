@@ -51,9 +51,6 @@ function ejemplo1() {
     }
 
     // Impresión de la información de personas
-    foreach ($personas as $persona) {
-        $persona->presentarse();
-    }
 }
 // Llamada a la función que encapsula todos los ejemplos
 ejemplo1();
