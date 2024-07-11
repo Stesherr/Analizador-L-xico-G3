@@ -166,8 +166,8 @@ def p_queueDequeue(p):
 
 # DEFINE FUNCTION - LUIS QUEZADA
 def p_defineFunction(p):
-    '''defineFunction : FUNCTION ID LPAREN arguments RPAREN LCURLY cuerpo RCURLY
-                    | FUNCTION ID LPAREN RPAREN LCURLY cuerpo RCURLY
+    '''defineFunction : FUNCTION ID LPAREN arguments RPAREN LCURLY programa RCURLY
+                    | FUNCTION ID LPAREN RPAREN LCURLY programa RCURLY
                     '''
 
 # ARGUMENTS - LUIS QUEZADA
@@ -263,7 +263,7 @@ def p_arithmeticExpression(p):
 
 #callFuntion Luis Quezada------------------------------------------------------
 def p_callFunction(p):
-    'callFunction : ID LPAREN RPAREN'
+    'callFunction : ID LPAREN RPAREN SEMICOLON'
     if p[1] in mathFunctions:
         if p[1] == "pi":
             p[0] = math.pi
@@ -273,7 +273,7 @@ def p_callFunction(p):
         
 
 def p_callFunctionArguments(p):
-    'callFunction : ID LPAREN value RPAREN'
+    'callFunction : ID LPAREN value RPAREN SEMICOLON'
     if p[1] in mathFunctions:
         if not isinstance(p[3], str) or p[3] in variables:
             pass
