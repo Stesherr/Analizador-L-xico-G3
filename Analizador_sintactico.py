@@ -335,19 +335,19 @@ def p_variableAsignation(p):
     #Aporte Stefano Suarez y Luis Quezada
     if len(p) == 4:
         variables[p[1]] = p[3]
-        print(variables[p[1]])
     else:
         if not p[1] in variables:
-            print(f'Error {p[1]} no ha sido inicializado.')
+            error_message = f'Error, {p[1]} no ha sido inicializado.'
+            semantic_error.append(error_message)
             return
         if (isinstance(variables[p[1]], int) or isinstance(variables[p[1]], float)):
             if p[2] == "++":
                 variables[p[1]] = variables[p[1]] + 1
             elif p[2] == "--":
                 variables[p[1]] = variables[p[1]] - 1
-            print(variables[p[1]])
         else:
-            print(f'Error {p[1]} no es una variable a la que se le pueda aplicar estas operaciones.')
+            error_message = f'Error, {p[1]} no es una variable a la que se le pueda aplicar estas operaciones.'
+            semantic_error.append(error_message)
 
 # COMPARING SIGN - LUIS QUEZADA
 def p_comparingSign(p):
