@@ -2,7 +2,7 @@ import ply.lex as lex
 import Generador_log
 
 # Todas las palabras reservadas Stefano Suarez
-reserved = {"abstract" : "ABSTRACT", "and" : "AND", "array(" : "ARRAY", "break" : "BREAK", "case" : "CASE", "continue" : "CONTINUE",
+reserved = {"abstract" : "ABSTRACT", "array(" : "ARRAY", "break" : "BREAK", "case" : "CASE", "continue" : "CONTINUE",
 "default" : "DEFAULT", "echo" : "ECHO", "else" : "ELSE", "fgets" : "FGETS", "fn" : "FN", "for" : "FOR", "function" : "FUNCTION", "if" : "IF",
 "new" : "NEW", "print" : "PRINT", "push" : "PUSH", "pop()" : "POP", "switch" : "SWITCH", "xor" : "XOR", "SplQueue()" : "QUEUE",
 "SplStack()" : "STACK", "STDIN" : "STDIN"}
@@ -62,6 +62,8 @@ tokens= (
     'QUOTE',
     'COMMA',
     'DOUBLEQUOTE',
+    'AND',
+    'OR'
 )+tuple(reserved.values())
 
 # Lista Operadores - Kevin Valle
@@ -108,6 +110,8 @@ t_LESSEQUALTHAN = r'<='
 t_GREATEREQUALTHAN = r'>='
     # Logico
 t_LOGICALNOT = r'!'
+t_AND = r'&&'
+t_OR = r'\|\|'
     # Control Errores
 t_ERRORCONTROL = r'@'
     # Cadenas
